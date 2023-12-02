@@ -1,7 +1,13 @@
 const express = require('express')
-const app = express()
 
 const PORT = process.env.PORT ?? 3000
+
+const app = express()
+app.disable('x-powered-by')
+
+app.use((req, res, next) => {
+  if (req.method !== 'POST') return next()
+})
 
 app.get('/', (req, res) => {
   res.status(200).send('<h1>Ferreteria Construmanta P</h1>')
