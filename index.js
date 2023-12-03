@@ -1,33 +1,25 @@
-const express = require('express')
-const cors = require('cors')
+import express, { json } from 'express'
+import pc from 'picocolors'
+import { corsMiddleware } from './middlewares/cors.js'
+import ProductRouter from './routes/routeProductos.js'
 
-const PORT = process.env.PORT ?? 3000
+const PORT = process.env.PORT ?? 3000 // obtiene el puerto del sistema operativo o el 3000 si no existe el puerto del sistema operativo
 
 const app = express()
 app.disable('x-powered-by') // deshabilita la cabecera X-Powered-By
-app.use(express.json()) // habilita el uso de json
-app.use(cors({
-  origin: (origin, callback) => {
-    const ACCEPTED_ORIGINS = [
-      'http://localhost:4000'
-    ]
+app.use(json()) // habilita el uso de json
+app.use(corsMiddleware())
 
-    if (ACCEPTED_ORIGINS.includes(origin)) {
-      return callback(null, true)
-    }
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-    if (!origin) {
-      return callback(null, true)
-    }
+app.use('/productos', ProductRouter)
 
-    return callback(new Error('Not allowed by CORS'))
-  }
-}))
-
-app.use('*', (req, res) => {
-  res.status(404).send('<h1>404 not found, go back to home</h1>')
+app.use('*', (req, res) => { // maneja las solicitudes no encontradas y devuelve un mensaje de error 404
+  res.status(404).send('<h1>404 not found, go back to home</h1><a href="http://localhost:3000/">home</a>')
 })
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  console.log(pc.dim('✔ Server running on port: '), pc.yellow(PORT))
 })
