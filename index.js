@@ -23,6 +23,7 @@ app.use('*', (req, res) => { // maneja las solicitudes no encontradas y devuelve
   res.status(404).send('<h1>404 not found, go back to home</h1><a href="http://localhost:3000/">home</a>')
 })
 
+// inicializamos servidor
 app.listen(PORT, () => {
-  console.log(pc.dim('✔ Server running on port: '), pc.yellow(PORT))
+  console.log(pc.green('[+] '), pc.white('Server running on port: '), pc.yellow(PORT))
 })
