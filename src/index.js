@@ -11,10 +11,10 @@ const app = express()
 app.disable('x-powered-by') // deshabilita la cabecera X-Powered-By
 app.use(json()) // habilita el uso de json
 
-app.use(morgan('dev'))
-app.use(corsMiddleware())
+app.use(morgan('dev')) // habilita el log de las solicitudes en la consola
+app.use(corsMiddleware()) // habilita el uso de CORS en todas las rutas
 
-pool.getConnection()
+pool.getConnection() // conecta a la base de datos y devuelve una conexión
   .then(conection => {
     console.log(pc.green('[+] '), pc.white('Database connected to host: '), pc.yellow(process.env.DB_HOST))
     conection.release()
