@@ -1,13 +1,13 @@
 import { Router } from 'express'
+import Product from '../controllers/products.controller.js'
 
 const ProductRouter = Router()
 
-ProductRouter.get('/', (req, res) => {
-  res.send('aqui hay productos')
-})
-
-ProductRouter.get('/:id', (req, res) => {
-  res.send(`mostrando producto con id ${req.params.id}`)
-})
+ProductRouter
+  .get('/', Product.getAllProducts)
+  .get('/:productId', Product.getOneProduct)
+  .post('/:productId', Product.createNewProduct)
+  .put('/:productId', Product.updateOneProduct)
+  .delete('/:productId', Product.deleteOneProduct)
 
 export default ProductRouter
