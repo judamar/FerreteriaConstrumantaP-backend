@@ -24,7 +24,7 @@ pool.getConnection() // conecta a la base de datos y devuelve una conexión
   })
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('<h1>Ferreteria Construmanta P</h1>')
 })
 
 app.use('/productos', ProductRouter)

@@ -1,9 +1,21 @@
-const getAllProducts = (req, res) => {
-  res.send('Get all products')
+import Product from '../models/product.model.js'
+
+const getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.getAllProducts()
+    res.status(200).json({ products })
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener los productos' })
+  }
 }
 
-const getOneProduct = (req, res) => {
-  res.send(`Get one product ${req.params.productId}`)
+const getOneProduct = async (req, res) => {
+  try {
+    const product = await Product.getProductById(req.params.productId)
+    res.status(200).json({ product })
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener el producto' })
+  }
 }
 
 const createNewProduct = (req, res) => {
