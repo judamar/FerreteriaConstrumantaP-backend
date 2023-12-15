@@ -7,9 +7,7 @@ class Product {
         .then(([rows, fields]) => {
           resolve(rows)
         })
-        .catch(error => {
-          reject(error)
-        })
+        .catch(error => reject(error))
     })
   }
 
