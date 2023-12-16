@@ -8,5 +8,6 @@ CategoryRouter
   .get('/:id', Category.getCategoryById)
   .post('/crear', Category.insertCategory)
   .put('/:id', Category.updateCategory)
+  .delete('/:id', Category.deleteCategory)
 
 export default CategoryRouter
