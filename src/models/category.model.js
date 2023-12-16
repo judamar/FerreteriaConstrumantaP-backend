@@ -3,7 +3,7 @@ import pool from '../database/db.js'
 class Category {
   static getAllCategories () {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM categories')
+      pool.query('SELECT * FROM categoria')
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -13,7 +13,7 @@ class Category {
 
   static getCategoryById (id) {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM categories WHERE id = ?', [id])
+      pool.query('SELECT * FROM categoria WHERE id = ?', [id])
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -23,7 +23,19 @@ class Category {
 
   static createCategory (category) {
     return new Promise((resolve, reject) => {
-      pool.query('INSERT INTO categoria (categoria) VALUES(?);', [category])
+      pool.query('INSERT INTO categoria (categoria) VALUES (?)', [category], (error, results) => {
+        if (error) {
+          reject(error)
+        } else {
+          resolve(results) // Resolve the promise with the inserted data
+        }
+      })
+    })
+  }
+
+  static updateCategory (category) {
+    return new Promise((resolve, reject) => {
+      pool.query('UPDATE categoria SET categoria = ? WHERE id = ?', [category.categoria, category.id])
         .then(([rows, fields]) => {
           resolve(rows)
         })
