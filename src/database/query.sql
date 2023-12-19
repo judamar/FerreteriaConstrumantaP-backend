@@ -23,7 +23,7 @@ USE `ferreteria-construmanta-p` ;
 DROP TABLE IF EXISTS `ferreteria-construmanta-p`.`usuario` ;
 
 CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`usuario` (
-  `id` CHAR(36) NOT NULL DEFAULT '(UUID())',
+  `id` CHAR(36) NOT NULL DEFAULT (UUID()),
   `nombre_completo` VARCHAR(255) NOT NULL,
   `correo_electronico` VARCHAR(255) NOT NULL,
   `telefono` VARCHAR(24) NOT NULL,
@@ -247,7 +247,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `ferreteria-construmanta-p`.`proveedor` ;
 
 CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`proveedor` (
-  `id` CHAR(36) NOT NULL DEFAULT '(UUID())',
+  `id` CHAR(36) NOT NULL DEFAULT (UUID()),
   `NIT` INT NOT NULL,
   `nombre_proveedor` VARCHAR(255) NOT NULL,
   `direccion_proveedor` VARCHAR(255) NOT NULL,
