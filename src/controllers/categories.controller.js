@@ -3,7 +3,7 @@ import Category from '../models/category.model.js'
 const getAllCategories = async (req, res) => {
   try {
     const categories = await Category.getAllCategories()
-    res.status(200).json({ categories })
+    res.status(200).json({ status: 'OK', categories })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
@@ -12,7 +12,7 @@ const getAllCategories = async (req, res) => {
 const getCategoryById = async (req, res) => {
   try {
     const category = await Category.getCategoryById(req.params.id)
-    res.status(200).json({ category })
+    res.status(200).json({ status: 'OK', category })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
