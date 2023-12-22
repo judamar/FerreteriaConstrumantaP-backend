@@ -6,6 +6,7 @@ import ProductRouter from './routes/products.routes.js'
 import pool from './database/db.js'
 import CategoryRouter from './routes/categories.routes.js'
 import ProviderRouter from './routes/providers.routes.js'
+import SuggestionRouter from './routes/suggestion.routes.js'
 
 const PORT = process.env.PORT ?? 3000 // obtiene el puerto del sistema operativo o el 3000 si no existe
 const app = express()
@@ -32,6 +33,7 @@ app.get('/', (req, res) => {
 app.use('/productos', ProductRouter)
 app.use('/categorias', CategoryRouter)
 app.use('/proveedores', ProviderRouter)
+app.use('/sugerencias', SuggestionRouter)
 
 app.use('*', (req, res) => { // maneja las solicitudes no encontradas y devuelve un mensaje de error 404
   res.status(404).send('<h1>404 not found, go back to home</h1><a href="http://localhost:3000/">home</a>')
