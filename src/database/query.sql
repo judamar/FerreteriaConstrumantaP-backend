@@ -248,7 +248,7 @@ DROP TABLE IF EXISTS `ferreteria-construmanta-p`.`proveedor` ;
 
 CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`proveedor` (
   `id` CHAR(36) NOT NULL DEFAULT (UUID()),
-  `NIT` INT NOT NULL,
+  `NIT` VARCHAR(64) NOT NULL,
   `nombre_proveedor` VARCHAR(255) NOT NULL,
   `direccion_proveedor` VARCHAR(255) NOT NULL,
   `telefono_proveedor` VARCHAR(24) NOT NULL,
