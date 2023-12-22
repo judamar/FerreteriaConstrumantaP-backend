@@ -5,9 +5,9 @@ const ProductRouter = Router()
 
 ProductRouter
   .get('/', Product.getAllProducts)
-  .get('/:productId', Product.getOneProduct)
-  .post('/:productId', Product.createNewProduct)
-  .put('/:productId', Product.updateOneProduct)
-  .delete('/:productId', Product.deleteOneProduct)
+  .get('/:id', Product.getOneProduct)
+  .post('/', Product.createNewProduct)
+  .put('/:id', Product.updateOneProduct)
+  .delete('/:id', Product.deleteOneProduct)
 
 export default ProductRouter

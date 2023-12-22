@@ -24,7 +24,7 @@ const getOneProduct = async (req, res) => {
 const createNewProduct = (req, res) => {
   try {
     const product = req.body.product
-    const result = Product.createProduct(product)
+    const result = Product.insertProduct(product)
     res.status(201).json({ status: 'OK', product: result })
   } catch (error) {
     res.status(500).json({ message: error.message })

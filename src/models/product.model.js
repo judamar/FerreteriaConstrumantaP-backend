@@ -3,7 +3,7 @@ import pool from '../database/db.js'
 class Product {
   static getAllProducts () {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM producto')
+      pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.marca, p.descripcion, p.precio, p.cantidad, p.url_imagen, c.categoria AS categoria FROM producto p JOIN categoria c ON p.categoria_id = c.id')
         .then(([rows, fields]) => {
           resolve(rows)
         })
