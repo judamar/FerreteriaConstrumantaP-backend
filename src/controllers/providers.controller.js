@@ -3,7 +3,7 @@ import Provider from '../models/provider.model.js'
 const getAllProviders = async (req, res) => {
   try {
     const providers = await Provider.getAllProviders()
-    res.status(200).json(providers)
+    res.status(200).json({ status: 'OK', providers })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
@@ -15,7 +15,7 @@ const getProviderById = async (req, res) => {
     if (!provider) {
       return res.status(404).json({ message: 'Provider not found' })
     }
-    res.status(200).json(provider)
+    res.status(200).json({ status: 'OK', provider })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }

@@ -31,9 +31,9 @@ class Provider {
     })
   }
 
-  static updateProvider (provider) {
+  static updateProvider (id, provider) {
     return new Promise((resolve, reject) => {
-      pool.query('UPDATE proveedor SET NIT = ?, nombre_proveedor = ?, direccion_proveedor = ?, telefono_proveedor = ?, correo_proveedor = ?, telefono_vendedor = ? WHERE id = ?', [provider.NIT, provider.nombre_proveedor, provider.direccion_proveedor, provider.telefono_proveedor, provider.correo_proveedor, provider.telefono_vendedor, provider.id])
+      pool.query('UPDATE proveedor SET NIT = ?, nombre_proveedor = ?, direccion_proveedor = ?, telefono_proveedor = ?, correo_proveedor = ?, telefono_vendedor = ? WHERE id = ?', [provider.NIT, provider.nombre_proveedor, provider.direccion_proveedor, provider.telefono_proveedor, provider.correo_proveedor, provider.telefono_vendedor, id])
         .then(([rows, fields]) => {
           resolve(rows)
         })
