@@ -8,6 +8,7 @@ import CategoryRouter from './routes/categories.routes.js'
 import ProviderRouter from './routes/providers.routes.js'
 import SuggestionRouter from './routes/suggestion.routes.js'
 import UserRouter from './routes/users.routes.js'
+import ReservationStatusRouter from './routes/reservation_statuses.routes.js'
 
 const PORT = process.env.PORT ?? 3000 // obtiene el puerto del sistema operativo o el 3000 si no existe
 const app = express()
@@ -36,6 +37,7 @@ app.use('/categorias', CategoryRouter)
 app.use('/proveedores', ProviderRouter)
 app.use('/sugerencias', SuggestionRouter)
 app.use('/usuarios', UserRouter)
+app.use('/estados_reserva', ReservationStatusRouter)
 
 app.use('*', (req, res) => { // maneja las solicitudes no encontradas y devuelve un mensaje de error 404
   res.status(404).send('<h1>404 not found, go back to home</h1><a href="http://localhost:3000/">home</a>')
