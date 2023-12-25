@@ -3,7 +3,7 @@ import pool from '../database/db.js'
 class Suggestion {
   static getAllSuggestions () {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM sugerencia')
+      pool.query('SELECT * FROM sugerencias')
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -13,7 +13,7 @@ class Suggestion {
 
   static getSuggestionById (id) {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM sugerenciaWHERE id = ?', [id], (error, results) => {
+      pool.query('SELECT * FROM sugerencias WHERE id = ?', [id], (error, results) => {
         if (error) {
           reject(error)
         }
@@ -24,7 +24,7 @@ class Suggestion {
 
   static createSuggestion (suggestion) {
     return new Promise((resolve, reject) => {
-      pool.query('INSERT INTO sugerencia (sugerencia) VALUES (?)', [suggestion])
+      pool.query('INSERT INTO sugerencias (sugerencia) VALUES (?)', [suggestion])
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -34,7 +34,7 @@ class Suggestion {
 
   static updateSuggestion (id, suggestion) {
     return new Promise((resolve, reject) => {
-      pool.query('UPDATE sugerencia SET sugerencia = ? WHERE id = ?', [suggestion, id])
+      pool.query('UPDATE sugerencia SET sugerencias = ? WHERE id = ?', [suggestion, id])
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -44,7 +44,7 @@ class Suggestion {
 
   static deleteSuggestion (id) {
     return new Promise((resolve, reject) => {
-      pool.query('DELETE FROM sugerencia WHERE id = ?', [id])
+      pool.query('DELETE FROM sugerencias WHERE id = ?', [id])
         .then(([rows, fields]) => {
           resolve(rows)
         })

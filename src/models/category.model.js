@@ -3,7 +3,7 @@ import pool from '../database/db.js'
 class Category {
   static getAllCategories () {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM categoria')
+      pool.query('SELECT * FROM categorias')
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -13,7 +13,7 @@ class Category {
 
   static getCategoryById (id) {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM categoria WHERE id = ?', [id])
+      pool.query('SELECT * FROM categorias WHERE id = ?', [id])
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -23,7 +23,7 @@ class Category {
 
   static createCategory (category) {
     return new Promise((resolve, reject) => {
-      pool.query('INSERT INTO categoria (categoria) VALUES (?)', [category])
+      pool.query('INSERT INTO categorias (categoria) VALUES (?)', [category])
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -33,7 +33,7 @@ class Category {
 
   static updateCategory (id, category) {
     return new Promise((resolve, reject) => {
-      pool.query('UPDATE categoria SET categoria = ? WHERE id = ?', [category, id])
+      pool.query('UPDATE categorias SET categoria = ? WHERE id = ?', [category, id])
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -43,7 +43,7 @@ class Category {
 
   static deleteCategory (id) {
     return new Promise((resolve, reject) => {
-      pool.query('DELETE FROM categoria WHERE id = ?', [id])
+      pool.query('DELETE FROM categorias WHERE id = ?', [id])
         .then(([rows, fields]) => {
           resolve(rows)
         })

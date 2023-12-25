@@ -3,7 +3,7 @@ import pool from '../database/db.js'
 class Provider {
   static getAllProviders () {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM proveedor')
+      pool.query('SELECT * FROM proveedores')
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -13,7 +13,7 @@ class Provider {
 
   static getProviderById (id) {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM proveedor WHERE id = ?', [id])
+      pool.query('SELECT * FROM proveedores WHERE id = ?', [id])
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -23,7 +23,7 @@ class Provider {
 
   static createProvider (provider) {
     return new Promise((resolve, reject) => {
-      pool.query('INSERT INTO proveedor (NIT, nombre_proveedor, direccion_proveedor, telefono_proveedor, correo_proveedor, telefono_vendedor) VALUES (?, ?, ?, ?, ?, ?)', [provider.NIT, provider.nombre_proveedor, provider.direccion_proveedor, provider.telefono_proveedor, provider.correo_proveedor, provider.telefono_vendedor])
+      pool.query('INSERT INTO proveedores (NIT, nombre_proveedor, direccion_proveedor, telefono_proveedor, correo_proveedor, telefono_vendedor) VALUES (?, ?, ?, ?, ?, ?)', [provider.NIT, provider.nombre_proveedor, provider.direccion_proveedor, provider.telefono_proveedor, provider.correo_proveedor, provider.telefono_vendedor])
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -33,7 +33,7 @@ class Provider {
 
   static updateProvider (id, provider) {
     return new Promise((resolve, reject) => {
-      pool.query('UPDATE proveedor SET NIT = ?, nombre_proveedor = ?, direccion_proveedor = ?, telefono_proveedor = ?, correo_proveedor = ?, telefono_vendedor = ? WHERE id = ?', [provider.NIT, provider.nombre_proveedor, provider.direccion_proveedor, provider.telefono_proveedor, provider.correo_proveedor, provider.telefono_vendedor, id])
+      pool.query('UPDATE proveedores SET NIT = ?, nombre_proveedor = ?, direccion_proveedor = ?, telefono_proveedor = ?, correo_proveedor = ?, telefono_vendedor = ? WHERE id = ?', [provider.NIT, provider.nombre_proveedor, provider.direccion_proveedor, provider.telefono_proveedor, provider.correo_proveedor, provider.telefono_vendedor, id])
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -43,7 +43,7 @@ class Provider {
 
   static deleteProvider (id) {
     return new Promise((resolve, reject) => {
-      pool.query('DELETE FROM proveedor WHERE id = ?', [id])
+      pool.query('DELETE FROM proveedores WHERE id = ?', [id])
         .then(([rows, fields]) => {
           resolve(rows)
         })

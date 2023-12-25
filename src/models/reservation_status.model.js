@@ -3,7 +3,7 @@ import pool from '../database/db.js'
 class ReservationStatus {
   static getAllReservationStatus () {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM estado_reserva')
+      pool.query('SELECT * FROM estados_reservas')
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -13,7 +13,7 @@ class ReservationStatus {
 
   static getReservationStatusById (id) {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM estado_reserva WHERE id = ?', [id])
+      pool.query('SELECT * FROM estados_reservas WHERE id = ?', [id])
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -23,7 +23,7 @@ class ReservationStatus {
 
   static createReservationStatus (status) {
     return new Promise((resolve, reject) => {
-      pool.query('INSERT INTO estado_reserva (estado) VALUES (?)', [status])
+      pool.query('INSERT INTO estados_reservas (estado) VALUES (?)', [status])
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -33,7 +33,7 @@ class ReservationStatus {
 
   static updateReservationStatus (id, status) {
     return new Promise((resolve, reject) => {
-      pool.query('UPDATE estado_reserva SET estado = ? WHERE id = ?', [status, id])
+      pool.query('UPDATE estados_reservas SET estado = ? WHERE id = ?', [status, id])
         .then(([rows, fields]) => {
           resolve(rows)
         })
@@ -43,7 +43,7 @@ class ReservationStatus {
 
   static deleteReservationStatus (id) {
     return new Promise((resolve, reject) => {
-      pool.query('DELETE FROM estado_reserva WHERE id = ?', [id])
+      pool.query('DELETE FROM estados_reservas WHERE id = ?', [id])
         .then(([rows, fields]) => {
           resolve(rows)
         })
