@@ -11,6 +11,7 @@ import UserRouter from './routes/users.routes.js'
 import ReservationStatusRouter from './routes/reservation_statuses.routes.js'
 import TMStatusRouter from './routes/tools_machines_statuses.routes.js'
 import ToolsMachinesRouter from './routes/tools_machines.routes.js'
+import ReservationRouter from './routes/reservation.routes.js'
 
 const PORT = process.env.PORT ?? 3000 // obtiene el puerto del sistema operativo o el 3000 si no existe
 const app = express()
@@ -40,6 +41,7 @@ app.use('/proveedores', ProviderRouter)
 app.use('/sugerencias', SuggestionRouter)
 app.use('/usuarios', UserRouter)
 app.use('/estados_reserva', ReservationStatusRouter)
+app.use('/reservas', ReservationRouter)
 app.use('/estados_herramienta_maquina', TMStatusRouter)
 app.use('/herramientas_maquinas', ToolsMachinesRouter)
 
