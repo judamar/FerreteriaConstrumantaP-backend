@@ -1,4 +1,4 @@
-import ToolMachineStatus from '../models/tool_machine_status.model'
+import ToolMachineStatus from '../models/tool_machine_status.model.js'
 
 const getAllStatus = async (req, res) => {
   try {
