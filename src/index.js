@@ -13,6 +13,7 @@ import TMStatusRouter from './routes/tools_machines_statuses.routes.js'
 import ToolsMachinesRouter from './routes/tools_machines.routes.js'
 import ReservationRouter from './routes/reservation.routes.js'
 import SalesStatusRouter from './routes/sales_status.routes.js'
+import SalesRouter from './routes/sales.routes.js'
 
 const PORT = process.env.PORT ?? 3000 // obtiene el puerto del sistema operativo o el 3000 si no existe
 const app = express()
@@ -46,6 +47,7 @@ app.use('/reservas', ReservationRouter)
 app.use('/estados_herramienta_maquina', TMStatusRouter)
 app.use('/herramientas_maquinas', ToolsMachinesRouter)
 app.use('/estados_venta', SalesStatusRouter)
+app.use('/ventas', SalesRouter)
 
 app.use('*', (req, res) => { // maneja las solicitudes no encontradas y devuelve un mensaje de error 404
   res.status(404).send('<h1>404 not found, go back to home</h1><a href="http://localhost:3000/">home</a>')
