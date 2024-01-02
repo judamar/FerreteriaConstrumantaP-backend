@@ -14,6 +14,8 @@ import ToolsMachinesRouter from './routes/tools_machines.routes.js'
 import ReservationRouter from './routes/reservation.routes.js'
 import SalesStatusRouter from './routes/sales_status.routes.js'
 import SalesRouter from './routes/sales.routes.js'
+import SalesDetailRouter from './routes/sales_details.routes.js'
+import ProviderHasCategoryRouter from './routes/providers_has_categories.routes.js'
 
 const PORT = process.env.PORT ?? 3000 // obtiene el puerto del sistema operativo o el 3000 si no existe
 const app = express()
@@ -40,6 +42,7 @@ app.get('/', (req, res) => {
 app.use('/productos', ProductRouter)
 app.use('/categorias', CategoryRouter)
 app.use('/proveedores', ProviderRouter)
+app.use('/proveedores_tienen_categorias', ProviderHasCategoryRouter)
 app.use('/sugerencias', SuggestionRouter)
 app.use('/usuarios', UserRouter)
 app.use('/estados_reserva', ReservationStatusRouter)
@@ -48,6 +51,7 @@ app.use('/estados_herramienta_maquina', TMStatusRouter)
 app.use('/herramientas_maquinas', ToolsMachinesRouter)
 app.use('/estados_venta', SalesStatusRouter)
 app.use('/ventas', SalesRouter)
+app.use('/detalles_ventas', SalesDetailRouter)
 
 app.use('*', (req, res) => { // maneja las solicitudes no encontradas y devuelve un mensaje de error 404
   res.status(404).send('<h1>404 not found, go back to home</h1><a href="http://localhost:3000/">home</a>')
