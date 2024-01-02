@@ -11,10 +11,6 @@ SET @OLD_SQL_MODE = @@SQL_MODE,
 -- -----------------------------------------------------
 -- Schema ferreteria-construmanta-p
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `ferreteria-construmanta-p`;
--- -----------------------------------------------------
--- Schema ferreteria-construmanta-p
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `ferreteria-construmanta-p` DEFAULT CHARACTER SET utf8;
 USE `ferreteria-construmanta-p`;
 -- -----------------------------------------------------
