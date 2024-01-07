@@ -1,4 +1,4 @@
-import ProviderHasCategory from '../models/provider_has_cateogry.model'
+import ProviderHasCategory from '../models/provider_has_cateogry.model.js'
 
 const getAll = async (req, res) => {
   try {
