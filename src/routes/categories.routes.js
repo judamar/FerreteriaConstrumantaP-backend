@@ -4,10 +4,11 @@ import Category from '../controllers/categories.controller.js'
 const CategoryRouter = Router()
 
 CategoryRouter
-  .get('/', Category.getAllCategories)
-  .get('/:id', Category.getCategoryById)
-  .post('/crear', Category.insertCategory)
-  .put('/:id', Category.updateCategory)
-  .delete('/:id', Category.deleteCategory)
+  .get('/', Category.getAll)
+  .get('/id/:id', Category.getById)
+  .get('/name/:name', Category.getByName)
+  .post('/crear', Category.insert)
+  .put('/:id', Category.update)
+  .delete('/:id', Category.remove)
 
 export default CategoryRouter
