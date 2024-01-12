@@ -45,7 +45,11 @@ const insert = async (req, res) => {
   const category = req.body.category
   try {
     const result = await Category.createCategory(category)
-    res.status(201).json({ status: 'RESOURCE_CREATED', category: result })
+    if (!result) {
+      res.status(500).json({ status: 'ERROR', error: 'Category not created' })
+    } else {
+      res.status(201).json({ status: 'RESOURCE_CREATED', category: result })
+    }
   } catch (error) {
     res.status(500).json({ status: 'ERROR', error: error.message })
   }
@@ -56,7 +60,11 @@ const update = async (req, res) => {
   const category = req.body.category
   try {
     const result = await Category.updateCategory(id, category)
-    res.status(201).json({ status: 'RESOURCE_UPDATED', category: result })
+    if (!result) {
+      res.status(500).json({ status: 'ERROR', error: 'Category not updated' })
+    } else {
+      res.status(201).json({ status: 'RESOURCE_UPDATED', category: result })
+    }
   } catch (error) {
     res.status(500).json({ status: 'ERROR', error: error.message })
   }
@@ -66,7 +74,11 @@ const remove = async (req, res) => {
   const id = req.params.id
   try {
     const result = await Category.deleteCategory(id)
-    res.status(200).json({ status: 'RESOURCE_DELETED', category: result })
+    if (!result) {
+      res.status(500).json({ status: 'ERROR', error: 'Category not deleted' })
+    } else {
+      res.status(200).json({ status: 'RESOURCE_DELETED', category: result })
+    }
   } catch (error) {
     res.status(500).json({ status: 'ERROR', error: error.message })
   }
