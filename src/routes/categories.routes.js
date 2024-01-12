@@ -7,7 +7,7 @@ CategoryRouter
   .get('/', Category.getAll)
   .get('/id/:id', Category.getById)
   .get('/name/:name', Category.getByName)
-  .post('/crear', Category.insert)
+  .post('/', Category.insert)
   .put('/:id', Category.update)
   .delete('/:id', Category.remove)
 
