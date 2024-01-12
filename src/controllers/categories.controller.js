@@ -44,7 +44,7 @@ const getByName = async (req, res) => {
 const insert = async (req, res) => {
   const category = req.body.category
   try {
-    const result = await Category.createCategory(category)
+    const result = await Category.create(category)
     if (!result) {
       res.status(500).json({ status: 'ERROR', error: 'Category not created' })
     } else {
@@ -59,7 +59,7 @@ const update = async (req, res) => {
   const id = req.params.id
   const category = req.body.category
   try {
-    const result = await Category.updateCategory(id, category)
+    const result = await Category.update(id, category)
     if (!result) {
       res.status(500).json({ status: 'ERROR', error: 'Category not updated' })
     } else {
@@ -73,7 +73,7 @@ const update = async (req, res) => {
 const remove = async (req, res) => {
   const id = req.params.id
   try {
-    const result = await Category.deleteCategory(id)
+    const result = await Category.remove(id)
     if (!result) {
       res.status(500).json({ status: 'ERROR', error: 'Category not deleted' })
     } else {
