@@ -11,7 +11,7 @@ const handleBadRequest = (res, error) => {
 }
 
 const handleServerError = (res, error) => {
-  res.status(500).json({ status: 'ERROR', error: error.message })
+  res.status(500).json({ status: 'ERROR', error })
 }
 
 export { handleSuccess, handleNotFound, handleBadRequest, handleServerError }
