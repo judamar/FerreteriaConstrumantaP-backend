@@ -1,28 +1,21 @@
 import Product from '../models/product.model.js'
+import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
 
 const getAll = async (req, res) => {
   try {
     const products = await Product.getAll()
-    if (!products) {
-      res.status(404).json({ status: 'NOT_FOUND', error: 'Products not found' })
-    } else {
-      res.status(200).json({ status: 'SUCCESS', products })
-    }
+    products ? handleSuccess(res, 200, products) : handleNotFound(res, 'Products not found.')
   } catch (error) {
-    res.status(500).json({ status: 'ERROR', error: error.message })
+    handleServerError(res, error.message)
   }
 }
 
 const getById = async (req, res) => {
   try {
     const product = await Product.getById(req.params.id)
-    if (!product) {
-      res.status(404).json({ status: 'NOT_FOUND', error: 'Product not found' })
-    } else {
-      res.status(200).json({ status: 'SUCCESS', product })
-    }
+    product ? handleSuccess(res, 200, product) : handleNotFound(res, 'Product not found.')
   } catch (error) {
-    res.status(500).json({ status: 'ERROR', error: error.message })
+    handleServerError(res, error.message)
   }
 }
 
@@ -30,62 +23,57 @@ const getByName = async (req, res) => {
   const name = req.params.name
   try {
     const product = await Product.getByName(name)
-    if (!product) {
-      res.status(404).json({ status: 'NOT_FOUND', error: 'Product not found' })
-    } else {
-      res.status(200).json({ status: 'SUCCESS', product })
-    }
+    product ? handleSuccess(res, 200, product) : handleNotFound(res, 'Product not found.')
   } catch (error) {
-    res.status(500).json({ status: 'ERROR', error: error.message })
+    handleServerError(res, error.message)
   }
 }
 
-const createNewProduct = (req, res) => {
+const getByCategory = async (req, res) => {
+  const category = req.params.category
+  try {
+    const products = await Product.getByCategory(category)
+    products ? handleSuccess(res, 200, products) : handleNotFound(res, 'Products not found.')
+  } catch (error) {
+    handleServerError(res, error.message)
+  }
+}
+
+const create = (req, res) => {
   try {
     const product = req.body.product
-    const result = Product.insertProduct(product)
-    if (!result) {
-      res.status(400).json({ status: 'ERROR', error: 'Product not created' })
-    } else {
-      res.status(201).json({ status: 'RESOURCE_CREATED', product: result })
-    }
+    const result = Product.create(product)
+    result ? handleSuccess(res, 201, result) : handleBadRequest(res, 'Product not created.')
   } catch (error) {
-    res.status(500).json({ status: 'ERROR', error: error.message })
-
+    handleServerError(res, error.message)
   }
 }
 
-const updateOneProduct = (req, res) => {
+const update = (req, res) => {
   try {
     const product = req.body.product
-    const result = Product.updateProduct(req.params.id, product)
-    if (!result) {
-      res.status(500).json({ status: 'ERROR', error: 'Product not updated' })
-    } else {
-      res.status(200).json({ status: 'RESOURCE_UPDATED', product: result })
-    }
+    const result = Product.update(req.params.id, product)
+    result ? handleSuccess(res, 200, result) : handleBadRequest(res, 'Product not updated.')
   } catch (error) {
-    res.status(500).json({ status: 'ERROR', error: error.message })
+    handleServerError(res, error.message)
   }
 }
 
-const deleteOneProduct = (req, res) => {
+const remove = (req, res) => {
   try {
-    const result = Product.deleteProduct(req.params.id)
-    if (!result) {
-      res.status(500).json({ status: 'ERROR', error: 'Product not deleted' })
-    } else {
-      res.status(200).json({ status: 'RESOURCE_DELETED', product: result })
-    }
+    const result = Product.remove(req.params.id)
+    result ? handleSuccess(res, 200, result) : handleBadRequest(res, 'Product not deleted.')
   } catch (error) {
-    res.status(500).json({ status: 'ERROR', error: error.message })
+    handleBadRequest(res, error.message)
   }
 }
 
 export default {
-  getAllProducts,
-  getOneProduct,
-  createNewProduct,
-  updateOneProduct,
-  deleteOneProduct
+  getAll,
+  getById,
+  getByName,
+  getByCategory,
+  create,
+  update,
+  remove
 }
