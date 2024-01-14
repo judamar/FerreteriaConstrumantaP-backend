@@ -45,9 +45,9 @@ const update = async (req, res) => {
   const user = req.body.user
   try {
     const result = await User.update(id, user)
-    result && result.changedRows > 0 ? handleSuccess(res, 200, result) : handleBadRequest(res, 'User not updated.')
+    result && result.affectedRows > 0 ? handleSuccess(res, 200, result) : handleBadRequest(res, 'User not updated.')
   } catch (error) {
-    return error.message.includes('cannot be null') ? handleBadRequest(res, `Missing or invalid value for field: ${/Column '([^']*)'/.exec(error.message)[1] || 'Unknown'}`) : handleServerError(res, error.message)
+    error.message.includes('cannot be null') ? handleBadRequest(res, `Missing or invalid value for field: ${/Column '([^']*)'/.exec(error.message)[1] || 'Unknown'}`) : handleServerError(res, error.message)
   }
 }
 
