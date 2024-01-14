@@ -4,10 +4,11 @@ import User from '../controllers/users.controller.js'
 const UsersRouter = Router()
 
 UsersRouter
+  .post('/signup/', User.signup)
+  .post('/login/', User.login)
   .get('/', User.getAll)
   .get('/id/:id', User.getById)
   .get('/cedula/:cedula', User.getByCedula)
-  .post('/', User.insert)
   .put('/:id', User.update)
   .delete('/:id', User.remove)
 
