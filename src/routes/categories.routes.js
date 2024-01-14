@@ -6,7 +6,7 @@ const CategoryRouter = Router()
 CategoryRouter
   .get('/', Category.getAll)
   .get('/id/:id', Category.getById)
-  .get('/name/:name', Category.getByName)
+  .get('/search/:name', Category.getByName)
   .post('/', Category.insert)
   .put('/:id', Category.update)
   .delete('/:id', Category.remove)
