@@ -6,8 +6,8 @@ const secretKey = process.env.JWT_SECRET_KEY
 export const generateToken = (user) => {
   const payload = {
     id: user.id,
-    correo_electronico: user.correo_electronico,
-    cedula: user.cedula
+    cedula: user.cedula,
+    esAdmin: user.es_admin
   }
 
   const options = {
