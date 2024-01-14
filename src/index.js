@@ -1,6 +1,7 @@
 import express, { json } from 'express'
 import pc from 'picocolors'
 import morgan from 'morgan'
+import 'dotenv/config'
 import { corsMiddleware } from './middlewares/cors.js'
 import ProductRouter from './routes/products.routes.js'
 import pool from './database/db.js'
