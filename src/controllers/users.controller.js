@@ -40,22 +40,11 @@ const insert = async (req, res) => {
   }
 }
 
-const updateById = async (req, res) => {
+const update = async (req, res) => {
   const id = req.params.id
   const user = req.body.user
   try {
-    const result = await User.updateById(id, user)
-    result ? handleSuccess(res, 200, result) : handleBadRequest(res, 'User not updated.')
-  } catch (error) {
-    return error.message.includes('cannot be null') ? handleBadRequest(res, `Missing or invalid value for field: ${/Column '([^']*)'/.exec(error.message)[1] || 'Unknown'}`) : handleServerError(res, error.message)
-  }
-}
-
-const updateByCedula = async (req, res) => {
-  const cedula = req.params.cedula
-  const user = req.body.user
-  try {
-    const result = await User.updateByCedula(cedula, user)
+    const result = await User.update(id, user)
     result ? handleSuccess(res, 200, result) : handleBadRequest(res, 'User not updated.')
   } catch (error) {
     return error.message.includes('cannot be null') ? handleBadRequest(res, `Missing or invalid value for field: ${/Column '([^']*)'/.exec(error.message)[1] || 'Unknown'}`) : handleServerError(res, error.message)
@@ -77,7 +66,6 @@ export default {
   getById,
   getByCedula,
   insert,
-  updateById,
-  updateByCedula,
+  update,
   remove
 }

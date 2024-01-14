@@ -8,8 +8,7 @@ UsersRouter
   .get('/id/:id', User.getById)
   .get('/cedula/:cedula', User.getByCedula)
   .post('/', User.insert)
-  .put('/id/:id', User.updateById)
-  .put('/cedula/:cedula', User.updateByCedula)
+  .put('/:id', User.update)
   .delete('/:id', User.remove)
 
 export default UsersRouter
