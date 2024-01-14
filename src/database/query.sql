@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`usuarios` (
   `id` CHAR(36) NOT NULL DEFAULT (UUID()),
   `cedula` BIGINT NOT NULL,
   `nombre_completo` VARCHAR(255) NOT NULL,
-  `correo_electronico` VARCHAR(255) NOT NULL,
+  `correo_electronico` VARCHAR(255) NULL DEFAULT NULL,
   `telefono` VARCHAR(24) NOT NULL,
   `direccion` VARCHAR(255) NULL DEFAULT NULL,
   `password` VARCHAR(255) NOT NULL,
