@@ -18,7 +18,7 @@ class Product {
   }
 
   static getById (id) {
-    return pool.query('SELECT * FROM productos WHERE id = ?', [id])
+    return pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE id = ?', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -26,7 +26,7 @@ class Product {
   }
 
   static getByName (name) {
-    return pool.query('SELECT * FROM productos WHERE nombre_producto = ?', [name])
+    return pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE nombre_producto = ?', [name])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -34,7 +34,7 @@ class Product {
   }
 
   static getByCategory (category) {
-    return pool.query('SELECT * FROM productos WHERE categorias_id = ?', [category])
+    return pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE categorias_id = ?', [category])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -42,7 +42,7 @@ class Product {
   }
 
   static getByKey (key) {
-    return pool.query('SELECT * FROM productos WHERE clave_producto = ?', [key])
+    return pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE clave_producto = ?', [key])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
