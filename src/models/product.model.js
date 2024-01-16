@@ -26,7 +26,7 @@ class Product {
   }
 
   static async getByName (name) {
-    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE nombre_producto = ?', [name])
+    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE nombre_producto LIKE ?', [`%${name}%`])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
