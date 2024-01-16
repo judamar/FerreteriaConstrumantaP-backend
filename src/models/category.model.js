@@ -2,7 +2,7 @@ import pool from '../database/db.js'
 
 class Category {
   static async create (category) {
-    return await pool.query('INSERT INTO categorias (categoria) VALUES (?)', [category])
+    return await pool.query('INSERT INTO categorias (categoria) VALUES (?)', [category.categoria])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -26,7 +26,7 @@ class Category {
   }
 
   static async getByName (name) {
-    return await pool.query('SELECT * FROM categorias WHERE categoria = ?', [name])
+    return await pool.query('SELECT * FROM categorias WHERE categoria LIKE ?', [`%${name}%`])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
