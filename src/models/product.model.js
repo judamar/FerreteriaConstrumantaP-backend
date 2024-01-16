@@ -1,8 +1,12 @@
 import pool from '../database/db.js'
+import productKeyGenerator from '../utils/productKey.js'
+import { imageToURL } from '../utils/images.js'
 
 class Product {
   static async create (product) {
-    return await pool.query('INSERT INTO productos (nombre_producto, clave_producto, url_imagen, marca, descripcion, precio, cantidad, categorias_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [product.nombre_producto, product.clave_producto, product.url_imagen, product.marca, product.descripcion, product.precio, product.cantidad, product.categorias_id])
+    const claveProducto = productKeyGenerator(product.nombre_producto, product.marca)
+    const urlImage = await imageToURL(product.url_imagen.path)
+    return await pool.query('INSERT INTO productos (nombre_producto, clave_producto, url_imagen, marca, descripcion, precio, cantidad, categorias_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [product.nombre_producto, claveProducto, urlImage, product.marca.toUpperCase(), product.descripcion, product.precio, product.cantidad, product.categorias_id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -50,7 +54,7 @@ class Product {
   }
 
   static async update (id, product) {
-    return await pool.query('UPDATE productos SET nombre_producto = ?, clave_producto = ?, url_imagen = ?, marca = ?, descripcion = ?, precio = ?, cantidad = ?, categorias_id = ? WHERE id = ?', [product.nombre_producto, product.clave_producto, product.url_imagen, product.marca, product.descripcion, product.precio, product.cantidad, product.categorias_id, id])
+    return await pool.query('UPDATE productos SET nombre_producto = ?, clave_producto = ?, url_imagen = ?, marca = ?, descripcion = ?, precio = ?, cantidad = ?, categorias_id = ? WHERE id = ?', [product.nombre_producto, productKeyGenerator(product.nombre_producto, product.marca), product.url_imagen, product.marca.toUpperCase, product.descripcion, product.precio, product.cantidad, product.categorias_id, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
