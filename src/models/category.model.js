@@ -34,7 +34,7 @@ class Category {
   }
 
   static async update (id, category) {
-    return await pool.query('UPDATE categorias SET categoria = ? WHERE id = ?', [category, id])
+    return await pool.query('UPDATE categorias SET categoria = ? WHERE id = ?', [category.categoria, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
