@@ -16,7 +16,7 @@ export const imageToURL = async (filePath) => {
         'Content-Type': `image/${extension}`
       }
     })
-
+    fs.unlinkSync(filePath)
     return response.data.data.link
   } catch (error) {
     console.error('Error', error)

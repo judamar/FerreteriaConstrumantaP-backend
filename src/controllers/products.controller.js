@@ -1,30 +1,56 @@
 import Product from '../models/product.model.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
+import pc from 'picocolors'
 
-const create = (req, res) => {
+const create = async (req, res) => {
+  const product = {
+    nombre_producto: req.body.nombre_producto,
+    marca: req.body.marca,
+    descripcion: req.body.descripcion,
+    precio: req.body.precio,
+    cantidad: req.body.cantidad,
+    categorias_id: req.body.categorias_id,
+    image: req.file.filename
+  }
   try {
-    const product = req.body.product
-    const result = Product.create(product)
-    result && result.affectedRows === 1 ? handleSuccess(res, 201, result) : handleBadRequest(res, 'Product not created.')
+    console.log(pc.bgGreen('CREATING PRODUCT'))
+    console.log({ Body: product })
+    const image = `src/images/public/${product.image}`
+    const result = await Product.create(product, image)
+    console.log(pc.bgGreen('PRODUCT CREATED'))
+    console.log({ Result: result })
+    result && result.affectedRows > 0 ? handleSuccess(res, 201, result) : handleBadRequest(res, 'Product not created.')
   } catch (error) {
+    console.log(pc.bgRed('ERROR CREATING PRODUCT'))
+    console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
 }
 
 const getAll = async (req, res) => {
   try {
+    console.log(pc.bgGreen('GETTING ALL PRODUCTS'))
     const products = await Product.getAll()
+    console.log(pc.bgGreen('PRODUCTS FOUND'))
     products && products.length > 0 ? handleSuccess(res, 200, products) : handleNotFound(res, 'Products not found.')
   } catch (error) {
+    console.log(pc.bgRed('ERROR GETTING ALL PRODUCTS'))
+    console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
 }
 
 const getById = async (req, res) => {
+  const id = req.params.id
   try {
-    const product = await Product.getById(req.params.id)
+    console.log(pc.bgGreen('GETTING PRODUCT BY ID'))
+    console.log({ ID: id })
+    const product = await Product.getById(id)
+    console.log(pc.bgGreen('PRODUCT FOUND'))
     product && product.length > 0 ? handleSuccess(res, 200, product) : handleNotFound(res, 'Product not found.')
   } catch (error) {
+    console.log(pc.bgRed('ERROR GETTING PRODUCT BY ID'))
+    console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
 }
@@ -32,9 +58,14 @@ const getById = async (req, res) => {
 const getByName = async (req, res) => {
   const name = req.params.name
   try {
+    console.log(pc.bgGreen('GETTING PRODUCT BY NAME'))
+    console.log({ Name: name })
     const product = await Product.getByName(name)
+    console.log(pc.bgGreen('PRODUCT FOUND'))
     product && product.length > 0 ? handleSuccess(res, 200, product) : handleNotFound(res, 'Product not found.')
   } catch (error) {
+    console.log(pc.bgRed('ERROR GETTING PRODUCT BY NAME'))
+    console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
 }
@@ -42,9 +73,14 @@ const getByName = async (req, res) => {
 const getByCategory = async (req, res) => {
   const category = req.params.category
   try {
+    console.log(pc.bgGreen('GETTING PRODUCTS BY CATEGORY'))
+    console.log({ Category: category })
     const products = await Product.getByCategory(category)
+    console.log(pc.bgGreen('PRODUCTS FOUND'))
     products && products.length > 0 ? handleSuccess(res, 200, products) : handleNotFound(res, 'Products not found.')
   } catch (error) {
+    console.log(pc.bgRed('ERROR GETTING PRODUCTS BY CATEGORY'))
+    console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
 }
@@ -52,28 +88,56 @@ const getByCategory = async (req, res) => {
 const getByKey = async (req, res) => {
   const key = req.params.key
   try {
+    console.log(pc.bgGreen('GETTING PRODUCTS BY KEY'))
+    console.log({ Key: key })
     const products = await Product.getByKey(key)
+    console.log(pc.bgGreen('PRODUCTS FOUND'))
     products && products.length > 0 ? handleSuccess(res, 200, products) : handleNotFound(res, 'Products not found.')
   } catch (error) {
+    console.log(pc.bgRed('ERROR GETTING PRODUCTS BY KEY'))
+    console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
 }
 
-const update = (req, res) => {
+const update = async (req, res) => {
+  const product = {
+    nombre_producto: req.body.nombre_producto,
+    marca: req.body.marca,
+    descripcion: req.body.descripcion,
+    precio: req.body.precio,
+    cantidad: req.body.cantidad,
+    categorias_id: req.body.categorias_id,
+    image: req.body.image
+  }
+  const id = req.params.id
   try {
-    const product = req.body.product
-    const result = Product.update(req.params.id, product)
+    console.log(pc.bgGreen('UPDATING PRODUCT'))
+    console.log({ Body: product })
+    console.log({ ID: id })
+    const result = await Product.update(id, product)
+    console.log(pc.bgGreen('PRODUCT UPDATED'))
+    console.log({ Result: result })
     result && result.affectedRows > 0 ? handleSuccess(res, 200, result) : handleBadRequest(res, 'Product not updated.')
   } catch (error) {
+    console.log(pc.bgRed('ERROR UPDATING PRODUCT'))
+    console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
 }
 
-const remove = (req, res) => {
+const remove = async (req, res) => {
+  const id = req.params.id
   try {
-    const result = Product.remove(req.params.id)
-    result && result.affectedRows === 1 ? handleSuccess(res, 200, result) : handleBadRequest(res, 'Product not deleted.')
+    console.log(pc.bgGreen('DELETING PRODUCT'))
+    console.log({ ID: id })
+    const result = await Product.remove(id)
+    console.log(pc.bgGreen('PRODUCT DELETED'))
+    console.log({ Result: result })
+    result && result.affectedRows > 0 ? handleSuccess(res, 200, result) : handleBadRequest(res, 'Product not deleted.')
   } catch (error) {
+    console.log(pc.bgRed('ERROR DELETING PRODUCT'))
+    console.error({ Error: error.message })
     handleBadRequest(res, error.message)
   }
 }

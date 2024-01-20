@@ -3,9 +3,9 @@ import productKeyGenerator from '../utils/productKey.js'
 import { imageToURL } from '../utils/images.js'
 
 class Product {
-  static async create (product) {
+  static async create (product, image) {
     const claveProducto = productKeyGenerator(product.nombre_producto, product.marca)
-    const urlImage = await imageToURL(product.url_imagen.path)
+    const urlImage = await imageToURL(image)
     return await pool.query('INSERT INTO productos (nombre_producto, clave_producto, url_imagen, marca, descripcion, precio, cantidad, categorias_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [product.nombre_producto, claveProducto, urlImage, product.marca.toUpperCase(), product.descripcion, product.precio, product.cantidad, product.categorias_id])
       .then(([rows, fields]) => rows)
       .catch(err => {
