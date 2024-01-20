@@ -147,7 +147,6 @@ CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`productos` (
   `cantidad` FLOAT(10, 2) NOT NULL,
   `precio` FLOAT(10, 2) NOT NULL,
   PRIMARY KEY (`id`, `clave_producto`),
-  UNIQUE INDEX `nombre_producto_UNIQUE` (`nombre_producto` ASC) VISIBLE,
   INDEX `fk_productos_categorias1_idx` (`categorias_id` ASC) VISIBLE,
   CONSTRAINT `fk_productos_categorias1` FOREIGN KEY (`categorias_id`) REFERENCES `ferreteria-construmanta-p`.`categorias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
