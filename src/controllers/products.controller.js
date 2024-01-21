@@ -17,9 +17,14 @@ const create = async (req, res) => {
     console.log({ Body: product })
     const image = `src/images/public/${product.image}`
     const result = await Product.create(product, image)
-    console.log(pc.bgGreen('PRODUCT CREATED'))
-    console.log({ Result: result })
-    result && result.affectedRows > 0 ? handleSuccess(res, 201, result) : handleBadRequest(res, 'Product not created.')
+    if (result && result.affectedRows > 0) {
+      console.log(pc.bgGreen('PRODUCT CREATED SUCCESSFULLY'))
+      console.log({ Result: result })
+      handleSuccess(res, 201, result)
+    } else {
+      console.log(pc.bgRed('PRODUCT NOT CREATED'))
+      handleBadRequest(res, 'Product not created.')
+    }
   } catch (error) {
     console.log(pc.bgRed('ERROR CREATING PRODUCT'))
     console.error({ Error: error.message })
@@ -31,8 +36,13 @@ const getAll = async (req, res) => {
   try {
     console.log(pc.bgGreen('GETTING ALL PRODUCTS'))
     const products = await Product.getAll()
-    console.log(pc.bgGreen('PRODUCTS FOUND'))
-    products && products.length > 0 ? handleSuccess(res, 200, products) : handleNotFound(res, 'Products not found.')
+    if (products && products.length > 0) {
+      console.log(pc.bgGreen('PRODUCTS FOUND'))
+      handleSuccess(res, 200, products)
+    } else {
+      console.log(pc.bgRed('PRODUCTS NOT FOUND'))
+      handleNotFound(res, 'Products not found.')
+    }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING ALL PRODUCTS'))
     console.error({ Error: error.message })
@@ -46,8 +56,13 @@ const getById = async (req, res) => {
     console.log(pc.bgGreen('GETTING PRODUCT BY ID'))
     console.log({ ID: id })
     const product = await Product.getById(id)
-    console.log(pc.bgGreen('PRODUCT FOUND'))
-    product && product.length > 0 ? handleSuccess(res, 200, product) : handleNotFound(res, 'Product not found.')
+    if (product && product.length > 0) {
+      console.log(pc.bgGreen('PRODUCT FOUND'))
+      handleSuccess(res, 200, product)
+    } else {
+      console.log(pc.bgRed('PRODUCT NOT FOUND'))
+      handleNotFound(res, 'Product not found.')
+    }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING PRODUCT BY ID'))
     console.error({ Error: error.message })
@@ -61,8 +76,13 @@ const getByName = async (req, res) => {
     console.log(pc.bgGreen('GETTING PRODUCT BY NAME'))
     console.log({ Name: name })
     const product = await Product.getByName(name)
-    console.log(pc.bgGreen('PRODUCT FOUND'))
-    product && product.length > 0 ? handleSuccess(res, 200, product) : handleNotFound(res, 'Product not found.')
+    if (product && product.length > 0) {
+      console.log(pc.bgGreen('PRODUCT FOUND'))
+      handleSuccess(res, 200, product)
+    } else {
+      console.log(pc.bgRed('PRODUCT NOT FOUND'))
+      handleNotFound(res, 'Product not found.')
+    }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING PRODUCT BY NAME'))
     console.error({ Error: error.message })
@@ -76,8 +96,13 @@ const getByCategory = async (req, res) => {
     console.log(pc.bgGreen('GETTING PRODUCTS BY CATEGORY'))
     console.log({ Category: category })
     const products = await Product.getByCategory(category)
-    console.log(pc.bgGreen('PRODUCTS FOUND'))
-    products && products.length > 0 ? handleSuccess(res, 200, products) : handleNotFound(res, 'Products not found.')
+    if (products && products.length > 0) {
+      console.log(pc.bgGreen('PRODUCTS FOUND'))
+      handleSuccess(res, 200, products)
+    } else {
+      console.log(pc.bgRed('PRODUCTS NOT FOUND'))
+      handleNotFound(res, 'Products not found.')
+    }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING PRODUCTS BY CATEGORY'))
     console.error({ Error: error.message })
@@ -91,8 +116,13 @@ const getByKey = async (req, res) => {
     console.log(pc.bgGreen('GETTING PRODUCTS BY KEY'))
     console.log({ Key: key })
     const products = await Product.getByKey(key)
-    console.log(pc.bgGreen('PRODUCTS FOUND'))
-    products && products.length > 0 ? handleSuccess(res, 200, products) : handleNotFound(res, 'Products not found.')
+    if (products && products.length > 0) {
+      console.log(pc.bgGreen('PRODUCTS FOUND'))
+      handleSuccess(res, 200, products)
+    } else {
+      console.log(pc.bgRed('PRODUCTS NOT FOUND'))
+      handleNotFound(res, 'Products not found.')
+    }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING PRODUCTS BY KEY'))
     console.error({ Error: error.message })
@@ -116,9 +146,14 @@ const update = async (req, res) => {
     console.log({ Body: product })
     console.log({ ID: id })
     const result = await Product.update(id, product)
-    console.log(pc.bgGreen('PRODUCT UPDATED'))
-    console.log({ Result: result })
-    result && result.affectedRows > 0 ? handleSuccess(res, 200, result) : handleBadRequest(res, 'Product not updated.')
+    if (result && result.affectedRows > 0) {
+      console.log(pc.bgGreen('PRODUCT UPDATED SUCCESSFULLY'))
+      console.log({ Result: result })
+      handleSuccess(res, 200, result)
+    } else {
+      console.log(pc.bgRed('PRODUCT NOT UPDATED'))
+      handleBadRequest(res, 'Product not updated.')
+    }
   } catch (error) {
     console.log(pc.bgRed('ERROR UPDATING PRODUCT'))
     console.error({ Error: error.message })
@@ -132,9 +167,14 @@ const remove = async (req, res) => {
     console.log(pc.bgGreen('DELETING PRODUCT'))
     console.log({ ID: id })
     const result = await Product.remove(id)
-    console.log(pc.bgGreen('PRODUCT DELETED'))
-    console.log({ Result: result })
-    result && result.affectedRows > 0 ? handleSuccess(res, 200, result) : handleBadRequest(res, 'Product not deleted.')
+    if (result && result.affectedRows > 0) {
+      console.log(pc.bgGreen('PRODUCT DELETED SUCCESSFULLY'))
+      console.log({ Result: result })
+      handleSuccess(res, 200, result)
+    } else {
+      console.log(pc.bgRed('PRODUCT NOT DELETED'))
+      handleBadRequest(res, 'Product not deleted.')
+    }
   } catch (error) {
     console.log(pc.bgRed('ERROR DELETING PRODUCT'))
     console.error({ Error: error.message })
