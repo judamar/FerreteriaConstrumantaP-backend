@@ -23,6 +23,7 @@ const create = async (req, res) => {
       handleSuccess(res, 201, result)
     } else {
       console.log(pc.bgRed('PRODUCT NOT CREATED'))
+      console.log({ Result: result })
       handleBadRequest(res, 'Product not created.')
     }
   } catch (error) {
@@ -152,6 +153,7 @@ const update = async (req, res) => {
       handleSuccess(res, 200, result)
     } else {
       console.log(pc.bgRed('PRODUCT NOT UPDATED'))
+      console.log({ Result: result })
       handleBadRequest(res, 'Product not updated.')
     }
   } catch (error) {

@@ -25,6 +25,7 @@ const signup = async (req, res) => { // x-www-form-urlencoded
       handleSuccess(res, 201, { message: 'User created successfully' })
     } else {
       console.log(pc.bgRed('SIGNUP USER FAILED'))
+      console.log({ Result: result })
       handleServerError(res, 'User creation failed')
     }
   } catch (error) {
@@ -133,6 +134,7 @@ const update = async (req, res) => {
       handleSuccess(res, 200, { message: 'User updated successfully' })
     } else {
       console.log(pc.bgRed('UPDATE USER FAILED'))
+      console.log({ Result: result })
       handleServerError(res, 'User update failed')
     }
   } catch (error) {
@@ -154,6 +156,7 @@ const remove = async (req, res) => {
       handleSuccess(res, 200, { message: 'User deleted successfully' })
     } else {
       console.log(pc.bgRed('DELETE USER FAILED'))
+      console.log({ Result: result })
       handleServerError(res, 'User delete failed')
     }
   } catch (error) {
