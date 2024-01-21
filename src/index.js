@@ -2,9 +2,13 @@ import express, { json } from 'express'
 import pc from 'picocolors'
 import morgan from 'morgan'
 import 'dotenv/config'
+
+// Import utils
 import { corsMiddleware } from './middlewares/cors.js'
-import ProductRouter from './routes/products.routes.js'
 import pool from './database/db.js'
+
+// Import routes
+import ProductRouter from './routes/products.routes.js'
 import CategoryRouter from './routes/categories.routes.js'
 import ProviderRouter from './routes/providers.routes.js'
 import SuggestionRouter from './routes/suggestion.routes.js'
@@ -23,6 +27,7 @@ const app = express()
 
 app.disable('x-powered-by') // deshabilita la cabecera X-Powered-By
 app.use(json()) // habilita el uso de json
+app.use(express.urlencoded({ extended: true })) // habilita el uso de formularios en la aplicación
 
 app.use(morgan('dev')) // habilita el log de las solicitudes en la consola
 app.use(corsMiddleware()) // habilita el uso de CORS en todas las rutas
@@ -40,6 +45,7 @@ app.get('/', (req, res) => {
   res.send('<h1>Ferreteria Construmanta P</h1>')
 })
 
+// ROUTES
 app.use('/api/productos', ProductRouter)
 app.use('/api/categorias', CategoryRouter)
 app.use('/api/proveedores', ProviderRouter)
