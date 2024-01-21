@@ -3,8 +3,7 @@ import password from '../utils/password.js'
 
 class User {
   static async create (user) {
-    const hashedPassword = await password.hashPassword(user.password)
-    return await pool.query('INSERT INTO usuarios (cedula, nombre_completo, correo_electronico, telefono, direccion, password, es_admin) VALUES (?, ?, ?, ?, ?, ?, ?)', [user.cedula, user.nombre_completo, user.correo_electronico, user.telefono, user.direccion, hashedPassword, user.es_admin])
+    return await pool.query('INSERT INTO usuarios (cedula, nombre_completo, correo_electronico, telefono, direccion, password, es_admin) VALUES (?, ?, ?, ?, ?, ?, ?)', [user.cedula, user.nombre_completo, user.correo_electronico, user.telefono, user.direccion, user.password, user.es_admin])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
