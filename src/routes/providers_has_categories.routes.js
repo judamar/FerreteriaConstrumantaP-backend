@@ -4,9 +4,9 @@ import ProvidersHasCategories from '../controllers/providers_has_categories.cont
 const ProviderHasCategoryRouter = Router()
 
 ProviderHasCategoryRouter
+  .post('/', ProvidersHasCategories.create)
   .get('/', ProvidersHasCategories.getAll)
   .get('/:id', ProvidersHasCategories.getById)
-  .post('/', ProvidersHasCategories.insert)
   .put('/:id', ProvidersHasCategories.update)
   .delete('/:id', ProvidersHasCategories.remove)
 
