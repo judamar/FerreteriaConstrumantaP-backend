@@ -1,67 +1,153 @@
 import Provider from '../models/provider.model.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
+import pc from 'picocolors'
 
 const create = async (req, res) => {
+  const provider = req.body
   try {
-    const provider = req.body.proveedor
+    console.log(pc.bgGreen('CREATING PROVIDER'))
+    console.log({ Provider: provider })
     const result = await Provider.create(provider)
-    result && result.affectedRows === 1 ? handleSuccess(res, 201, result) : handleBadRequest(res, 'Provider not created.')
+    if (result && result.affectedRows > 0) {
+      console.log(pc.bgGreen('PROVIDER CREATED SUCCESFULLY'))
+      console.log({ Result: result })
+      handleSuccess(res, 201, result)
+    } else {
+      console.log(pc.bgRed('PROVIDER NOT CREATED'))
+      console.log({ Result: result })
+      handleBadRequest(res, 'Provider not created.')
+    }
   } catch (error) {
-    error.message.includes('cannot be null') ? handleBadRequest(res, `Missing or invalid value for field: ${/Column '([^']*)'/.exec(error.message)[1] || 'Unknown'}`) : handleServerError(res, error.message)
+    console.log(pc.bgRed('CREATING PROVIDER FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
   }
 }
 
 const getAll = async (req, res) => {
   try {
+    console.log(pc.bgGreen('GETTING PROVIDERS'))
     const providers = await Provider.getAll()
-    providers && providers.length > 0 ? handleSuccess(res, 200, providers) : handleNotFound(res, 'No providers found.')
+    if (providers && providers.length > 0) {
+      console.log(pc.bgGreen('PROVIDERS FOUND'))
+      handleSuccess(res, 200, providers)
+    } else {
+      console.log(pc.bgRed('PROVIDERS NOT FOUND'))
+      console.log({ Providers: providers })
+      handleNotFound(res, 'Providers not found.')
+    }
   } catch (error) {
-    handleBadRequest(res, error.message)
+    console.log(pc.bgRed('GETTING PROVIDERS FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
   }
 }
 
 const getById = async (req, res) => {
+  const id = req.params.id
   try {
-    const provider = await Provider.getById(req.params.id)
-    provider && provider.length > 0 ? handleSuccess(res, 200, provider) : handleNotFound(res, 'Provider not found.')
+    console.log(pc.bgGreen('GETTING PROVIDER'))
+    console.log({ Id: id })
+    const provider = await Provider.getById(id)
+    if (provider && provider.length > 0) {
+      console.log(pc.bgGreen('PROVIDER FOUND'))
+      handleSuccess(res, 200, provider)
+    } else {
+      console.log(pc.bgRed('PROVIDER NOT FOUND'))
+      console.log({ Provider: provider })
+      handleNotFound(res, 'Provider not found.')
+    }
   } catch (error) {
+    console.log(pc.bgRed('GETTING PROVIDER FAILED'))
+    console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
 }
 
 const getByName = async (req, res) => {
+  const name = req.params.name
   try {
-    const provider = await Provider.getByName(req.params.name)
-    provider && provider.length > 0 ? handleSuccess(res, 200, provider) : handleNotFound(res, 'Provider not found.')
+    console.log(pc.bgGreen('GETTING PROVIDER'))
+    console.log({ Name: name })
+    const provider = await Provider.getByName(name)
+    if (provider && provider.length > 0) {
+      console.log(pc.bgGreen('PROVIDER FOUND'))
+      handleSuccess(res, 200, provider)
+    } else {
+      console.log(pc.bgRed('PROVIDER NOT FOUND'))
+      console.log({ Provider: provider })
+      handleNotFound(res, 'Provider not found.')
+    }
   } catch (error) {
+    console.log(pc.bgRed('GETTING PROVIDER FAILED'))
+    console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
 }
 
 const getByNIT = async (req, res) => {
+  const nit = req.params.nit
   try {
-    const provider = await Provider.getByNIT(req.params.nit)
-    provider && provider.length > 0 ? handleSuccess(res, 200, provider) : handleNotFound(res, 'Provider not found.')
+    console.log(pc.bgGreen('GETTING PROVIDER'))
+    console.log({ NIT: nit })
+    const provider = await Provider.getByNIT(nit)
+    if (provider && provider.length > 0) {
+      console.log(pc.bgGreen('PROVIDER FOUND'))
+      handleSuccess(res, 200, provider)
+    } else {
+      console.log(pc.bgRed('PROVIDER NOT FOUND'))
+      console.log({ Provider: provider })
+      handleNotFound(res, 'Provider not found.')
+    }
   } catch (error) {
+    console.log(pc.bgRed('GETTING PROVIDER FAILED'))
+    console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
 }
 
 const update = async (req, res) => {
+  const provider = req.body
+  const id = req.params.id
   try {
-    const provider = req.body.proveedor
-    const result = await Provider.update(req.params.id, provider)
-    result && result.affectedRows > 0 ? handleSuccess(res, 200, result) : handleBadRequest(res, 'Provider not updated.')
+    console.log(pc.bgGreen('UPDATING PROVIDER'))
+    console.log({ Provider: provider })
+    console.log({ Id: id })
+    const result = await Provider.update(id, provider)
+    if (result && result.affectedRows > 0) {
+      console.log(pc.bgGreen('PROVIDER UPDATED SUCCESFULLY'))
+      console.log({ Result: result })
+      handleSuccess(res, 200, result)
+    } else {
+      console.log(pc.bgRed('PROVIDER NOT UPDATED'))
+      console.log({ Result: result })
+      handleBadRequest(res, 'Provider not updated.')
+    }
   } catch (error) {
-    error.message.includes('cannot be null') ? handleBadRequest(res, `Missing or invalid value for field: ${/Column '([^']*)'/.exec(error.message)[1] || 'Unknown'}`) : handleServerError(res, error.message)
+    console.log(pc.bgRed('UPDATING PROVIDER FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
   }
 }
 
 const remove = async (req, res) => {
+  const id = req.params.id
   try {
-    const result = await Provider.remove(req.params.id)
-    result && result.affectedRows === 1 ? handleSuccess(res, 200, result) : handleBadRequest(res, 'Provider not deleted.')
+    console.log(pc.bgGreen('DELETING PROVIDER'))
+    console.log({ Id: id })
+    const result = await Provider.remove(id)
+    if (result && result.affectedRows > 0) {
+      console.log(pc.bgGreen('PROVIDER DELETED SUCCESFULLY'))
+      console.log({ Result: result })
+      handleSuccess(res, 200, result)
+    } else {
+      console.log(pc.bgRed('PROVIDER NOT DELETED'))
+      console.log({ Result: result })
+      handleBadRequest(res, 'Provider not deleted.')
+    }
   } catch (error) {
+    console.log(pc.bgRed('DELETING PROVIDER FAILED'))
+    console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
 }
