@@ -33,7 +33,7 @@ class SalesDetail {
       })
   }
 
-  static async delete (id) {
+  static async remove (id) {
     return await pool.query('DELETE FROM detalles_ventas WHERE id = ?', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {

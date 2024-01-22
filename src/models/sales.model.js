@@ -1,54 +1,44 @@
 import pool from '../database/db.js'
 
 class Sales {
-  static getAll () {
-    return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM ventas')
-        .then(([rows, fields]) => {
-          resolve(rows)
-        })
-        .catch(err => reject(err))
-    })
+  static async create (sale) {
+    return await pool.query('INSERT INTO ventas (usuario_id, total_venta, enviar_factura, estado_venta_id) VALUES (?, ?, ?, ?)', [sale.usuario_id, sale.total_venta, sale.enviar_factura, sale.estado_venta_id])
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
   }
 
-  static getById (id) {
-    return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM ventas WHERE id = ?', [id])
-        .then(([rows, fields]) => {
-          resolve(rows)
-        })
-        .catch(err => reject(err))
-    })
+  static async getAll () {
+    return await pool.query('SELECT * FROM ventas')
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
   }
 
-  static create (sale) {
-    return new Promise((resolve, reject) => {
-      pool.query('INSERT INTO ventas(usuario_id, total_venta, enviar_factura, estado_venta_id) SET ?, ?, ? , ?', [sale.usuario_id, sale.total_venta, sale.enviar_factura, sale.estado_venta_id])
-        .then(([rows, fields]) => {
-          resolve(rows)
-        })
-        .catch(err => reject(err))
-    })
+  static async getById (id) {
+    return await pool.query('SELECT * FROM ventas WHERE id = ?', [id])
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
   }
 
-  static update (id, sale) {
-    return new Promise((resolve, reject) => {
-      pool.query('UPDATE ventas SET ? WHERE id = ?', [sale.usuario_id, sale.total_venta, sale.enviar_factura, sale.estado_venta_id, id])
-        .then(([rows, fields]) => {
-          resolve(rows)
-        })
-        .catch(err => reject(err))
-    })
+  static async update (id, sale) {
+    return await pool.query('UPDATE ventas SET usuario_id = ?, total_venta = ?, enviar_factura = ?, estado_venta_id = ? WHERE id = ?', [sale.usuario_id, sale.total_venta, sale.enviar_factura, sale.estado_venta_id, id])
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
   }
 
-  static delete (id) {
-    return new Promise((resolve, reject) => {
-      pool.query('DELETE FROM ventas WHERE id = ?', [id])
-        .then(([rows, fields]) => {
-          resolve(rows)
-        })
-        .catch(err => reject(err))
-    })
+  static async remove (id) {
+    return await pool.query('DELETE FROM ventas WHERE id = ?', [id])
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
   }
 }
 
