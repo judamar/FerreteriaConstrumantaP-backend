@@ -1,54 +1,44 @@
 import pool from '../database/db.js'
 
 class SalesStatus {
-  static getAll () {
-    return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM estados_ventas')
-        .then(([rows, fields]) => {
-          resolve(rows)
-        })
-        .catch(err => reject(err))
-    })
+  static async create (salesStatus) {
+    return await pool.query('INSERT INTO estados_ventas (estado) VALUES (?)', [salesStatus])
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
   }
 
-  static getById (id) {
-    return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM estados_ventas WHERE id = ?', [id])
-        .then(([rows, fields]) => {
-          resolve(rows)
-        })
-        .catch(err => reject(err))
-    })
+  static async getAll () {
+    return await pool.query('SELECT * FROM estados_ventas')
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
   }
 
-  static createSalesStatus (salesStatus) {
-    return new Promise((resolve, reject) => {
-      pool.query('INSERT INTO estados_ventas (estado) VALUES (?)', [salesStatus])
-        .then(([rows, fields]) => {
-          resolve(rows)
-        })
-        .catch(err => reject(err))
-    })
+  static async getById (id) {
+    return await pool.query('SELECT * FROM estados_ventas WHERE id = ?', [id])
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
   }
 
-  static updateSalesStatus (id, salesStatus) {
-    return new Promise((resolve, reject) => {
-      pool.query('UPDATE estados_ventas SET estado = ? WHERE id = ?', [salesStatus, id])
-        .then(([rows, fields]) => {
-          resolve(rows)
-        })
-        .catch(err => reject(err))
-    })
+  static async update (id, salesStatus) {
+    return await pool.query('UPDATE estados_ventas SET estado = ? WHERE id = ?', [salesStatus, id])
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
   }
 
-  static deleteSalesStatus (id) {
-    return new Promise((resolve, reject) => {
-      pool.query('DELETE FROM estados_ventas WHERE id = ?', [id])
-        .then(([rows, fields]) => {
-          resolve(rows)
-        })
-        .catch(err => reject(err))
-    })
+  static async remove (id) {
+    return await pool.query('DELETE FROM estados_ventas WHERE id = ?', [id])
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
   }
 }
 
