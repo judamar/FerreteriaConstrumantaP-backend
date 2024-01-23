@@ -3,9 +3,11 @@ import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } fr
 import pc from 'picocolors'
 
 const create = async (req, res) => {
+  const reservationStatus = req.body
   try {
     console.log(pc.green('CREATING RESERVATION'))
-    const result = await Reservation.create(req.body)
+    console.log({ ReservationStatus: reservationStatus })
+    const result = await Reservation.create(reservationStatus)
     if (result) {
       console.log(pc.green('RESERVATION CREATED'))
       handleSuccess(res, 201, result)
@@ -40,9 +42,10 @@ const getAll = async (req, res) => {
 }
 
 const getById = async (req, res) => {
+  const id = req.params.id
   try {
-    const { id } = req.params
     console.log(pc.green('GETTING RESERVATION'))
+    console.log({ Id: id })
     const reservation = await Reservation.getById(id)
     if (reservation && reservation.length > 0) {
       console.log(pc.green('RESERVATION FOUND'))
@@ -60,10 +63,13 @@ const getById = async (req, res) => {
 }
 
 const update = async (req, res) => {
+  const reservationStatus = req.body
+  const id = req.params.id
   try {
-    const { id } = req.params
     console.log(pc.bgGreen('UPDATING RESERVATION'))
-    const result = await Reservation.update(id, req.body)
+    console.log({ Id: id })
+    console.log({ ReservationStatus: reservationStatus })
+    const result = await Reservation.update(id, reservationStatus)
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('RESERVATION UPDATED SUCCESFULLY'))
       console.log({ Result: result })
