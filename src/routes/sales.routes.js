@@ -6,7 +6,7 @@ const SalesRouter = Router()
 SalesRouter
   .get('/', Sales.getAll)
   .get('/:id', Sales.getById)
-  .post('/', Sales.insert)
+  .post('/', Sales.create)
   .put('/:id', Sales.update)
   .delete('/:id', Sales.remove)
 

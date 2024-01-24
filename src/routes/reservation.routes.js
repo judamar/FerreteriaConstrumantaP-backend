@@ -4,10 +4,10 @@ import Reservation from '../controllers/reservation.controller.js'
 const ReservationRouter = Router()
 
 ReservationRouter
-  .get('/', Reservation.getAllReservations)
-  .get('/:id', Reservation.getReservationById)
-  .post('/', Reservation.insertReservation)
-  .put('/:id', Reservation.updateReservation)
-  .delete('/:id', Reservation.deleteReservation)
+  .get('/', Reservation.getAll)
+  .get('/:id', Reservation.getById)
+  .post('/', Reservation.create)
+  .put('/:id', Reservation.update)
+  .delete('/:id', Reservation.remove)
 
 export default ReservationRouter

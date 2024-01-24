@@ -4,10 +4,10 @@ import Suggestion from '../controllers/suggestions.controller.js'
 const SuggestionRouter = Router()
 
 SuggestionRouter
-  .get('/', Suggestion.getAllSuggestions)
-  .get('/:id', Suggestion.getSuggestionById)
-  .post('/', Suggestion.insertSuggestion)
-  .put('/:id', Suggestion.updateSuggestion)
-  .delete('/:id', Suggestion.deleteSuggestion)
+  .get('/', Suggestion.getAll)
+  .get('/:id', Suggestion.getById)
+  .post('/', Suggestion.create)
+  .put('/:id', Suggestion.update)
+  .delete('/:id', Suggestion.remove)
 
 export default SuggestionRouter
