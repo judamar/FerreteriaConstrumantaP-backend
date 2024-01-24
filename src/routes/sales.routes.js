@@ -4,9 +4,10 @@ import Sales from '../controllers/sales.controller.js'
 const SalesRouter = Router()
 
 SalesRouter
+  .post('/', Sales.create)
   .get('/', Sales.getAll)
   .get('/:id', Sales.getById)
-  .post('/', Sales.create)
+  .get('/nombre/:nombre', Sales.getByUserName)
   .put('/:id', Sales.update)
   .delete('/:id', Sales.remove)
 

@@ -64,6 +64,27 @@ const getById = async (req, res) => {
   }
 }
 
+const getByUserName = async (req, res) => {
+  const userName = req.params.userName
+  try {
+    console.log(pc.bgGreen('GETTING SALE'))
+    console.log({ UserName: userName })
+    const result = await Sales.getByUserName(userName)
+    if (result && result.length > 0) {
+      console.log(pc.green('SALE FOUND'))
+      handleSuccess(res, 200, result)
+    } else {
+      console.log(pc.red('SALE NOT FOUND'))
+      console.log({ Result: result })
+      handleNotFound(res, 'No sale found.')
+    }
+  } catch (error) {
+    console.log(pc.red('GETTING SALE FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
+  }
+}
+
 const update = async (req, res) => {
   const sale = req.body
   const id = req.params.id
@@ -114,6 +135,7 @@ export default {
   create,
   getAll,
   getById,
+  getByUserName,
   update,
   remove
 }

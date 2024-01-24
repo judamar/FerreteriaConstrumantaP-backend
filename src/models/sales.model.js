@@ -25,6 +25,15 @@ class Sales {
       })
   }
 
+  static async getByUserName (userName) {
+    const searchTerm = `%${userName}%`
+    return await pool.query('SELECT v.*, u.nombre_usuario FROM ventas v JOIN usuarios u ON v.usuario_id = u.id WHERE u.nombre_usuario LIKE ?', [searchTerm])
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
+  }
+
   static async update (id, sale) {
     return await pool.query('UPDATE ventas SET usuario_id = ?, total_venta = ?, enviar_factura = ?, estado_venta_id = ? WHERE id = ?', [sale.usuario_id, sale.total_venta, sale.enviar_factura, sale.estado_venta_id, id])
       .then(([rows, fields]) => rows)
