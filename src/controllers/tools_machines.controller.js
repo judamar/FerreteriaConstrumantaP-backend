@@ -1,54 +1,121 @@
 import ToolMachine from '../models/tool_machine.model.js'
+import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
+import pc from 'picocolors'
 
-const getAllToolMachines = async (req, res) => {
+const create = async (req, res) => {
+  const toolMachine = {
+    nombre_articulo: req.body.nombre_articulo,
+    descripcion: req.body.descripcion,
+    precio_alquiler: req.body.precio_alquiler,
+    cantidad_disponible: req.body.cantidad_disponible,
+    estado_herramienta_maquina: req.body.estado_herramienta_maquina,
+    image: req.file.filename
+  }
   try {
+    console.log(pc.bgGreen('CREATING TOOL - MACHINE'))
+    console.log({ Body: toolMachine })
+    const image = `src/images/public/${toolMachine.image}`
+    const result = await ToolMachine.create(toolMachine, image)
+    if (result && result.affectedRows > 0) {
+      console.log(pc.bgGreen('TOOL - MACHINE CREATED'))
+      console.log({ Result: result })
+      handleSuccess(res, 201, result)
+    } else {
+      console.log(pc.bgRed('TOOL - MACHINE NOT CREATED'))
+      console.log({ Result: result })
+      handleBadRequest(res, 'Tool - machine not created')
+    }
+  } catch (error) {
+    console.log(pc.bgRed('CREATING TOOL - MACHINE FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
+  }
+}
+
+const getAll = async (req, res) => {
+  try {
+    console.log(pc.bgGreen('GETTING ALL TOOL - MACHINES'))
     const result = await ToolMachine.getAll()
-    res.status(200).json({ status: 'OK', result })
+    if (result && result.length > 0) {
+      console.log(pc.bgGreen('TOOL - MACHINES FOUND'))
+      console.log({ Result: result })
+      handleSuccess(res, 200, result)
+    } else {
+      console.log(pc.bgRed('TOOL - MACHINES NOT FOUND'))
+      console.log({ Result: result })
+      handleNotFound(res, 'Tool - machines not found')
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    console.log(pc.bgRed('GETTING ALL TOOL - MACHINES FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
   }
 }
 
-const getToolMachineById = async (req, res) => {
+const getById = async (req, res) => {
   try {
+    console.log(pc.bgGreen('GETTING TOOL - MACHINE BY ID'))
     const result = await ToolMachine.getById(req.params.id)
-    res.status(200).json({ status: 'OK', result })
+    if (result && result.length > 0) {
+      console.log(pc.bgGreen('TOOL - MACHINE FOUND'))
+      console.log({ Result: result })
+      handleSuccess(res, 200, result)
+    } else {
+      console.log(pc.bgRed('TOOL - MACHINE NOT FOUND'))
+      console.log({ Result: result })
+      handleNotFound(res, 'Tool - machine not found')
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    console.log(pc.bgRed('GETTING TOOL - MACHINE BY ID FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
   }
 }
 
-const insertToolMachine = async (req, res) => {
+const update = async (req, res) => {
   try {
-    const result = await ToolMachine.createToolMachine(req.body.herramienta_maquina)
-    res.status(201).json({ status: 'OK', result })
+    console.log(pc.bgGreen('UPDATING TOOL - MACHINE'))
+    const result = await ToolMachine.update(req.body, req.params.id)
+    if (result && result.affectedRows > 0) {
+      console.log(pc.bgGreen('TOOL - MACHINE UPDATED'))
+      console.log({ Result: result })
+      handleSuccess(res, 200, result)
+    } else {
+      console.log(pc.bgRed('TOOL - MACHINE NOT UPDATED'))
+      console.log({ Result: result })
+      handleBadRequest(res, 'Tool - machine not updated')
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    console.log(pc.bgRed('UPDATING TOOL - MACHINE FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
   }
 }
 
-const updateToolMachine = async (req, res) => {
+const remove = async (req, res) => {
   try {
-    const result = await ToolMachine.updateToolMachine(req.params.id, req.body.herramienta_maquina)
-    res.status(200).json({ status: 'OK', result })
+    console.log(pc.bgGreen('REMOVING TOOL - MACHINE'))
+    const result = await ToolMachine.remove(req.params.id)
+    if (result && result.affectedRows > 0) {
+      console.log(pc.bgGreen('TOOL - MACHINE REMOVED'))
+      console.log({ Result: result })
+      handleSuccess(res, 200, result)
+    } else {
+      console.log(pc.bgRed('TOOL - MACHINE NOT REMOVED'))
+      console.log({ Result: result })
+      handleBadRequest(res, 'Tool - machine not removed')
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-const deleteToolMachine = async (req, res) => {
-  try {
-    const result = await ToolMachine.deleteToolMachine(req.params.id)
-    res.status(200).json({ status: 'OK', result })
-  } catch (error) {
-    res.status(500).json({ message: error.message })
+    console.log(pc.bgRed('REMOVING TOOL - MACHINE FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
   }
 }
 
 export default {
-  getAllToolMachines,
-  getToolMachineById,
-  insertToolMachine,
-  updateToolMachine,
-  deleteToolMachine
+  create,
+  getAll,
+  getById,
+  update,
+  remove
 }

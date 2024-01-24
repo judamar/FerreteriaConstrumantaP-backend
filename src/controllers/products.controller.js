@@ -14,7 +14,7 @@ const create = async (req, res) => {
   }
   try {
     console.log(pc.bgGreen('CREATING PRODUCT'))
-    console.log({ Body: product })
+    console.log({ Product: product })
     const image = `src/images/public/${product.image}`
     const result = await Product.create(product, image)
     if (result && result.affectedRows > 0) {
@@ -144,7 +144,7 @@ const update = async (req, res) => {
   const id = req.params.id
   try {
     console.log(pc.bgGreen('UPDATING PRODUCT'))
-    console.log({ Body: product })
+    console.log({ Product: product })
     console.log({ ID: id })
     const result = await Product.update(id, product)
     if (result && result.affectedRows > 0) {
