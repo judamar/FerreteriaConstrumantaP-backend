@@ -19,7 +19,7 @@ export const imageToURL = async (filePath) => {
     fs.unlinkSync(filePath)
     return response.data.data.link
   } catch (error) {
-    console.error('Error', error)
+    console.error('Error', error.message)
     return null
   }
 }
