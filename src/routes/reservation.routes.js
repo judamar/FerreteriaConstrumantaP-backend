@@ -4,9 +4,9 @@ import Reservation from '../controllers/reservation.controller.js'
 const ReservationRouter = Router()
 
 ReservationRouter
+  .post('/', Reservation.create)
   .get('/', Reservation.getAll)
   .get('/:id', Reservation.getById)
-  .post('/', Reservation.create)
   .put('/:id', Reservation.update)
   .delete('/:id', Reservation.remove)
 

@@ -4,9 +4,9 @@ import SalesStatuses from '../controllers/sales_statuses.controller.js'
 const SalesStatusRouter = Router()
 
 SalesStatusRouter
+  .post('/', SalesStatuses.create)
   .get('/', SalesStatuses.getAll)
   .get('/:id', SalesStatuses.getById)
-  .post('/', SalesStatuses.create)
   .put('/:id', SalesStatuses.update)
   .delete('/:id', SalesStatuses.remove)
 
