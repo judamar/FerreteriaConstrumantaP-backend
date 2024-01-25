@@ -22,7 +22,7 @@ class Product {
   }
 
   static async getById (id) {
-    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE id = ?', [id])
+    return await pool.query('SELECT p.id AS producto_id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE p.id = ?', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -54,7 +54,17 @@ class Product {
   }
 
   static async update (id, product) {
-    return await pool.query('UPDATE productos SET nombre_producto = ?, clave_producto = ?, url_imagen = ?, marca = ?, descripcion = ?, precio = ?, cantidad = ?, categorias_id = ? WHERE id = ?', [product.nombre_producto, productKeyGenerator(product.nombre_producto, product.marca), product.url_imagen, product.marca.toUpperCase, product.descripcion, product.precio, product.cantidad, product.categorias_id, id])
+    const claveProducto = productKeyGenerator(product.nombre_producto, product.marca)
+    return await pool.query('UPDATE productos SET nombre_producto = ?, clave_producto = ?, marca = ?, descripcion = ?, precio = ?, cantidad = ?, categorias_id = ? WHERE id = ?', [product.nombre_producto, claveProducto, product.marca.toUpperCase(), product.descripcion, product.precio, product.cantidad, product.categorias_id, id])
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
+  }
+
+  static async updateImage (id, image) {
+    const urlImage = await imageToURL(image)
+    return await pool.query('UPDATE productos SET url_imagen = ? WHERE id = ?', [urlImage, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err

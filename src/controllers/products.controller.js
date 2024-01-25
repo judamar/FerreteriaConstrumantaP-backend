@@ -131,15 +131,14 @@ const getByKey = async (req, res) => {
   }
 }
 
-const update = async (req, res) => {
+const update = async (req, res) => { // x-www-form-urlencoded
   const product = {
     nombre_producto: req.body.nombre_producto,
     marca: req.body.marca,
     descripcion: req.body.descripcion,
     precio: req.body.precio,
     cantidad: req.body.cantidad,
-    categorias_id: req.body.categorias_id,
-    image: req.body.image
+    categorias_id: req.body.categorias_id
   }
   const id = req.params.id
   try {
@@ -158,7 +157,30 @@ const update = async (req, res) => {
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR UPDATING PRODUCT'))
-    console.error({ Error: error.message })
+    console.error({ Error: error })
+    handleServerError(res, error.message)
+  }
+}
+
+const updateImage = async (req, res) => {
+  const id = req.params.id
+  const image = req.file.filename
+  try {
+    console.log(pc.bgGreen('UPDATING PRODUCT IMAGE'))
+    console.log({ ID: id })
+    const result = await Product.updateImage(id, image)
+    if (result && result.affectedRows > 0) {
+      console.log(pc.bgGreen('PRODUCT IMAGE UPDATED SUCCESSFULLY'))
+      console.log({ Result: result })
+      handleSuccess(res, 200, result)
+    } else {
+      console.log(pc.bgRed('PRODUCT IMAGE NOT UPDATED'))
+      console.log({ Result: result })
+      handleBadRequest(res, 'Product image not updated.')
+    }
+  } catch (error) {
+    console.log(pc.bgRed('ERROR UPDATING PRODUCT IMAGE'))
+    console.error({ Error: error })
     handleServerError(res, error.message)
   }
 }
@@ -192,5 +214,6 @@ export default {
   getByCategory,
   getByKey,
   update,
+  updateImage,
   remove
 }

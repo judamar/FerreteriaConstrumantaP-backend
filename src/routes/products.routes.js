@@ -21,6 +21,7 @@ ProductRouter
   .get('/category/:category', Product.getByCategory)
   .get('/key/:key', Product.getByKey)
   .put('/:id', Product.update)
+  .patch('/:id', upload.single('image'), Product.updateImage)
   .delete('/:id', Product.remove)
 
 export default ProductRouter
