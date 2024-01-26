@@ -2,7 +2,7 @@ import pool from '../database/db.js'
 
 class ReservationStatus {
   static async create (status) {
-    return await pool.query('INSERT INTO estados_reservas (estado) VALUES (?)', [status])
+    return await pool.query('INSERT INTO estados_reservas (estado) VALUES (?)', [status.estado])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -26,7 +26,7 @@ class ReservationStatus {
   }
 
   static async update (id, status) {
-    return await pool.query('UPDATE estados_reservas SET estado = ? WHERE id = ?', [status, id])
+    return await pool.query('UPDATE estados_reservas SET estado = ? WHERE id = ?', [status.estado, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err

@@ -168,7 +168,8 @@ const updateImage = async (req, res) => {
   try {
     console.log(pc.bgGreen('UPDATING PRODUCT IMAGE'))
     console.log({ ID: id })
-    const result = await Product.updateImage(id, image)
+    const img = `src/images/public/${image}`
+    const result = await Product.updateImage(id, img)
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('PRODUCT IMAGE UPDATED SUCCESSFULLY'))
       console.log({ Result: result })

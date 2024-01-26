@@ -2,7 +2,7 @@ import Provider from '../models/provider.model.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
 import pc from 'picocolors'
 
-const create = async (req, res) => {
+const create = async (req, res) => { // x-www-form-urlencoded or json raw
   const provider = req.body
   try {
     console.log(pc.bgGreen('CREATING PROVIDER'))
@@ -106,7 +106,7 @@ const getByNIT = async (req, res) => {
   }
 }
 
-const update = async (req, res) => {
+const update = async (req, res) => { // x-www-form-urlencoded or json raw
   const provider = req.body
   const id = req.params.id
   try {
