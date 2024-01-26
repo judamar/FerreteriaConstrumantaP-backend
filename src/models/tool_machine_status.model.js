@@ -2,7 +2,7 @@ import pool from '../database/db.js'
 
 class ToolMachineStatus {
   static async create (status) {
-    return await pool.query('INSERT INTO estados_herramientas_maquinas (estado) VALUES (?)', [status])
+    return await pool.query('INSERT INTO estados_herramientas_maquinas (estado) VALUES (?)', [status.estado])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err

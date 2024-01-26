@@ -5,18 +5,18 @@ import pc from 'picocolors'
 const create = async (req, res) => {
   const reservationStatus = req.body
   try {
-    console.log(pc.green('CREATING RESERVATION'))
+    console.log(pc.bgGreen('CREATING RESERVATION'))
     console.log({ ReservationStatus: reservationStatus })
     const result = await Reservation.create(reservationStatus)
     if (result) {
-      console.log(pc.green('RESERVATION CREATED'))
+      console.log(pc.bgGreen('RESERVATION CREATED'))
       handleSuccess(res, 201, result)
     } else {
-      console.log(pc.red('RESERVATION NOT CREATED'))
+      console.log(pc.bgRed('RESERVATION NOT CREATED'))
       handleBadRequest(res, 'Reservation not created.')
     }
   } catch (error) {
-    console.log(pc.red('CREATING RESERVATION FAILED'))
+    console.log(pc.bgRed('CREATING RESERVATION FAILED'))
     console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
@@ -24,18 +24,18 @@ const create = async (req, res) => {
 
 const getAll = async (req, res) => {
   try {
-    console.log(pc.green('GETTING ALL RESERVATIONS'))
+    console.log(pc.bgGreen('GETTING ALL RESERVATIONS'))
     const result = await Reservation.getAll()
     if (result && result.length > 0) {
-      console.log(pc.green('RESERVATIONS FOUND'))
+      console.log(pc.bgGreen('RESERVATIONS FOUND'))
       handleSuccess(res, 200, result)
     } else {
-      console.log(pc.red('RESERVATIONS NOT FOUND'))
+      console.log(pc.bgRed('RESERVATIONS NOT FOUND'))
       console.log({ Result: result })
       handleNotFound(res, 'Reservations not found.')
     }
   } catch (error) {
-    console.log(pc.red('GETTING ALL RESERVATIONS FAILED'))
+    console.log(pc.bgRed('GETTING ALL RESERVATIONS FAILED'))
     console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
@@ -44,19 +44,19 @@ const getAll = async (req, res) => {
 const getById = async (req, res) => {
   const id = req.params.id
   try {
-    console.log(pc.green('GETTING RESERVATION'))
+    console.log(pc.bgGreen('GETTING RESERVATION'))
     console.log({ Id: id })
     const reservation = await Reservation.getById(id)
     if (reservation && reservation.length > 0) {
-      console.log(pc.green('RESERVATION FOUND'))
+      console.log(pc.bgGreen('RESERVATION FOUND'))
       handleSuccess(res, 200, reservation)
     } else {
-      console.log(pc.red('RESERVATION NOT FOUND'))
+      console.log(pc.bgRed('RESERVATION NOT FOUND'))
       console.log({ Reservation: reservation })
       handleNotFound(res, 'Reservation not found.')
     }
   } catch (error) {
-    console.log(pc.red('GETTING RESERVATION FAILED'))
+    console.log(pc.bgRed('GETTING RESERVATION FAILED'))
     console.error({ Error: error.message })
     handleServerError(res, error.message)
   }

@@ -8,7 +8,7 @@ const create = async (req, res) => {
     descripcion: req.body.descripcion,
     precio_alquiler: req.body.precio_alquiler,
     cantidad_disponible: req.body.cantidad_disponible,
-    estado_herramienta_maquina: req.body.estado_herramienta_maquina,
+    estados_herramientas_maquinas_id: req.body.estados_herramientas_maquinas_id,
     image: req.file.filename
   }
   try {

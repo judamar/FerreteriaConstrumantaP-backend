@@ -4,7 +4,7 @@ import { imageToURL } from '../utils/images.js'
 class ToolMachine {
   static async create (toolMachine, image) {
     const urlImage = await imageToURL(image)
-    return await pool.query('INSERT INTO herramientas_maquinas (nombre_articulo, url_imagen, descripcion, precio_alquiler, cantidad_disponible, estado_herramienta_maquina_id) VALUES (?, ?, ?, ?, ?, ?)', [toolMachine.nombre_articulo, urlImage, toolMachine.descripcion, toolMachine.precio_alquiler, toolMachine.cantidad_disponible, toolMachine.estado_herramienta_maquina_id])
+    return await pool.query('INSERT INTO herramientas_maquinas (nombre_articulo, url_imagen, descripcion, precio_alquiler, cantidad_disponible, estados_herramientas_maquinas_id) VALUES (?, ?, ?, ?, ?, ?)', [toolMachine.nombre_articulo, urlImage, toolMachine.descripcion, toolMachine.precio_alquiler, toolMachine.cantidad_disponible, toolMachine.estados_herramientas_maquinas_id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
