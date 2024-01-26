@@ -12,7 +12,7 @@ class ToolMachine {
   }
 
   static async getAll () {
-    return await pool.query('SELECT * FROM herramientas_maquinas')
+    return await pool.query('SELECT hm.id, hm.nombre_articulo, hm.url_imagen, hm.descripcion, hm.precio_alquiler, hm.cantidad_disponible, ehm.estado as estado FROM herramientas_maquinas hm JOIN estados_herramientas_maquinas ehm ON hm.estados_herramientas_maquinas_id = ehm.id')
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err

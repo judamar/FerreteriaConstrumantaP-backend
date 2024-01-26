@@ -2,7 +2,7 @@ import pool from '../database/db.js'
 
 class Reservation {
   static async create (reservation) {
-    return await pool.query('INSERT INTO reservas (usuario_id, herramienta_maquina_id, fecha_inicio, fecha_fin, cantidad, estado_reserva_id) VALUES (?, ?, ?, ?, ?, ?)', [reservation.usuario_id, reservation.herramienta_maquina_id, reservation.fecha_inicio, reservation.fecha_fin, reservation.cantidad, reservation.estado_reserva_id])
+    return await pool.query('INSERT INTO reservas (usuarios_id, herramientas_maquinas_id, fecha_fin, cantidad, estados_reservas_id) VALUES (?, ?, ?, ?, ?)', [reservation.usuario_id, reservation.herramienta_maquina_id, reservation.fecha_fin, reservation.cantidad, reservation.estado_reserva_id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
