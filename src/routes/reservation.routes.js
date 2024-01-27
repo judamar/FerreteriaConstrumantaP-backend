@@ -7,6 +7,7 @@ ReservationRouter
   .post('/', Reservation.create)
   .get('/', Reservation.getAll)
   .get('/:id', Reservation.getById)
+  .get('/usuario/:userName', Reservation.getByUserName)
   .put('/:id', Reservation.update)
   .delete('/:id', Reservation.remove)
 

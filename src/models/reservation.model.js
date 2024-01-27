@@ -10,7 +10,7 @@ class Reservation {
   }
 
   static async getAll () {
-    return await pool.query('SELECT * FROM reservas')
+    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, hm.nombre_articulo, r.fecha_inicio, r.fecha_fin, r.cantidad, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id')
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -18,7 +18,15 @@ class Reservation {
   }
 
   static async getById (id) {
-    return await pool.query('SELECT * FROM reservas WHERE id = ?', [id])
+    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, hm.nombre_articulo, r.fecha_inicio, r.fecha_fin, r.cantidad, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE r.id = ?', [id])
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
+  }
+
+  static async getByUserName (name) {
+    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, hm.nombre_articulo, r.fecha_inicio, r.fecha_fin, r.cantidad, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE u.nombre_completo LIKE ?', [`%${name}%`])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err

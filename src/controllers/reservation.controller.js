@@ -62,6 +62,27 @@ const getById = async (req, res) => {
   }
 }
 
+const getByUserName = async (req, res) => {
+  const userName = req.params.userName
+  try {
+    console.log(pc.bgGreen('GETTING RESERVATION'))
+    console.log({ UserName: userName })
+    const reservation = await Reservation.getByUserName(userName)
+    if (reservation && reservation.length > 0) {
+      console.log(pc.bgGreen('RESERVATION FOUND'))
+      handleSuccess(res, 200, reservation)
+    } else {
+      console.log(pc.bgRed('RESERVATION NOT FOUND'))
+      console.log({ Reservation: reservation })
+      handleNotFound(res, 'Reservation not found.')
+    }
+  } catch (error) {
+    console.log(pc.bgRed('GETTING RESERVATION FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
+  }
+}
+
 const update = async (req, res) => {
   const reservationStatus = req.body
   const id = req.params.id
@@ -112,6 +133,7 @@ export default {
   create,
   getAll,
   getById,
+  getByUserName,
   update,
   remove
 }
