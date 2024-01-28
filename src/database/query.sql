@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`sugerencias` (
   `mensaje` TEXT(1024) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_sugerencias_usuarios1_idx` (`usuarios_id` ASC) VISIBLE,
-  CONSTRAINT `fk_sugerencias_usuarios1` FOREIGN KEY (`usuarios_id`) REFERENCES `ferreteria-construmanta-p`.`usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_sugerencias_usuarios1` FOREIGN KEY (`usuarios_id`) REFERENCES `ferreteria-construmanta-p`.`usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `ferreteria-construmanta-p`.`estados_reservas`
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`herramientas_maquinas` (
   `estados_herramientas_maquinas_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_herramientas_maquinas_estados_herramientas_maquinas1_idx` (`estados_herramientas_maquinas_id` ASC) VISIBLE,
-  CONSTRAINT `fk_herramientas_maquinas_estados_herramientas_maquinas1` FOREIGN KEY (`estados_herramientas_maquinas_id`) REFERENCES `ferreteria-construmanta-p`.`estados_herramientas_maquinas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_herramientas_maquinas_estados_herramientas_maquinas1` FOREIGN KEY (`estados_herramientas_maquinas_id`) REFERENCES `ferreteria-construmanta-p`.`estados_herramientas_maquinas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `ferreteria-construmanta-p`.`reservas`
@@ -92,9 +92,9 @@ CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`reservas` (
   INDEX `fk_reservas_usuarios1_idx` (`usuarios_id` ASC) VISIBLE,
   INDEX `fk_reservas_herramientas_maquinas1_idx` (`herramientas_maquinas_id` ASC) VISIBLE,
   INDEX `fk_reservas_estados_reservas1_idx` (`estados_reservas_id` ASC) VISIBLE,
-  CONSTRAINT `fk_reservas_usuarios1` FOREIGN KEY (`usuarios_id`) REFERENCES `ferreteria-construmanta-p`.`usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_reservas_herramientas_maquinas1` FOREIGN KEY (`herramientas_maquinas_id`) REFERENCES `ferreteria-construmanta-p`.`herramientas_maquinas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_reservas_estados_reservas1` FOREIGN KEY (`estados_reservas_id`) REFERENCES `ferreteria-construmanta-p`.`estados_reservas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_reservas_usuarios1` FOREIGN KEY (`usuarios_id`) REFERENCES `ferreteria-construmanta-p`.`usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_reservas_herramientas_maquinas1` FOREIGN KEY (`herramientas_maquinas_id`) REFERENCES `ferreteria-construmanta-p`.`herramientas_maquinas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_reservas_estados_reservas1` FOREIGN KEY (`estados_reservas_id`) REFERENCES `ferreteria-construmanta-p`.`estados_reservas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `ferreteria-construmanta-p`.`estados_ventas`
@@ -119,8 +119,8 @@ CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`ventas` (
   PRIMARY KEY (`id`),
   INDEX `fk_ventas_usuarios1_idx` (`usuarios_id` ASC) VISIBLE,
   INDEX `fk_ventas_estados_ventas1_idx` (`estados_ventas_id` ASC) VISIBLE,
-  CONSTRAINT `fk_ventas_usuarios1` FOREIGN KEY (`usuarios_id`) REFERENCES `ferreteria-construmanta-p`.`usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ventas_estados_ventas1` FOREIGN KEY (`estados_ventas_id`) REFERENCES `ferreteria-construmanta-p`.`estados_ventas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_ventas_usuarios1` FOREIGN KEY (`usuarios_id`) REFERENCES `ferreteria-construmanta-p`.`usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_ventas_estados_ventas1` FOREIGN KEY (`estados_ventas_id`) REFERENCES `ferreteria-construmanta-p`.`estados_ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `ferreteria-construmanta-p`.`categorias`
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`productos` (
   `precio` FLOAT(10, 2) NOT NULL,
   PRIMARY KEY (`id`, `clave_producto`),
   INDEX `fk_productos_categorias1_idx` (`categorias_id` ASC) VISIBLE,
-  CONSTRAINT `fk_productos_categorias1` FOREIGN KEY (`categorias_id`) REFERENCES `ferreteria-construmanta-p`.`categorias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_productos_categorias1` FOREIGN KEY (`categorias_id`) REFERENCES `ferreteria-construmanta-p`.`categorias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `ferreteria-construmanta-p`.`detalles_ventas`
@@ -162,8 +162,8 @@ CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`detalles_ventas` (
   PRIMARY KEY (`id`),
   INDEX `fk_detalles_ventas_ventas1_idx` (`ventas_id` ASC) VISIBLE,
   INDEX `fk_detalles_ventas_productos1_idx` (`productos_id` ASC) VISIBLE,
-  CONSTRAINT `fk_detalles_ventas_ventas1` FOREIGN KEY (`ventas_id`) REFERENCES `ferreteria-construmanta-p`.`ventas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_detalles_ventas_productos1` FOREIGN KEY (`productos_id`) REFERENCES `ferreteria-construmanta-p`.`productos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_detalles_ventas_ventas1` FOREIGN KEY (`ventas_id`) REFERENCES `ferreteria-construmanta-p`.`ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_detalles_ventas_productos1` FOREIGN KEY (`productos_id`) REFERENCES `ferreteria-construmanta-p`.`productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `ferreteria-construmanta-p`.`proveedores`
@@ -193,8 +193,8 @@ CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`proveedores_has_categori
   PRIMARY KEY (`proveedores_id`, `categorias_id`),
   INDEX `fk_proveedores_has_categorias_categorias1_idx` (`categorias_id` ASC) VISIBLE,
   INDEX `fk_proveedores_has_categorias_proveedores1_idx` (`proveedores_id` ASC) VISIBLE,
-  CONSTRAINT `fk_proveedores_has_categorias_proveedores1` FOREIGN KEY (`proveedores_id`) REFERENCES `ferreteria-construmanta-p`.`proveedores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_proveedores_has_categorias_categorias1` FOREIGN KEY (`categorias_id`) REFERENCES `ferreteria-construmanta-p`.`categorias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_proveedores_has_categorias_proveedores1` FOREIGN KEY (`proveedores_id`) REFERENCES `ferreteria-construmanta-p`.`proveedores` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_proveedores_has_categorias_categorias1` FOREIGN KEY (`categorias_id`) REFERENCES `ferreteria-construmanta-p`.`categorias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 SET SQL_MODE = @OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;

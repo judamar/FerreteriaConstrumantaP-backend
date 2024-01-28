@@ -43,51 +43,8 @@ const getAll = async (req, res) => {
   }
 }
 
-const getById = async (req, res) => {
-  try {
-    console.log(pc.bgGreen('GETTING PROVIDER HAS CATEGORY RELATION BY ID'))
-    console.log({ ID: req.params.id })
-    const result = await ProviderHasCategory.getById(req.params.id)
-    if (result && result.length > 0) {
-      console.log(pc.bgGreen('PROVIDER HAS CATEGORY RELATION FOUND'))
-      handleSuccess(res, 200, result)
-    } else {
-      console.log(pc.bgRed('PROVIDER HAS CATEGORY RELATION NOT FOUND'))
-      console.log({ Result: result })
-      handleNotFound(res, 'Relation not found')
-    }
-  } catch (error) {
-    console.log(pc.bgRed('GETTING PROVIDER HAS CATEGORY RELATION BY ID FAILED'))
-    console.error({ Error: error.message })
-    handleServerError(res, error.message)
-  }
-}
-
-const update = async (req, res) => {
-  const provHasCategory = req.body
-  const id = req.params.id
-  try {
-    console.log(pc.bgGreen('UPDATING PROVIDER HAS CATEGORY RELATION'))
-    console.log({ Relation: provHasCategory, ID: id })
-    const result = await ProviderHasCategory.update(provHasCategory, id)
-    if (result && result.affectedRows > 0) {
-      console.log(pc.bgGreen('PROVIDER HAS CATEGORY RELATION UPDATED SUCCESFULLY'))
-      console.log({ Result: result })
-      handleSuccess(res, 200, result)
-    } else {
-      console.log(pc.bgRed('PROVIDER HAS CATEGORY RELATION NOT UPDATED'))
-      console.log({ Result: result })
-      handleBadRequest(res, 'Relation not updated')
-    }
-  } catch (error) {
-    console.log(pc.bgRed('UPDATING PROVIDER HAS CATEGORY RELATION FAILED'))
-    console.error({ Error: error.message })
-    handleServerError(res, error.message)
-  }
-}
-
 const remove = async (req, res) => {
-  const id = req.params.id
+  const id = req.params.provId
   try {
     console.log(pc.bgGreen('REMOVING PROVIDER HAS CATEGORY RELATION'))
     console.log({ ID: id })
@@ -111,7 +68,5 @@ const remove = async (req, res) => {
 export default {
   create,
   getAll,
-  getById,
-  update,
   remove
 }

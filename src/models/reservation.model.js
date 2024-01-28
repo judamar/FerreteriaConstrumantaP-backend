@@ -10,7 +10,7 @@ class Reservation {
   }
 
   static async getAll () {
-    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, hm.nombre_articulo, r.fecha_inicio, r.fecha_fin, r.cantidad, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id')
+    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, u.telefono, hm.nombre_articulo, r.fecha_inicio, r.fecha_fin, r.cantidad, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id')
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -18,7 +18,7 @@ class Reservation {
   }
 
   static async getById (id) {
-    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, hm.nombre_articulo, r.fecha_inicio, r.fecha_fin, r.cantidad, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE r.id = ?', [id])
+    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, u.telefono, hm.nombre_articulo, r.fecha_inicio, r.fecha_fin, r.cantidad, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE r.id = ?', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -26,7 +26,7 @@ class Reservation {
   }
 
   static async getByUserName (name) {
-    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, hm.nombre_articulo, r.fecha_inicio, r.fecha_fin, r.cantidad, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE u.nombre_completo LIKE ?', [`%${name}%`])
+    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, u.telefono, hm.nombre_articulo, r.fecha_inicio, r.fecha_fin, r.cantidad, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE u.nombre_completo LIKE ?', [`%${name}%`])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -34,7 +34,7 @@ class Reservation {
   }
 
   static async update (id, reservation) {
-    return await pool.query('UPDATE reservas SET usuario_id = ?, herramienta_maquina_id = ?, fecha_inicio = ?, fecha_fin = ?, cantidad = ?, estado_reserva_id = ? WHERE id = ?', [reservation.usuario_id, reservation.herramienta_maquina_id, reservation.fecha_inicio, reservation.fecha_fin, reservation.cantidad, reservation.estado_reserva_id, id])
+    return await pool.query('UPDATE reservas SET usuarios_id = ?, herramientas_maquinas_id = ?, fecha_inicio = ?, fecha_fin = ?, cantidad = ?, estados_reservas_id = ? WHERE id = ?', [reservation.usuario_id, reservation.herramienta_maquina_id, reservation.fecha_inicio, reservation.fecha_fin, reservation.cantidad, reservation.estado_reserva_id, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err

@@ -84,7 +84,7 @@ const getByName = async (req, res) => {
 
 const update = async (req, res) => {
   const id = req.params.id
-  const category = req.body.categoria
+  const category = req.body
   try {
     console.log(pc.bgGreen('UPDATING CATEGORY'))
     console.log({ ID: id, Category: category })

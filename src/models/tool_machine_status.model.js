@@ -26,7 +26,7 @@ class ToolMachineStatus {
   }
 
   static async update (id, status) {
-    return await pool.query('UPDATE estados_herramientas_maquinas SET estado = ? WHERE id = ?', [status, id])
+    return await pool.query('UPDATE estados_herramientas_maquinas SET estado = ? WHERE id = ?', [status.estado, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
