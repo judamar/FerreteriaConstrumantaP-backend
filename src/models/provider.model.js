@@ -10,7 +10,7 @@ class Provider {
   }
 
   static async getAll () {
-    return await pool.query('SELECT p.id AS proveedor_id, p.NIT, p.nombre_proveedor, p.direccion_proveedor, p.telefono_proveedor, p.correo_proveedor, p.telefono_vendedor, GROUP_CONCAT(c.categoria) AS categorias FROM proveedores p JOIN proveedores_has_categorias pc ON p.id = pc.proveedores_id JOIN categorias c ON pc.categorias_id = c.id GROUP BY p.id')
+    return await pool.query('SELECT p.id AS proveedor_id, p.NIT, p.nombre_proveedor, p.direccion_proveedor, p.telefono_proveedor, p.correo_proveedor, p.telefono_vendedor, COALESCE(GROUP_CONCAT(c.categoria), "") AS categorias FROM proveedores p LEFT JOIN proveedores_has_categorias pc ON p.id = pc.proveedores_id LEFT JOIN categorias c ON pc.categorias_id = c.id GROUP BY p.id')
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
