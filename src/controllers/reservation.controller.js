@@ -3,11 +3,11 @@ import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } fr
 import pc from 'picocolors'
 
 const create = async (req, res) => {
-  const reservationStatus = req.body
+  const reservation = req.body
   try {
     console.log(pc.bgGreen('CREATING RESERVATION'))
-    console.log({ ReservationStatus: reservationStatus })
-    const result = await Reservation.create(reservationStatus)
+    console.log({ Reservation: reservation })
+    const result = await Reservation.create(reservation)
     if (result) {
       console.log(pc.bgGreen('RESERVATION CREATED'))
       handleSuccess(res, 201, result)
@@ -83,14 +83,35 @@ const getByUserName = async (req, res) => {
   }
 }
 
+const getByToolName = async (req, res) => {
+  const toolName = req.params.herramienta
+  try {
+    console.log(pc.bgGreen('GETTING RESERVATION'))
+    console.log({ ToolName: toolName })
+    const reservation = await Reservation.getByToolName(toolName)
+    if (reservation && reservation.length > 0) {
+      console.log(pc.bgGreen('RESERVATION FOUND'))
+      handleSuccess(res, 200, reservation)
+    } else {
+      console.log(pc.bgRed('RESERVATION NOT FOUND'))
+      console.log({ Reservation: reservation })
+      handleNotFound(res, 'Reservation not found.')
+    }
+  } catch (error) {
+    console.log(pc.bgRed('GETTING RESERVATION FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
+  }
+}
+
 const update = async (req, res) => {
-  const reservationStatus = req.body
+  const reservation = req.body
   const id = req.params.id
   try {
     console.log(pc.bgGreen('UPDATING RESERVATION'))
     console.log({ Id: id })
-    console.log({ ReservationStatus: reservationStatus })
-    const result = await Reservation.update(id, reservationStatus)
+    console.log({ Reservation: reservation })
+    const result = await Reservation.update(id, reservation)
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('RESERVATION UPDATED SUCCESFULLY'))
       console.log({ Result: result })
@@ -102,6 +123,54 @@ const update = async (req, res) => {
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATING RESERVATION FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
+  }
+}
+
+const updateState = async (req, res) => {
+  const id = req.params.id
+  const state = req.body.estado
+  try {
+    console.log(pc.bgGreen('UPDATING RESERVATION STATE'))
+    console.log({ Id: id })
+    console.log({ State: state })
+    const result = await Reservation.updateState(id, state)
+    if (result && result.affectedRows > 0) {
+      console.log(pc.bgGreen('RESERVATION STATE UPDATED SUCCESFULLY'))
+      console.log({ Result: result })
+      handleSuccess(res, 200, result)
+    } else {
+      console.log(pc.bgRed('RESERVATION STATE NOT UPDATED'))
+      console.log({ Result: result })
+      handleBadRequest(res, 'Reservation state not updated.')
+    }
+  } catch (error) {
+    console.log(pc.bgRed('UPDATING RESERVATION STATE FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
+  }
+}
+
+const updateEndDate = async (req, res) => {
+  const id = req.params.id
+  const endDate = req.body.fecha_fin
+  try {
+    console.log(pc.bgGreen('UPDATING RESERVATION END DATE'))
+    console.log({ Id: id })
+    console.log({ EndDate: endDate })
+    const result = await Reservation.updateEndDate(id, endDate)
+    if (result && result.affectedRows > 0) {
+      console.log(pc.bgGreen('RESERVATION END DATE UPDATED SUCCESFULLY'))
+      console.log({ Result: result })
+      handleSuccess(res, 200, result)
+    } else {
+      console.log(pc.bgRed('RESERVATION END DATE NOT UPDATED'))
+      console.log({ Result: result })
+      handleBadRequest(res, 'Reservation end date not updated.')
+    }
+  } catch (error) {
+    console.log(pc.bgRed('UPDATING RESERVATION END DATE FAILED'))
     console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
@@ -134,6 +203,9 @@ export default {
   getAll,
   getById,
   getByUserName,
+  getByToolName,
   update,
+  updateState,
+  updateEndDate,
   remove
 }

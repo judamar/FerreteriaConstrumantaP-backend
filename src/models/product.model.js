@@ -22,7 +22,7 @@ class Product {
   }
 
   static async getById (id) {
-    return await pool.query('SELECT p.id AS producto_id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE p.id = ?', [id])
+    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE p.id = ?', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -62,8 +62,8 @@ class Product {
       })
   }
 
-  static async updateImage (id, image) {
-    const urlImage = await imageToURL(image)
+  static async updateImage (id, img) {
+    const urlImage = await imageToURL(img)
     return await pool.query('UPDATE productos SET url_imagen = ? WHERE id = ?', [urlImage, id])
       .then(([rows, fields]) => rows)
       .catch(err => {

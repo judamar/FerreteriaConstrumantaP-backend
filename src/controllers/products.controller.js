@@ -13,9 +13,10 @@ const create = async (req, res) => {
     image: req.file.filename
   }
   try {
+    const image = `src/images/public/${product.image}`
     console.log(pc.bgGreen('CREATING PRODUCT'))
     console.log({ Product: product })
-    const image = `src/images/public/${product.image}`
+    console.log({ Image: image })
     const result = await Product.create(product, image)
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('PRODUCT CREATED SUCCESSFULLY'))
@@ -166,9 +167,10 @@ const updateImage = async (req, res) => {
   const id = req.params.id
   const image = req.file.filename
   try {
+    const img = `src/images/public/${image}`
     console.log(pc.bgGreen('UPDATING PRODUCT IMAGE'))
     console.log({ ID: id })
-    const img = `src/images/public/${image}`
+    console.log({ Image: img })
     const result = await Product.updateImage(id, img)
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('PRODUCT IMAGE UPDATED SUCCESSFULLY'))

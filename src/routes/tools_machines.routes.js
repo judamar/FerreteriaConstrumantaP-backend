@@ -17,7 +17,10 @@ ToolsMachinesRouter
   .post('/', upload.single('image'), ToolsMachines.create)
   .get('/', ToolsMachines.getAll)
   .get('/:id', ToolsMachines.getById)
+  .get('/search/:name', ToolsMachines.getByName)
   .put('/:id', ToolsMachines.update)
+  .patch('/:id', upload.single('image'), ToolsMachines.updateImage)
+  .patch('/state/:id', ToolsMachines.updateState)
   .delete('/:id', ToolsMachines.remove)
 
 export default ToolsMachinesRouter

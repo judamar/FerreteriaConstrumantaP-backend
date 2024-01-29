@@ -18,7 +18,7 @@ class Provider {
   }
 
   static async getById (id) {
-    return await pool.query('SELECT p.id AS proveedor_id, p.NIT, p.nombre_proveedor, p.direccion_proveedor, p.telefono_proveedor, p.correo_proveedor, p.telefono_vendedor, GROUP_CONCAT(c.categoria) AS categorias FROM proveedores p JOIN proveedores_has_categorias pc ON p.id = pc.proveedores_id JOIN categorias c ON pc.categorias_id = c.id WHERE p.id = ? GROUP BY p.id', [id])
+    return await pool.query('SELECT p.id AS proveedor_id, p.NIT, p.nombre_proveedor, p.direccion_proveedor, p.telefono_proveedor, p.correo_proveedor, p.telefono_vendedor, COALESCE(GROUP_CONCAT(c.categoria), "") AS categorias FROM proveedores p LEFT JOIN proveedores_has_categorias pc ON p.id = pc.proveedores_id LEFT JOIN categorias c ON pc.categorias_id = c.id WHERE p.id = ? GROUP BY p.id', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -26,7 +26,7 @@ class Provider {
   }
 
   static async getByName (name) {
-    return await pool.query('SELECT p.id AS proveedor_id, p.NIT, p.nombre_proveedor, p.direccion_proveedor, p.telefono_proveedor, p.correo_proveedor, p.telefono_vendedor, GROUP_CONCAT(c.categoria) AS categorias FROM proveedores p JOIN proveedores_has_categorias pc ON p.id = pc.proveedores_id JOIN categorias c ON pc.categorias_id = c.id WHERE p.nombre_proveedor LIKE ? GROUP BY p.id', [`%${name}%`])
+    return await pool.query('SELECT p.id AS proveedor_id, p.NIT, p.nombre_proveedor, p.direccion_proveedor, p.telefono_proveedor, p.correo_proveedor, p.telefono_vendedor, COALESCE(GROUP_CONCAT(c.categoria), "") AS categorias FROM proveedores p LEFT JOIN proveedores_has_categorias pc ON p.id = pc.proveedores_id LEFT JOIN categorias c ON pc.categorias_id = c.id WHERE p.nombre_proveedor LIKE ? GROUP BY p.id', [`%${name}%`])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -34,7 +34,7 @@ class Provider {
   }
 
   static async getByNIT (NIT) {
-    return await pool.query('SELECT p.id AS proveedor_id, p.NIT, p.nombre_proveedor, p.direccion_proveedor, p.telefono_proveedor, p.correo_proveedor, p.telefono_vendedor, GROUP_CONCAT(c.categoria) AS categorias FROM proveedores p JOIN proveedores_has_categorias pc ON p.id = pc.proveedores_id JOIN categorias c ON pc.categorias_id = c.id WHERE p.NIT = ? GROUP BY p.id', [NIT])
+    return await pool.query('SELECT p.id AS proveedor_id, p.NIT, p.nombre_proveedor, p.direccion_proveedor, p.telefono_proveedor, p.correo_proveedor, p.telefono_vendedor, COALESCE(GROUP_CONCAT(c.categoria), "") AS categorias FROM proveedores p LEFT JOIN proveedores_has_categorias pc ON p.id = pc.proveedores_id LEFT JOIN categorias c ON pc.categorias_id = c.id WHERE p.NIT = ? GROUP BY p.id', [NIT])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
