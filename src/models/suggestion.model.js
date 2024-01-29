@@ -2,7 +2,7 @@ import pool from '../database/db.js'
 
 class Suggestion {
   static async create (suggestion) {
-    return await pool.query('INSERT INTO sugerencias (sugerencias) VALUES (?)', [suggestion])
+    return await pool.query('INSERT INTO sugerencias (usuarios_id, mensaje) VALUES (?, ?)', [suggestion.usuarios_id, suggestion.mensaje])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -10,23 +10,7 @@ class Suggestion {
   }
 
   static async getAll () {
-    return await pool.query('SELECT * FROM sugerencias')
-      .then(([rows, fields]) => rows)
-      .catch(err => {
-        throw err
-      })
-  }
-
-  static async getById (id) {
-    return await pool.query('SELECT * FROM sugerencias WHERE id = ?', [id])
-      .then(([rows, fields]) => rows)
-      .catch(err => {
-        throw err
-      })
-  }
-
-  static async update (id, suggestion) {
-    return await pool.query('UPDATE sugerencias SET sugerencias = ? WHERE id = ?', [suggestion, id])
+    return await pool.query('SELECT u.nombre_completo, s.mensaje FROM sugerencias s JOIN usuarios u ON s.usuarios_id = u.id')
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err

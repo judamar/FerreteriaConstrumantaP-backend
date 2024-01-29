@@ -3,7 +3,7 @@ import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } fr
 import pc from 'picocolors'
 
 const create = async (req, res) => {
-  const salesStatus = (req.body)
+  const salesStatus = req.body
   try {
     console.log(pc.bgGreen('CREATING SALES STATUS'))
     console.log({ SalesSatatus: salesStatus })
@@ -65,13 +65,13 @@ const getById = async (req, res) => {
 }
 
 const update = async (req, res) => {
-  const salesStatus = (req.body)
+  const salesStatus = req.body
   const id = req.params.id
   try {
     console.log(pc.bgGreen('UPDATING SALES STATUS'))
     console.log({ SalesStatus: salesStatus })
     console.log({ Id: id })
-    const result = await SalesStatus.update(salesStatus, id)
+    const result = await SalesStatus.update(id, salesStatus)
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('SALES STATUS UPDATED SUCCESFULLY'))
       console.log({ Result: result })
