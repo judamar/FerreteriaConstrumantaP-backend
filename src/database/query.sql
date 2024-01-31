@@ -6,6 +6,7 @@ SET @OLD_UNIQUE_CHECKS = @@UNIQUE_CHECKS,
   UNIQUE_CHECKS = 0;
 SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS,
   FOREIGN_KEY_CHECKS = 0;
+SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
 SET @OLD_SQL_MODE = @@SQL_MODE,
   SQL_MODE = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 -- -----------------------------------------------------
@@ -113,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`ventas` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `usuarios_id` CHAR(36) NOT NULL,
   `fecha_emision` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  `total_venta` DECIMAL(10, 2) NOT NULL,
+  `total_venta` DECIMAL(10, 2) NOT NULL DEFAULT 0,
   `enviar_factura` TINYINT NOT NULL DEFAULT 0,
   `estados_ventas_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -155,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`productos` (
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `ferreteria-construmanta-p`.`detalles_ventas`;
 CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`detalles_ventas` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL DEFAULT AUTO_INCREMENT,
   `ventas_id` INT NOT NULL,
   `productos_id` INT NOT NULL,
   `cantidad_vendida` INT NOT NULL,
