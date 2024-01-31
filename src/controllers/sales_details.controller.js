@@ -8,7 +8,7 @@ const create = async (req, res) => {
     console.log(pc.bgGreen('CREATING SALE DETAIL'))
     console.log({ SaleDetail: saleDetail })
     const result = await SalesDetail.create(saleDetail)
-    if (result && result.affectedRows > 0) {
+    if (result && (result.insertSaleDetail.affectedRows > 0 && result.updateProductResult.affectedRows >= 0)) {
       console.log(pc.bgGreen('SALE DETAIL CREATED SUCCESFULLY'))
       console.log({ Result: result })
       handleSuccess(res, 201, result)

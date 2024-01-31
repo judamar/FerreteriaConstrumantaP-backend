@@ -2,11 +2,12 @@ import pool from '../database/db.js'
 
 class SalesDetail {
   static async create (saleDetail) {
-    return await pool.query('INSERT INTO detalles_ventas (venta_id, producto_id, cantidad, precio_unitario) VALUES (?, ?, ?, ?)', [saleDetail.venta_id, saleDetail.producto_id, saleDetail.cantidad, saleDetail.precio_unitario])
-      .then(([rows, fields]) => rows)
-      .catch(err => {
-        throw err
-      })
+    const [insertSaleDetail] = await pool.query('INSERT INTO detalles_ventas (ventas_id, productos_id, cantidad_vendida) VALUES (?, ?, ?)', [saleDetail.ventas_id, saleDetail.productos_id, saleDetail.cantidad_vendida])
+    const [updateProductResult] = await pool.query('UPDATE productos SET cantidad = cantidad - ? WHERE id = ?', [saleDetail.cantidad_vendida, saleDetail.productos_id])
+    return {
+      insertSaleDetail,
+      updateProductResult
+    }
   }
 
   static async getAll () {

@@ -8,7 +8,7 @@ const create = async (req, res) => {
     console.log(pc.bgGreen('CREATING RESERVATION'))
     console.log({ Reservation: reservation })
     const result = await Reservation.create(reservation)
-    if (result) {
+    if (result && (result.insertReservationResult.affectedRows > 0 || result.updateToolMachineResult.affectedRows >= 0)) {
       console.log(pc.bgGreen('RESERVATION CREATED'))
       handleSuccess(res, 201, result)
     } else {
