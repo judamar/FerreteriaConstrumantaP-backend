@@ -18,7 +18,7 @@ class Sales {
   }
 
   static async getById (id) {
-    return await pool.query('SELECT * FROM ventas WHERE id = ?', [id])
+    return await pool.query('SELECT v.id AS venta_id, v.fecha_emision, u.nombre_completo AS nombre_cliente, ev.estado AS estado_venta, JSON_ARRAYAGG(JSON_OBJECT("cantidad", dv.cantidad_vendida, "producto", p.nombre_producto, "valor_unitario", p.precio, "valor_sin_iva", p.precio / 1.19, "valor_total", p.precio * dv.cantidad_vendida)) AS productos, (SUM(p.precio * dv.cantidad_vendida)/1.19) AS subototal, "19%" AS IVA, SUM(p.precio * dv.cantidad_vendida) AS total_venta FROM ventas AS v JOIN usuarios AS u ON v.usuarios_id = u.id JOIN estados_ventas AS ev ON v.estados_ventas_id = ev.id JOIN detalles_ventas AS dv ON v.id = dv.ventas_id JOIN productos AS p ON dv.productos_id = p.id WHERE v.id = ? GROUP BY v.id, v.fecha_emision, u.nombre_completo, ev.estado', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err

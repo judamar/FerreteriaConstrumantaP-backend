@@ -29,15 +29,15 @@ const getAll = async (req, res) => {
     console.log(pc.bgGreen('GETTING ALL SALES'))
     const result = await Sales.getAll()
     if (result && result.length > 0) {
-      console.log(pc.green('SALES FOUND'))
+      console.log(pc.bgGreen('SALES FOUND'))
       handleSuccess(res, 200, result)
     } else {
-      console.log(pc.red('SALES NOT FOUND'))
+      console.log(pc.bgRed('SALES NOT FOUND'))
       console.log({ Result: result })
       handleNotFound(res, 'No sales found.')
     }
   } catch (error) {
-    console.log(pc.red('GETTING ALL SALES FAILED'))
+    console.log(pc.bgRed('GETTING ALL SALES FAILED'))
     console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
@@ -50,15 +50,15 @@ const getById = async (req, res) => {
     console.log({ Id: id })
     const result = await Sales.getById(id)
     if (result && result.length > 0) {
-      console.log(pc.green('SALE FOUND'))
+      console.log(pc.bgGreen('SALE FOUND'))
       handleSuccess(res, 200, result)
     } else {
-      console.log(pc.red('SALE NOT FOUND'))
+      console.log(pc.bgRed('SALE NOT FOUND'))
       console.log({ Result: result })
       handleNotFound(res, 'No sale found.')
     }
   } catch (error) {
-    console.log(pc.red('GETTING SALE FAILED'))
+    console.log(pc.bgRed('GETTING SALE FAILED'))
     console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
@@ -71,15 +71,15 @@ const getByUserName = async (req, res) => {
     console.log({ UserName: userName })
     const result = await Sales.getByUserName(userName)
     if (result && result.length > 0) {
-      console.log(pc.green('SALE FOUND'))
+      console.log(pc.bgGreen('SALE FOUND'))
       handleSuccess(res, 200, result)
     } else {
-      console.log(pc.red('SALE NOT FOUND'))
+      console.log(pc.bgRed('SALE NOT FOUND'))
       console.log({ Result: result })
       handleNotFound(res, 'No sale found.')
     }
   } catch (error) {
-    console.log(pc.red('GETTING SALE FAILED'))
+    console.log(pc.bgRed('GETTING SALE FAILED'))
     console.error({ Error: error.message })
     handleServerError(res, error.message)
   }
