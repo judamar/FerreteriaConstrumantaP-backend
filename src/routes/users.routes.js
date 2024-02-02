@@ -10,6 +10,7 @@ UsersRouter
   .get('/id/:id', User.getById)
   .get('/cedula/:cedula', User.getByCedula)
   .put('/:id', User.update)
+  .patch('/:id', User.updatePassword)
   .delete('/:id', User.remove)
 
 export default UsersRouter

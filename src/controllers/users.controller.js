@@ -119,7 +119,6 @@ const update = async (req, res) => {
     correo_electronico: req.body.correo_electronico,
     telefono: req.body.telefono,
     direccion: req.body.direccion,
-    password: await password.hashPassword(req.body.password),
     es_admin: req.body.es_admin
   }
   try {
@@ -141,6 +140,29 @@ const update = async (req, res) => {
     console.log(pc.bgRed('UPDATE USER FAILED'))
     console.error({ Error: error.message })
     error.message.includes('cannot be null') ? handleBadRequest(res, `Missing or invalid value for field: ${/Column '([^']*)'/.exec(error.message)[1] || 'Unknown'}`) : handleServerError(res, error.message)
+  }
+}
+
+const updatePassword = async (req, res) => {
+  const id = req.params.id
+  const passwordHashed = await password.hashPassword(req.body.password)
+  try {
+    console.log(pc.bgGreen('UPDATE PASSWORD'))
+    console.log({ ID: id })
+    const result = await User.updatePassword(id, passwordHashed)
+    if (result && result.affectedRows > 0) {
+      console.log(pc.bgGreen('UPDATE PASSWORD SUCCESFULLY'))
+      console.log({ Result: result })
+      handleSuccess(res, 200, { message: 'Password updated successfully' })
+    } else {
+      console.log(pc.bgRed('UPDATE PASSWORD FAILED'))
+      console.log({ Result: result })
+      handleServerError(res, 'Password update failed')
+    }
+  } catch (error) {
+    console.log(pc.bgRed('UPDATE PASSWORD FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
   }
 }
 
@@ -173,5 +195,6 @@ export default {
   getById,
   getByCedula,
   update,
+  updatePassword,
   remove
 }

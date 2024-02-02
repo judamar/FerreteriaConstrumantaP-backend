@@ -65,7 +65,7 @@ const getById = async (req, res) => {
 }
 
 const getByUserName = async (req, res) => {
-  const userName = req.params.userName
+  const userName = req.params.nombre
   try {
     console.log(pc.bgGreen('GETTING SALE'))
     console.log({ UserName: userName })
@@ -92,7 +92,7 @@ const update = async (req, res) => {
     console.log(pc.bgGreen('UPDATING SALE'))
     console.log({ Sale: sale })
     console.log({ Id: id })
-    const result = await Sales.update(sale, id)
+    const result = await Sales.update(id, sale)
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('SALE UPDATED SUCCESFULLY'))
       console.log({ Result: result })

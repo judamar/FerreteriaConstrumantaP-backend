@@ -44,8 +44,15 @@ class User {
   }
 
   static async update (id, user) {
-    const passwordHashed = await password.hashPassword(user.password)
-    return await pool.query('UPDATE usuarios SET cedula = ?, nombre_completo = ?, correo_electronico = ?, telefono = ?, direccion = ?, password = ?, es_admin = ? WHERE id = ?', [user.cedula, user.nombre_completo, user.correo_electronico, user.telefono, user.direccion, passwordHashed, user.es_admin, id])
+    return await pool.query('UPDATE usuarios SET cedula = ?, nombre_completo = ?, correo_electronico = ?, telefono = ?, direccion = ?, es_admin = ? WHERE id = ?', [user.cedula, user.nombre_completo, user.correo_electronico, user.telefono, user.direccion, user.es_admin, id])
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
+  }
+
+  static async updatePassword (id, password) {
+    return await pool.query('UPDATE usuarios SET password = ? WHERE id = ?', [password, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
