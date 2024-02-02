@@ -114,8 +114,6 @@ CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`ventas` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `usuarios_id` CHAR(36) NOT NULL,
   `fecha_emision` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  `total_venta` DECIMAL(10, 2) NOT NULL DEFAULT 0,
-  `enviar_factura` TINYINT NOT NULL DEFAULT 0,
   `estados_ventas_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_ventas_usuarios1_idx` (`usuarios_id` ASC) VISIBLE,
