@@ -64,6 +64,27 @@ const getById = async (req, res) => {
   }
 }
 
+const getBySaleId = async (req, res) => {
+  const id = req.params.id
+  try {
+    console.log(pc.green('GETTING SALE DETAIL'))
+    console.log({ Id: id })
+    const result = await SalesDetail.getBySaleId(id)
+    if (result && result.length > 0) {
+      console.log(pc.green('SALE DETAIL FOUND'))
+      handleSuccess(res, 200, result)
+    } else {
+      console.log(pc.red('SALE DETAIL NOT FOUND'))
+      console.log({ Result: result })
+      handleNotFound(res, 'No sale detail found.')
+    }
+  } catch (error) {
+    console.log(pc.red('GETTING SALE DETAIL FAILED'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
+  }
+}
+
 const update = async (req, res) => {
   const saleDetail = req.body
   const id = req.params.id
@@ -71,7 +92,7 @@ const update = async (req, res) => {
     console.log(pc.bgGreen('UPDATING SALE DETAIL'))
     console.log({ SaleDetail: saleDetail })
     console.log({ Id: id })
-    const result = await SalesDetail.update(saleDetail, id)
+    const result = await SalesDetail.update(id, saleDetail)
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('SALE DETAIL UPDATED SUCCESFULLY'))
       console.log({ Result: result })
@@ -114,6 +135,7 @@ export default {
   create,
   getAll,
   getById,
+  getBySaleId,
   update,
   remove
 }

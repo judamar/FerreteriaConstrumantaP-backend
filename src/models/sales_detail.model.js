@@ -26,8 +26,16 @@ class SalesDetail {
       })
   }
 
+  static async getBySaleId (id) {
+    return await pool.query('SELECT * FROM detalles_ventas WHERE ventas_id = ?', [id])
+      .then(([rows, fields]) => rows)
+      .catch(err => {
+        throw err
+      })
+  }
+
   static async update (id, saleDetail) {
-    return await pool.query('UPDATE detalles_ventas SET venta_id = ?, producto_id = ?, cantidad = ?, precio_unitario = ? WHERE id = ?', [saleDetail.venta_id, saleDetail.producto_id, saleDetail.cantidad, saleDetail.precio_unitario, id])
+    return await pool.query('UPDATE detalles_ventas SET ventas_id = ?, productos_id = ?, cantidad_vendida = ? WHERE id = ?', [saleDetail.ventas_id, saleDetail.productos_id, saleDetail.cantidad_vendida, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err

@@ -7,6 +7,7 @@ SalesDetailRouter
   .post('/', SalesDetail.create)
   .get('', SalesDetail.getAll)
   .get('/:id', SalesDetail.getById)
+  .get('/ventas/:id', SalesDetail.getBySaleId)
   .put('/:id', SalesDetail.update)
   .delete('/:id', SalesDetail.remove)
 
