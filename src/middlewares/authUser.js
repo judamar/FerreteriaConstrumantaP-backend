@@ -19,7 +19,7 @@ const secretKey = process.env.JWT_SECRET_KEY
  * response with status code 401 and a JSON object containing the message "Access Denied. No token
  * provided." will be returned.
  */
-const authenticateUser = (req, res, next) => {
+const authUser = (req, res, next) => {
   const token = req.header('Authorization')
   if (!token) {
     return res.status(401).json({ message: 'Access Denied. No token provided.' })
@@ -33,14 +33,14 @@ const authenticateUser = (req, res, next) => {
   }
 }
 
-const authorizeAdmin = (req, res, next) => {
-  if (req.user.role !== 'admin') {
+const authAdmin = (req, res, next) => {
+  if (req.user.es_admin !== 1) {
     return res.status(403).json({ message: 'Access Denied. Only admins can access this resource.' })
   }
   next()
 }
 
 export default {
-  authenticateUser,
-  authorizeAdmin
+  authUser,
+  authAdmin
 }
