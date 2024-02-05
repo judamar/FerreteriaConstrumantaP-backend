@@ -31,7 +31,7 @@ const signup = async (req, res) => { // x-www-form-urlencoded
   } catch (error) {
     console.log(pc.bgRed('SIGNUP USER FAILED'))
     console.error({ Error: error.message })
-    error.message.includes('cannot be null') ? handleBadRequest(res, `Missing or invalid value for field: ${/Column '([^']*)'/.exec(error.message)[1] || 'Unknown'}`) : handleServerError(res, error.message)
+    handleServerError(res, error.message)
   }
 }
 
@@ -124,8 +124,7 @@ const update = async (req, res) => {
   try {
     console.log(pc.bgGreen('UPDATE USER'))
     const result = await User.update(id, user)
-    const { password, ...loggableUser } = user
-    console.log({ User: loggableUser })
+    console.log({ User: user })
     console.log({ ID: id })
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('UPDATE USER SUCCESFULLY'))

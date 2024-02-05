@@ -20,7 +20,7 @@ class User {
   }
 
   static async getAll () {
-    return await pool.query('SELECT * FROM usuarios')
+    return await pool.query('SELECT id, cedula, nombre_completo, correo_electronico, telefono, direccion, es_admin FROM usuarios')
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -28,7 +28,7 @@ class User {
   }
 
   static async getById (id) {
-    return await pool.query('SELECT * FROM usuarios WHERE id = ?', [id])
+    return await pool.query('SELECT id, cedula, nombre_completo, correo_electronico, telefono, direccion, es_admin FROM usuarios WHERE id = ?', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -36,7 +36,7 @@ class User {
   }
 
   static async getByCedula (cedula) {
-    return await pool.query('SELECT * FROM usuarios WHERE cedula = ?', [cedula])
+    return await pool.query('SELECT id, cedula, nombre_completo, correo_electronico, telefono, direccion, es_admin FROM usuarios WHERE cedula = ?', [cedula])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
