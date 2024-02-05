@@ -1,46 +1,80 @@
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
+import pc from 'picocolors'
+import { handleUnauthorized, handleExpiredToken, handleNotFound, handleServerError } from '../utils/handles.js'
+import User from '../models/user.model.js'
 
 const secretKey = process.env.JWT_SECRET_KEY
 
 /**
- * The above code defines two middleware functions, `authenticateUser` and `authorizeAdmin`, that
- * handle user authentication and authorization respectively.
- * @param req - The `req` parameter is an object that represents the HTTP request made by the client.
- * It contains information such as the request headers, request body, request method, request URL, and
- * other relevant data.
- * @param res - The `res` parameter is the response object that is used to send the response back to
- * the client. It contains methods and properties that allow you to control the response, such as
- * setting the status code, sending JSON data, or redirecting the client to another URL.
- * @param next - The `next` parameter is a function that is used to pass control to the next middleware
- * function in the request-response cycle. It is typically used to move to the next middleware function
- * or to the final route handler.
- * @returns In the `authenticateUser` function, if there is no token provided in the request header, a
- * response with status code 401 and a JSON object containing the message "Access Denied. No token
- * provided." will be returned.
+ * Middleware function to authenticate users.
+ * @param {Object} req - The HTTP request object.
+ * @param {Object} res - The HTTP response object.
+ * @param {Function} next - The next middleware function.
  */
 const authUser = (req, res, next) => {
-  const token = req.header('Authorization')
-  if (!token) {
-    return res.status(401).json({ message: 'Access Denied. No token provided.' })
+  console.log(pc.bgBlue('AUTHENTICATING USER'))
+  const accessToken = req.headers.authorization
+  if (!accessToken) {
+    handleUnauthorized(res, 'No token provided.')
+    console.log(pc.bgRed('USER NOT AUTHENTICATED, NO TOKEN PROVIDED'))
+    return
   }
   try {
-    const decoded = jwt.verify(token, secretKey)
-    req.user = decoded
-    next()
+    jwt.verify(accessToken, secretKey, async (err, user) => {
+      if (err) {
+        handleExpiredToken(res, err.message)
+      } else {
+        const decoded = jwt.decode(accessToken)
+        req.id = decoded.id
+        req.esAdmin = decoded.esAdmin
+        const user = await User.getById(req.id)
+        if (!user) {
+          handleNotFound(res, 'User not found.')
+          console.log(pc.bgRed('USER NOT AUTHENTICATED, USER NOT FOUND'))
+        }
+        console.log(pc.bgBlue('USER AUTHENTICATED SUCCESFULLY'))
+        next()
+      }
+    })
   } catch (error) {
-    res.status(400).json({ message: 'Invalid token.' })
+    console.log(pc.bgRed('USER NOT AUTHENTICATED, ERROR'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
   }
 }
 
-const authAdmin = (req, res, next) => {
-  if (req.user.es_admin !== 1) {
-    return res.status(403).json({ message: 'Access Denied. Only admins can access this resource.' })
+/**
+ * Middleware function to check if the user is an admin.
+ * @param {Object} req - The HTTP request object.
+ * @param {Object} res - The HTTP response object.
+ * @param {Function} next - The next middleware function.
+ */
+
+const authAdmin = async (req, res, next) => {
+  console.log(pc.bgBlue('CHECKING IF USER IS AN ADMIN'))
+  try {
+    const user = await User.getById(req.id)
+    if (!user) {
+      handleNotFound(res, 'User not found.')
+      console.log(pc.bgRed('USER NOT AUTHENTICATED, USER NOT FOUND'))
+    }
+    if (req.esAdmin === 1) {
+      console.log(pc.bgBlue('USER IS AN ADMIN'))
+      console.log(pc.bgBlue('USER AUTHENTICATED SUCCESFULLY'))
+      next()
+    } else {
+      handleUnauthorized(res, 'You are not authorized to perform this action.')
+      console.log(pc.bgRed('USER NOT AUTHENTICATED, NOT AN ADMIN'))
+    }
+  } catch (error) {
+    console.log(pc.bgRed('USER NOT AUTHENTICATED, ERROR'))
+    console.error({ Error: error.message })
+    handleServerError(res, error.message)
   }
-  next()
 }
 
-export default {
+export {
   authUser,
   authAdmin
 }

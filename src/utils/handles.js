@@ -18,4 +18,8 @@ const handleUnauthorized = (res, message) => {
   res.status(401).json({ status: 'UNAUTHORIZED', error: message })
 }
 
-export { handleSuccess, handleNotFound, handleBadRequest, handleServerError, handleUnauthorized }
+const handleExpiredToken = (res, message) => {
+  res.status(491).json({ status: 'UNAUTHORIZED', error: message })
+}
+
+export { handleSuccess, handleNotFound, handleBadRequest, handleServerError, handleUnauthorized, handleExpiredToken }
