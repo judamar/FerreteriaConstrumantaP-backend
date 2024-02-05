@@ -1,10 +1,13 @@
 import { Router } from 'express'
 import Provider from '../controllers/providers.controller.js'
+import { authUser, authAdmin } from '../middlewares/authUser.js'
 
 const ProviderRouter = Router()
 
+ProviderRouter.use(authUser, authAdmin)
+
 ProviderRouter
-  .post('/', Provider.create)
+  .post('/', authUser, authAdmin, Provider.create)
   .get('/', Provider.getAll)
   .get('/id/:id', Provider.getById)
   .get('/search/:name', Provider.getByName)
