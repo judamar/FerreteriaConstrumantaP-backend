@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `ferreteria-construmanta-p`.`usuarios` (
   `telefono` VARCHAR(24) NOT NULL,
   `direccion` VARCHAR(255) NULL DEFAULT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `es_admin` TINYINT NOT NULL DEFAULT 0,
+  `es_admin` TINYINT NULL DEFAULT 0,
   PRIMARY KEY (`id`, `cedula`),
   UNIQUE INDEX `correo_electronico_UNIQUE` (`correo_electronico` ASC) VISIBLE,
   UNIQUE INDEX `telefono_UNIQUE` (`telefono` ASC) VISIBLE
