@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import multer from 'multer'
 import ToolsMachines from '../controllers/tools_machines.controller.js'
+import { authUser, authAdmin } from '../middlewares/authUser.js'
 
 const storage = multer.diskStorage({
   destination: 'src/images/public/',
@@ -14,13 +15,13 @@ const upload = multer({ storage })
 const ToolsMachinesRouter = Router()
 
 ToolsMachinesRouter
-  .post('/', upload.single('image'), ToolsMachines.create)
+  .post('/', authUser, authAdmin, upload.single('image'), ToolsMachines.create)
   .get('/', ToolsMachines.getAll)
   .get('/:id', ToolsMachines.getById)
   .get('/search/:name', ToolsMachines.getByName)
-  .put('/:id', ToolsMachines.update)
-  .patch('/:id', upload.single('image'), ToolsMachines.updateImage)
-  .patch('/state/:id', ToolsMachines.updateState)
-  .delete('/:id', ToolsMachines.remove)
+  .put('/:id', authUser, authAdmin, ToolsMachines.update)
+  .patch('/:id', authUser, authAdmin, upload.single('image'), ToolsMachines.updateImage)
+  .patch('/state/:id', authUser, authAdmin, ToolsMachines.updateState)
+  .delete('/:id', authUser, authAdmin, ToolsMachines.remove)
 
 export default ToolsMachinesRouter

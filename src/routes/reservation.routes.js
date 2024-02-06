@@ -1,7 +1,10 @@
 import { Router } from 'express'
 import Reservation from '../controllers/reservation.controller.js'
+import { authUser, authAdmin } from '../middlewares/authUser.js'
 
 const ReservationRouter = Router()
+
+ReservationRouter.use(authUser, authAdmin)
 
 ReservationRouter
   .post('/', Reservation.create)

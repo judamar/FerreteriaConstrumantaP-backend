@@ -7,7 +7,7 @@ const ProviderRouter = Router()
 ProviderRouter.use(authUser, authAdmin)
 
 ProviderRouter
-  .post('/', authUser, authAdmin, Provider.create)
+  .post('/', Provider.create)
   .get('/', Provider.getAll)
   .get('/id/:id', Provider.getById)
   .get('/search/:name', Provider.getByName)

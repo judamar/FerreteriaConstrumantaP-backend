@@ -1,7 +1,10 @@
 import { Router } from 'express'
 import Sales from '../controllers/sales.controller.js'
+import { authAdmin, authUser } from '../middlewares/authUser.js'
 
 const SalesRouter = Router()
+
+SalesRouter.use(authUser, authAdmin)
 
 SalesRouter
   .post('/', Sales.create)

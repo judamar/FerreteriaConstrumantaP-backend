@@ -1,7 +1,10 @@
 import { Router } from 'express'
 import ReservationStatus from '../controllers/reservation_statuses.controller.js'
+import { authAdmin, authUser } from '../middlewares/authUser.js'
 
 const ReservationStatusRouter = Router()
+
+ReservationStatusRouter.use(authUser, authAdmin)
 
 ReservationStatusRouter
   .post('/', ReservationStatus.create)
