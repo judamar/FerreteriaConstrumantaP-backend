@@ -43,4 +43,4 @@ const sendEmail = async (toEmail, Subject, Body, attachmentPath) => {
   console.log(info)
 }
 
-sendEmail('juansantiagovega111@gmail.com', 'Test Backend', 'Test correo a pingu', 'src/images/public/logo.ico')
+sendEmail('xxxxxxxxxxx@xxxx.com', 'Test Backend', 'Test', 'src/images/public/logo.ico')
