@@ -2,6 +2,7 @@ import ReservationStatus from '../models/reservation_status.model.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
 import pc from 'picocolors'
 
+// create a status for reservations
 const create = async (req, res) => {
   const reservationStatus = req.body
   try {
@@ -24,6 +25,7 @@ const create = async (req, res) => {
   }
 }
 
+// get al statuses
 const getAll = async (req, res) => {
   try {
     console.log(pc.bgGreen('GETTING RESERVATION STATUSES'))
@@ -43,6 +45,7 @@ const getAll = async (req, res) => {
   }
 }
 
+// get status by id
 const getById = async (req, res) => {
   const id = req.params.id
   try {
@@ -64,6 +67,7 @@ const getById = async (req, res) => {
   }
 }
 
+// update status (update all fields)
 const update = async (req, res) => {
   const id = req.params.id
   const reservationStatus = req.body
@@ -88,6 +92,7 @@ const update = async (req, res) => {
   }
 }
 
+// remove status
 const remove = async (req, res) => {
   const id = req.params.id
   try {

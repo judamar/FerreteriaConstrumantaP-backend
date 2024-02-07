@@ -1,3 +1,7 @@
+/**
+ * The above code defines functions to handle different types of HTTP responses in a JavaScript
+ * application.
+ */
 const handleSuccess = (res, status, data) => {
   res.status(status).json({ status: 'SUCCESS', data })
 }

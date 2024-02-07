@@ -1,5 +1,7 @@
 import pool from '../database/db.js'
 
+/* The SalesStatus class provides methods for creating, retrieving, updating, and deleting sales status
+records in a database. */
 class SalesStatus {
   static async create (salesStatus) {
     return await pool.query('INSERT INTO estados_ventas (estado) VALUES (?)', [salesStatus.estado])

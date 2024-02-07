@@ -2,6 +2,7 @@ import Provider from '../models/provider.model.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
 import pc from 'picocolors'
 
+// create provider
 const create = async (req, res) => { // x-www-form-urlencoded or json raw
   const provider = req.body
   try {
@@ -24,6 +25,7 @@ const create = async (req, res) => { // x-www-form-urlencoded or json raw
   }
 }
 
+// get all providers
 const getAll = async (req, res) => {
   try {
     console.log(pc.bgGreen('GETTING PROVIDERS'))
@@ -43,6 +45,7 @@ const getAll = async (req, res) => {
   }
 }
 
+// get provider by id
 const getById = async (req, res) => {
   const id = req.params.id
   try {
@@ -64,6 +67,7 @@ const getById = async (req, res) => {
   }
 }
 
+// get provider by name (search)
 const getByName = async (req, res) => {
   const name = req.params.name
   try {
@@ -85,6 +89,7 @@ const getByName = async (req, res) => {
   }
 }
 
+// get provider by NIT
 const getByNIT = async (req, res) => {
   const nit = req.params.nit
   try {
@@ -106,6 +111,7 @@ const getByNIT = async (req, res) => {
   }
 }
 
+// update provider (update all fields)
 const update = async (req, res) => { // x-www-form-urlencoded or json raw
   const provider = req.body
   const id = req.params.id
@@ -130,6 +136,7 @@ const update = async (req, res) => { // x-www-form-urlencoded or json raw
   }
 }
 
+// remove provider
 const remove = async (req, res) => {
   const id = req.params.id
   try {

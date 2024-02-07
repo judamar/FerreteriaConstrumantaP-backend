@@ -2,6 +2,7 @@ import Sales from '../models/sales.model.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
 import pc from 'picocolors'
 
+// create sale
 const create = async (req, res) => {
   const sale = req.body
   try {
@@ -24,6 +25,7 @@ const create = async (req, res) => {
   }
 }
 
+// get all sales
 const getAll = async (req, res) => {
   try {
     console.log(pc.bgGreen('GETTING ALL SALES'))
@@ -43,6 +45,7 @@ const getAll = async (req, res) => {
   }
 }
 
+// get sale by id
 const getById = async (req, res) => {
   const id = req.params.id
   try {
@@ -64,6 +67,7 @@ const getById = async (req, res) => {
   }
 }
 
+// get sale by user name (client name)
 const getByUserName = async (req, res) => {
   const userName = req.params.nombre
   try {
@@ -85,6 +89,7 @@ const getByUserName = async (req, res) => {
   }
 }
 
+// update sale
 const update = async (req, res) => {
   const sale = req.body
   const id = req.params.id
@@ -109,6 +114,7 @@ const update = async (req, res) => {
   }
 }
 
+// remove sale
 const remove = async (req, res) => {
   const id = req.params.id
   try {

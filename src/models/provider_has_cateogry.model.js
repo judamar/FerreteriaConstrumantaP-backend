@@ -1,5 +1,9 @@
 import pool from '../database/db.js'
 
+/* The ProviderHasCategory class is a JavaScript class that provides methods for creating, retrieving,
+and removing records from a database table called proveedores_has_categorias. */
+/* The above class is a JavaScript class that provides methods for creating, retrieving, updating, and
+deleting products in a database. */
 class ProviderHasCategory {
   static async create (providerHasCategory) {
     return await pool.query('INSERT INTO proveedores_has_categorias (proveedores_id, categorias_id) VALUES (?, ?)', [providerHasCategory.proveedores_id, providerHasCategory.categorias_id])

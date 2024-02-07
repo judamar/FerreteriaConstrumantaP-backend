@@ -1,5 +1,7 @@
 import pool from '../database/db.js'
 
+/* The Reservation class is a JavaScript class that provides methods for creating, retrieving,
+updating, and deleting reservations in a database. */
 class Reservation {
   static async create (reservation) {
     const [insertReservationResult] = await pool.query('INSERT INTO reservas (usuarios_id, herramientas_maquinas_id, fecha_fin, cantidad, estados_reservas_id) VALUES (?, ?, ?, ?, ?)', [reservation.usuario_id, reservation.herramienta_maquina_id, reservation.fecha_fin, reservation.cantidad, reservation.estado_reserva_id])

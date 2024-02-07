@@ -2,6 +2,7 @@ import SalesStatus from '../models/sales_status.model.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
 import pc from 'picocolors'
 
+// create status for sales
 const create = async (req, res) => {
   const salesStatus = req.body
   try {
@@ -24,6 +25,7 @@ const create = async (req, res) => {
   }
 }
 
+// get all statuses
 const getAll = async (req, res) => {
   try {
     console.log(pc.green('GETTING ALL SALES STATUSES'))
@@ -43,6 +45,7 @@ const getAll = async (req, res) => {
   }
 }
 
+// get status by id
 const getById = async (req, res) => {
   const id = req.params.id
   try {
@@ -64,6 +67,7 @@ const getById = async (req, res) => {
   }
 }
 
+// update status
 const update = async (req, res) => {
   const salesStatus = req.body
   const id = req.params.id
@@ -88,6 +92,7 @@ const update = async (req, res) => {
   }
 }
 
+// remove status
 const remove = async (req, res) => {
   const id = req.params.id
   try {

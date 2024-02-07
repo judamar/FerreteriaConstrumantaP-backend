@@ -22,17 +22,17 @@ import SalesRouter from './routes/sales.routes.js'
 import SalesDetailRouter from './routes/sales_details.routes.js'
 import ProviderHasCategoryRouter from './routes/providers_has_categories.routes.js'
 
-const PORT = process.env.PORT ?? 3000 // obtiene el puerto del sistema operativo o el 3000 si no existe
+const PORT = process.env.PORT ?? 3000 // get server port or use 3000 by default
 const app = express()
 
-app.disable('x-powered-by') // deshabilita la cabecera X-Powered-By
-app.use(json()) // habilita el uso de json
-app.use(express.urlencoded({ extended: true })) // habilita el uso de formularios en la aplicación
+app.disable('x-powered-by') // dissable header X-Powered-By
+app.use(json()) // enable json
+app.use(express.urlencoded({ extended: true })) // enable forms
 
-app.use(morgan('dev')) // habilita el log de las solicitudes en la consola
-app.use(corsMiddleware()) // habilita el uso de CORS en todas las rutas
+app.use(morgan('dev'))
+app.use(corsMiddleware()) // enables cors in all routes
 
-pool.getConnection() // conecta a la base de datos y devuelve una conexión
+pool.getConnection() // connect to db
   .then(conection => {
     console.log(pc.green('[+] '), pc.white('Database connected to host: '), pc.yellow(process.env.DB_HOST))
     conection.release()
@@ -60,7 +60,7 @@ app.use('/api/estados_venta', SalesStatusRouter)
 app.use('/api/ventas', SalesRouter)
 app.use('/api/detalles_ventas', SalesDetailRouter)
 
-// inicializamos servidor
+// Initialize the server
 app.listen(PORT, () => {
   console.log(pc.green('[+] '), pc.white('Server running on port: '), pc.yellow(PORT))
 })

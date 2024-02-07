@@ -1,6 +1,8 @@
 import pool from '../database/db.js'
 import { imageToURL } from '../utils/images.js'
 
+/* The ToolMachine class is a JavaScript class that provides methods for creating, retrieving,
+updating, and deleting tool machine objects in a database. */
 class ToolMachine {
   static async create (toolMachine, img) {
     const urlImage = imageToURL(img)

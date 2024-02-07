@@ -1,5 +1,7 @@
 import pool from '../database/db.js'
 
+/* The SalesDetail class is a JavaScript class that provides methods for creating, retrieving,
+updating, and deleting sales details from a database. */
 class SalesDetail {
   static async create (saleDetail) {
     const [insertSaleDetail] = await pool.query('INSERT INTO detalles_ventas (ventas_id, productos_id, cantidad_vendida) VALUES (?, ?, ?)', [saleDetail.ventas_id, saleDetail.productos_id, saleDetail.cantidad_vendida])

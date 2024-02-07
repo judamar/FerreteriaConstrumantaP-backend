@@ -1,6 +1,8 @@
 import pool from '../database/db.js'
 import password from '../utils/password.js'
 
+/* The User class is a JavaScript class that provides methods for creating, authenticating, retrieving,
+updating, and deleting user data from a database. */
 class User {
   static async create (user) {
     return await pool.query('INSERT INTO usuarios (cedula, nombre_completo, correo_electronico, telefono, direccion, password, es_admin) VALUES (?, ?, ?, ?, ?, ?, ?)', [user.cedula, user.nombre_completo, user.correo_electronico, user.telefono, user.direccion, user.password, user.es_admin])

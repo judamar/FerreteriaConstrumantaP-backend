@@ -2,6 +2,7 @@ import Category from '../models/category.model.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
 import pc from 'picocolors'
 
+// create a category
 const create = async (req, res) => {
   const category = req.body
   try {
@@ -24,6 +25,7 @@ const create = async (req, res) => {
   }
 }
 
+// get all categories
 const getAll = async (req, res) => {
   try {
     console.log(pc.bgGreen('GETTING ALL CATEGORIES'))
@@ -42,6 +44,7 @@ const getAll = async (req, res) => {
   }
 }
 
+// get category by id
 const getById = async (req, res) => {
   const id = req.params.id
   try {
@@ -62,6 +65,7 @@ const getById = async (req, res) => {
   }
 }
 
+// get category by name
 const getByName = async (req, res) => {
   const name = req.params.name
   try {
@@ -82,6 +86,7 @@ const getByName = async (req, res) => {
   }
 }
 
+// update category
 const update = async (req, res) => {
   const id = req.params.id
   const category = req.body
@@ -105,6 +110,7 @@ const update = async (req, res) => {
   }
 }
 
+// remove category
 const remove = async (req, res) => {
   const id = req.params.id
   try {

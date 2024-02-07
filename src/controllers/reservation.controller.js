@@ -2,6 +2,7 @@ import Reservation from '../models/reservation.model.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
 import pc from 'picocolors'
 
+// create a reservation of some available
 const create = async (req, res) => {
   const reservation = req.body
   try {

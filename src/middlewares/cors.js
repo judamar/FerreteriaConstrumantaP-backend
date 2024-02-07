@@ -4,16 +4,22 @@ const ACCEPTED_ORIGINS = [
   'http://localhost:4000'
 ]
 
-export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) => cors({ // habilita el uso de cors
+/**
+ * The above function is a CORS middleware that checks if the origin of a request is allowed and
+ * returns an error if it is not.
+ * @param [] - - `acceptedOrigins`: This is an optional parameter that specifies the list of accepted
+ * origins for CORS requests. If not provided, it defaults to `ACCEPTED_ORIGINS`.
+ */
+export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) => cors({
   origin: (origin, callback) => {
-    if (acceptedOrigins.includes(origin)) { // si el origen es válido, permite el acceso a la API
+    if (acceptedOrigins.includes(origin)) {
       return callback(null, true)
     }
 
-    if (!origin) { // si el origen no es válido, permite el acceso a la API
+    if (!origin) {
       return callback(null, true)
     }
 
-    return callback(new Error('Not allowed by CORS')) // si el origen no es válido, no permite el acceso a la API
+    return callback(new Error('Not allowed by CORS'))
   }
 })

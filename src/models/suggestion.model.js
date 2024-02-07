@@ -1,5 +1,7 @@
 import pool from '../database/db.js'
 
+/* The Suggestion class provides methods for creating, retrieving, and removing suggestions from a
+database. */
 class Suggestion {
   static async create (suggestion) {
     return await pool.query('INSERT INTO sugerencias (usuarios_id, mensaje) VALUES (?, ?)', [suggestion.usuarios_id, suggestion.mensaje])

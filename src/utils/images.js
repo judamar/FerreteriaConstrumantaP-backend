@@ -5,6 +5,11 @@ import path from 'path'
 
 const CLIENT_ID = process.env.IMGUR_CLIENT_ID
 
+/**
+ * The function converts an image file to a URL.
+ * @param filePath - The `filePath` parameter is a string that represents the path to the image file
+ * that you want to convert to a URL.
+ */
 export const imageToURL = async (filePath) => {
   try {
     const extension = path.extname(filePath).slice(1)

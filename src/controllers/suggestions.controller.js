@@ -2,6 +2,7 @@ import Suggestion from '../models/suggestion.model.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
 import pc from 'picocolors'
 
+// create suggestion
 const create = async (req, res) => {
   const suggestion = req.body
   try {
@@ -24,6 +25,7 @@ const create = async (req, res) => {
   }
 }
 
+// get all suggestions
 const getAll = async (req, res) => {
   try {
     console.log(pc.bgGreen('GETTING ALL SUGGESTIONS'))
@@ -43,6 +45,7 @@ const getAll = async (req, res) => {
   }
 }
 
+// remove suggestion
 const remove = async (req, res) => {
   const id = req.params.id
   try {

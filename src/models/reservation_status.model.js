@@ -1,5 +1,7 @@
 import pool from '../database/db.js'
 
+/* The ReservationStatus class is a JavaScript class that provides methods for creating, retrieving,
+updating, and deleting reservation statuses in a database. */
 class ReservationStatus {
   static async create (status) {
     return await pool.query('INSERT INTO estados_reservas (estado) VALUES (?)', [status.estado])
@@ -39,6 +41,8 @@ class ReservationStatus {
       .catch(err => {
         throw err
       })
+  /* The Reservation class is a JavaScript class that provides methods for creating, retrieving,
+  updating, and deleting reservations in a database. */
   }
 }
 

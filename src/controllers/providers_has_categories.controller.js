@@ -2,6 +2,7 @@ import ProviderHasCategory from '../models/provider_has_cateogry.model.js'
 import { handleSuccess, handleBadRequest, handleNotFound, handleServerError } from '../utils/handles.js'
 import pc from 'picocolors'
 
+// create relation providers-categories
 const create = async (req, res) => {
   const provHasCategory = req.body
   try {
@@ -24,6 +25,7 @@ const create = async (req, res) => {
   }
 }
 
+// get all relations
 const getAll = async (req, res) => {
   try {
     console.log(pc.bgGreen('GETTING ALL PROVIDER HAS CATEGORY RELATIONS'))
@@ -43,6 +45,7 @@ const getAll = async (req, res) => {
   }
 }
 
+// remove relation
 const remove = async (req, res) => {
   const id = req.params.provId
   try {

@@ -2,6 +2,7 @@ import Product from '../models/product.model.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
 import pc from 'picocolors'
 
+// create a product
 const create = async (req, res) => {
   const product = {
     nombre_producto: req.body.nombre_producto,
@@ -34,6 +35,7 @@ const create = async (req, res) => {
   }
 }
 
+// get all products
 const getAll = async (req, res) => {
   try {
     console.log(pc.bgGreen('GETTING ALL PRODUCTS'))
@@ -52,6 +54,7 @@ const getAll = async (req, res) => {
   }
 }
 
+// get product by id
 const getById = async (req, res) => {
   const id = req.params.id
   try {
@@ -72,6 +75,7 @@ const getById = async (req, res) => {
   }
 }
 
+// get product by name (search)
 const getByName = async (req, res) => {
   const name = req.params.name
   try {
@@ -92,6 +96,7 @@ const getByName = async (req, res) => {
   }
 }
 
+// get products by category
 const getByCategory = async (req, res) => {
   const category = req.params.category
   try {
@@ -112,6 +117,7 @@ const getByCategory = async (req, res) => {
   }
 }
 
+// get prodyct by Key
 const getByKey = async (req, res) => {
   const key = req.params.key
   try {
@@ -132,6 +138,7 @@ const getByKey = async (req, res) => {
   }
 }
 
+// update product
 const update = async (req, res) => { // x-www-form-urlencoded
   const product = {
     nombre_producto: req.body.nombre_producto,
@@ -163,6 +170,7 @@ const update = async (req, res) => { // x-www-form-urlencoded
   }
 }
 
+// update a product image
 const updateImage = async (req, res) => {
   const id = req.params.id
   const image = req.file.filename
@@ -188,6 +196,7 @@ const updateImage = async (req, res) => {
   }
 }
 
+// remove product
 const remove = async (req, res) => {
   const id = req.params.id
   try {

@@ -1,5 +1,7 @@
 import pool from '../database/db.js'
 
+/* The ToolMachineStatus class provides methods for creating, retrieving, updating, and deleting tool
+machine statuses in a database. */
 class ToolMachineStatus {
   static async create (status) {
     return await pool.query('INSERT INTO estados_herramientas_maquinas (estado) VALUES (?)', [status.estado])

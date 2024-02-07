@@ -2,6 +2,8 @@ import pool from '../database/db.js'
 import productKeyGenerator from '../utils/productKey.js'
 import { imageToURL } from '../utils/images.js'
 
+/* The above class is a JavaScript class that provides methods for creating, retrieving, updating, and
+deleting products in a database. */
 class Product {
   static async create (product, image) {
     const claveProducto = productKeyGenerator(product.nombre_producto, product.marca)

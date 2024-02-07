@@ -1,5 +1,7 @@
 import pool from '../database/db.js'
 
+/* The Category class is a JavaScript class that provides methods for creating, retrieving, updating,
+and deleting categories in a database. */
 class Category {
   static async create (category) {
     return await pool.query('INSERT INTO categorias (categoria) VALUES (?)', [category.categoria])

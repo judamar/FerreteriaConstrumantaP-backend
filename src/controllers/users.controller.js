@@ -4,6 +4,7 @@ import password from '../utils/password.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest, handleUnauthorized } from '../utils/handles.js'
 import pc from 'picocolors'
 
+// signup user
 const signup = async (req, res) => { // x-www-form-urlencoded
   const user = {
     cedula: req.body.cedula,
@@ -35,6 +36,7 @@ const signup = async (req, res) => { // x-www-form-urlencoded
   }
 }
 
+// login user
 const login = async (req, res) => { // x-www-form-urlencoded or raw(json)
   const { cedula, password } = req.body
   try {
@@ -55,6 +57,7 @@ const login = async (req, res) => { // x-www-form-urlencoded or raw(json)
   }
 }
 
+// get all users
 const getAll = async (req, res) => {
   try {
     console.log(pc.bgGreen('GET ALL USERS'))
@@ -73,6 +76,7 @@ const getAll = async (req, res) => {
   }
 }
 
+// get user by id
 const getById = async (req, res) => {
   const id = req.params.id
   try {
@@ -92,6 +96,7 @@ const getById = async (req, res) => {
   }
 }
 
+// get user by cedula
 const getByCedula = async (req, res) => {
   const cedula = req.params.cedula
   try {
@@ -111,6 +116,7 @@ const getByCedula = async (req, res) => {
   }
 }
 
+// update user
 const update = async (req, res) => {
   const id = req.params.id
   const user = {
@@ -142,6 +148,7 @@ const update = async (req, res) => {
   }
 }
 
+// update password (change)
 const updatePassword = async (req, res) => {
   const id = req.params.id
   const passwordHashed = await password.hashPassword(req.body.password)
@@ -165,6 +172,7 @@ const updatePassword = async (req, res) => {
   }
 }
 
+// remove user
 const remove = async (req, res) => {
   const id = req.params.id
   try {

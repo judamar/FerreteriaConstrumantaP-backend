@@ -2,6 +2,7 @@ import ToolMachine from '../models/tool_machine.model.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest } from '../utils/handles.js'
 import pc from 'picocolors'
 
+// create tool machine
 const create = async (req, res) => {
   const toolMachine = {
     nombre_articulo: req.body.nombre_articulo,
@@ -32,6 +33,7 @@ const create = async (req, res) => {
   }
 }
 
+// update tool machine
 const getAll = async (req, res) => {
   try {
     console.log(pc.bgGreen('GETTING ALL TOOL - MACHINES'))
@@ -52,6 +54,7 @@ const getAll = async (req, res) => {
   }
 }
 
+// get tool machine by id
 const getById = async (req, res) => {
   const id = req.params.id
   try {
@@ -74,6 +77,7 @@ const getById = async (req, res) => {
   }
 }
 
+// get tool machine by name (search)
 const getByName = async (req, res) => {
   const name = req.params.name
   try {
@@ -96,6 +100,7 @@ const getByName = async (req, res) => {
   }
 }
 
+// update tool machine
 const update = async (req, res) => {
   const id = req.params.id
   const toolMachine = {
@@ -126,6 +131,7 @@ const update = async (req, res) => {
   }
 }
 
+// update image of tool machine
 const updateImage = async (req, res) => {
   const id = req.params.id
   const image = req.file.filename
@@ -151,6 +157,7 @@ const updateImage = async (req, res) => {
   }
 }
 
+// update state (status)
 const updateState = async (req, res) => {
   const id = req.params.id
   const state = req.body.estado
@@ -175,6 +182,7 @@ const updateState = async (req, res) => {
   }
 }
 
+// remove tool machine
 const remove = async (req, res) => {
   try {
     console.log(pc.bgGreen('REMOVING TOOL - MACHINE'))
