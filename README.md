@@ -11,7 +11,7 @@ Asegúrate de tener Node.js instalado en tu sistema antes de comenzar.
 1. Clona este repositorio en tu máquina local:
 
    ```bash
-   git clone [URL del repositorio]
+   git clone https://github.com/judamar/FerreteriaConstrumantaP-backend.git
    ```
 
 2. Accede al directorio del proyecto:
