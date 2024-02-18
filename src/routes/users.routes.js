@@ -11,9 +11,9 @@ user's information or password, and deleting a user. It also includes middleware
 UsersRouter
   .post('/signup/', User.signup)
   .post('/login/', User.login)
-  .get('/', User.getAll)
-  .get('/id/:id', User.getById)
-  .get('/cedula/:cedula', User.getByCedula)
+  .get('/', authUser, authAdmin, User.getAll)
+  .get('/id/:id', authUser, authAdmin, User.getById)
+  .get('/cedula/:cedula', authUser, authAdmin, User.getByCedula)
   .put('/:id', authUser, authAdmin, User.update)
   .patch('/:id', authUser, authAdmin, User.updatePassword)
   .delete('/:id', authUser, authAdmin, User.remove)
