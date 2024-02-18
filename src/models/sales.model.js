@@ -4,7 +4,7 @@ import pool from '../database/db.js'
 deleting sales records from a database. */
 class Sales {
   static async create (sale) {
-    return await pool.query('INSERT INTO ventas (usuarios_id, enviar_factura, estados_ventas_id) VALUES (?, ?, ?)', [sale.usuarios_id, sale.enviar_factura, sale.estados_ventas_id])
+    return await pool.query('INSERT INTO ventas (usuarios_id, estados_ventas_id) VALUES (?, ?)', [sale.usuarios_id, sale.estados_ventas_id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -37,7 +37,7 @@ class Sales {
   }
 
   static async update (id, sale) {
-    return await pool.query('UPDATE ventas SET usuarios_id = ?, enviar_factura = ?, estados_ventas_id = ? WHERE id = ?', [sale.usuarios_id, sale.enviar_factura, sale.estados_ventas_id, id])
+    return await pool.query('UPDATE ventas SET usuarios_id = ?, estados_ventas_id = ? WHERE id = ?', [sale.usuarios_id, sale.estados_ventas_id, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
