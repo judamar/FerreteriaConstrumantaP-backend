@@ -25,6 +25,6 @@ export const imageToURL = async (filePath) => {
     return response.data.data.link
   } catch (error) {
     console.error('Error', error.message)
-    return null
+    return 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fcampusultra.com%2Fadministracion-de-inventarios-en-una-ferreteria%2F&psig=AOvVaw0GhxWD5iGpjIu_AcG-S0mO&ust=1708398233225000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIj2gsC1toQDFQAAAAAdAAAAABAE'
   }
 }
