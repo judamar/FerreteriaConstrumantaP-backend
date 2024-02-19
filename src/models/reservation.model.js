@@ -45,7 +45,7 @@ class Reservation {
   }
 
   static async update (id, reservation) {
-    return await pool.query('UPDATE reservas SET usuarios_id = ?, herramientas_maquinas_id = ?, fecha_inicio = ?, fecha_fin = ?, cantidad = ?, estados_reservas_id = ? WHERE id = ?', [reservation.usuario_id, reservation.herramienta_maquina_id, reservation.fecha_inicio, reservation.fecha_fin, reservation.cantidad, reservation.estado_reserva_id, id])
+    return await pool.query('UPDATE reservas SET usuarios_id = ?, herramientas_maquinas_id = ?, fecha_inicio = ? WHERE id = ?', [reservation.usuarios_id, reservation.herramientas_maquinas_id, reservation.fecha_inicio, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err

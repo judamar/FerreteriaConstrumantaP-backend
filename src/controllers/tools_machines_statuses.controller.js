@@ -75,7 +75,7 @@ const update = async (req, res) => {
     console.log(pc.bgGreen('UPDATING TOOL MACHINE STATUS'))
     console.log({ ToolsMachinesStatus: toolsMachinesStatus })
     console.log({ Id: id })
-    const result = await ToolMachineStatus.update(toolsMachinesStatus, id)
+    const result = await ToolMachineStatus.update(id, toolsMachinesStatus)
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('TOOL MACHINE STATUS UPDATED SUCCESFULLY'))
       console.log({ Result: result })
