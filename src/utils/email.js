@@ -31,7 +31,7 @@ const sendEmail = async (toEmail, Subject, Body, attachmentPath) => {
     text: Body,
     attachments: [
       {
-        path: attachmentPath
+        path: attachmentPath || 'src/images/public/logo.ico'
       }
     ]
   }
