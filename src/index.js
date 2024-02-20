@@ -21,6 +21,7 @@ import SalesStatusRouter from './routes/sales_status.routes.js'
 import SalesRouter from './routes/sales.routes.js'
 import SalesDetailRouter from './routes/sales_details.routes.js'
 import ProviderHasCategoryRouter from './routes/providers_has_categories.routes.js'
+import SendEmailRouter from './routes/sendEmail.routes.js'
 
 const PORT = process.env.PORT ?? 3000 // get server port or use 3000 by default
 const app = express()
@@ -59,6 +60,7 @@ app.use('/api/herramientas_maquinas', ToolsMachinesRouter)
 app.use('/api/estados_venta', SalesStatusRouter)
 app.use('/api/ventas', SalesRouter)
 app.use('/api/detalles_ventas', SalesDetailRouter)
+app.use('/api/send_email', SendEmailRouter)
 
 // Initialize the server
 app.listen(PORT, () => {

@@ -37,10 +37,8 @@ const sendEmail = async (toEmail, Subject, Body, attachmentPath) => {
   }
 
   const transport = nodemailer.createTransport(config)
-
   const info = await transport.sendMail(msg)
-
   console.log(info)
 }
 
-sendEmail('xxxxxxxxxxx@xxxx.com', 'Test Backend', 'Test', 'src/images/public/logo.ico')
+export default sendEmail
