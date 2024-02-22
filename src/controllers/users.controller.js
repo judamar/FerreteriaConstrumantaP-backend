@@ -6,13 +6,18 @@ import pc from 'picocolors'
 
 // signup user
 const signup = async (req, res) => { // x-www-form-urlencoded
+  if (req.body.password.length < 8) {
+    handleBadRequest(res, 'La contraseña debe ser minimo de 8 caracteres.')
+    console.log(pc.bgRed('SIGNUP USER FAILED, INVALID PASSWORD'))
+    return
+  }
   const user = {
     cedula: req.body.cedula,
     nombre_completo: req.body.nombre_completo,
     correo_electronico: req.body.correo_electronico,
     telefono: req.body.telefono,
     direccion: req.body.direccion,
-    password: await password.hashPassword(req.body.password),
+    password: await password.hashPassword(req.body.password), // hashea la contraseña
     es_admin: req.body.es_admin
   }
   try {
@@ -23,16 +28,16 @@ const signup = async (req, res) => { // x-www-form-urlencoded
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('SIGNUP USER SUCCESFULLY'))
       console.log({ Result: result })
-      handleSuccess(res, 201, { message: 'User created successfully' })
+      handleSuccess(res, 201, { message: 'Usuario creado satisfactoriamente.' })
     } else {
       console.log(pc.bgRed('SIGNUP USER FAILED'))
       console.log({ Result: result })
-      handleServerError(res, 'User creation failed')
+      handleServerError(res, 'Error al crear usuario.')
     }
   } catch (error) {
     console.log(pc.bgRed('SIGNUP USER FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al crear usuario.')
   }
 }
 
@@ -45,15 +50,15 @@ const login = async (req, res) => { // x-www-form-urlencoded or raw(json)
     if (user) {
       const token = generateToken(user)
       console.log(pc.bgGreen('LOGIN USER SUCCESFULLY'))
-      handleSuccess(res, 200, { token })
+      handleSuccess(res, 200, { mesage: 'Inicio de sesión correcto.', token })
     } else {
       console.log(pc.bgRed('LOGIN USER FAILED, INVALID CREDENTIALS'))
-      handleUnauthorized(res, 'Invalid credentials')
+      handleUnauthorized(res, 'Credenciales invalidas.')
     }
   } catch (error) {
     console.log(pc.bgRed('LOGIN USER FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error en el inicio de sesión.')
   }
 }
 
