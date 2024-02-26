@@ -26,12 +26,12 @@ const create = async (req, res) => {
     } else {
       console.log(pc.bgRed('PRODUCT NOT CREATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Product not created.')
+      handleBadRequest(res, 'No se pudo crear el producto.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR CREATING PRODUCT'))
     console.error({ Error: error.message })
-    handleServerError(res, 'ERROR AL CREAR EL PRODUCTO, REVISA LOS CAMPOS.')
+    handleServerError(res, 'Error al crear el producto.')
   }
 }
 

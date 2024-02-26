@@ -16,12 +16,12 @@ const create = async (req, res) => {
     } else {
       console.log(pc.bgRed('CATEGORY NOT CREATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Category not created.')
+      handleBadRequest(res, 'Categoria no creada.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR CREATING CATEGORY'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al crear la categoria.')
   }
 }
 
@@ -35,12 +35,12 @@ const getAll = async (req, res) => {
       handleSuccess(res, 200, categories)
     } else {
       console.log(pc.bgRed('CATEGORIES NOT FOUND'))
-      handleNotFound(res, 'Categories not found.')
+      handleNotFound(res, 'No se encontraron categorias.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING ALL CATEGORIES'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'No se pudo obtener las categorias.')
   }
 }
 
@@ -56,12 +56,12 @@ const getById = async (req, res) => {
       handleSuccess(res, 200, category)
     } else {
       console.log(pc.bgRed('CATEGORY NOT FOUND'))
-      handleNotFound(res, 'Category not found.')
+      handleNotFound(res, 'No se encontro la categoria.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING CATEGORY BY ID'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'No se pudo obtener la categoria.')
   }
 }
 
@@ -77,12 +77,12 @@ const getByName = async (req, res) => {
       handleSuccess(res, 200, category)
     } else {
       console.log(pc.bgRed('CATEGORY NOT FOUND'))
-      handleNotFound(res, 'Category not found.')
+      handleNotFound(res, 'No se encontro la categoria.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING CATEGORY BY NAME'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'No se pudo obtener la categoria.')
   }
 }
 
@@ -101,12 +101,12 @@ const update = async (req, res) => {
     } else {
       console.log(pc.bgRed('CATEGORY NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Category not updated.')
+      handleBadRequest(res, 'No se pudo actualizar la categoria.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR UPDATING CATEGORY'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar la categoria.')
   }
 }
 
@@ -124,12 +124,12 @@ const remove = async (req, res) => {
     } else {
       console.log(pc.bgRed('CATEGORY NOT DELETED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Category not deleted.')
+      handleBadRequest(res, 'No se pudo eliminar la categoria.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR REMOVING CATEGORY'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al eliminar la categoria.')
   }
 }
 
