@@ -3,6 +3,7 @@ import { generateToken } from '../middlewares/authJWT.js'
 import password from '../utils/password.js'
 import { handleSuccess, handleNotFound, handleServerError, handleBadRequest, handleUnauthorized } from '../utils/handles.js'
 import pc from 'picocolors'
+import jwt from 'jsonwebtoken'
 
 // signup user
 const signup = async (req, res) => { // x-www-form-urlencoded
@@ -50,7 +51,8 @@ const login = async (req, res) => { // x-www-form-urlencoded or raw(json)
     if (user) {
       const token = generateToken(user)
       console.log(pc.bgGreen('LOGIN USER SUCCESFULLY'))
-      handleSuccess(res, 200, { mesage: 'Inicio de sesión correcto.', token })
+      const decoded = jwt.decode(token)
+      handleSuccess(res, 200, { mesage: 'Inicio de sesión correcto.', token, user: decoded })
     } else {
       console.log(pc.bgRed('LOGIN USER FAILED, INVALID CREDENTIALS'))
       handleUnauthorized(res, 'Credenciales invalidas.')

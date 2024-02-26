@@ -31,7 +31,7 @@ const create = async (req, res) => {
   } catch (error) {
     console.log(pc.bgRed('ERROR CREATING PRODUCT'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'ERROR AL CREAR EL PRODUCTO, REVISA LOS CAMPOS.')
   }
 }
 
@@ -45,12 +45,12 @@ const getAll = async (req, res) => {
       handleSuccess(res, 200, products)
     } else {
       console.log(pc.bgRed('PRODUCTS NOT FOUND'))
-      handleNotFound(res, 'Products not found.')
+      handleNotFound(res, 'NO HAY PRODUCTOS PARA MOSTRAR')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING ALL PRODUCTS'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'ERROR AL OBTENER LOS PRODUCTOS')
   }
 }
 

@@ -12,6 +12,7 @@ export const generateToken = (user) => {
   const payload = {
     id: user.id,
     cedula: user.cedula,
+    nombre: user.nombre_completo,
     esAdmin: user.es_admin
   }
 
