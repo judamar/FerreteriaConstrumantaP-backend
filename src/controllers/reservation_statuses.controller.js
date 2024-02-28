@@ -16,12 +16,12 @@ const create = async (req, res) => {
     } else {
       console.log(pc.bgRed('RESERVATION STATUS NOT CREATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Reservation status not created.')
+      handleBadRequest(res, 'No se pudo crear el estado de reserva.')
     }
   } catch (error) {
     console.log(pc.bgRed('CREATING RESERVATION STATUS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al crear el estado de reserva.')
   }
 }
 
@@ -36,12 +36,12 @@ const getAll = async (req, res) => {
     } else {
       console.log(pc.bgRed('RESERVATION STATUSES NOT FOUND'))
       console.log({ ReservationStatuses: reservationStatuses })
-      handleNotFound(res, 'Reservation statuses not found.')
+      handleNotFound(res, 'No se encontraron estados de reserva.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING RESERVATION STATUSES FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener los estados de reserva.')
   }
 }
 
@@ -58,12 +58,12 @@ const getById = async (req, res) => {
     } else {
       console.log(pc.bgRed('RESERVATION STATUS NOT FOUND'))
       console.log({ ReservationStatus: reservationStatus })
-      handleNotFound(res, 'Reservation status not found.')
+      handleNotFound(res, 'No se encontro el estado de reserva')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING RESERVATION STATUS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener el estado de reserva.')
   }
 }
 
@@ -83,12 +83,12 @@ const update = async (req, res) => {
     } else {
       console.log(pc.bgRed('RESERVATION STATUS NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Reservation status not updated.')
+      handleBadRequest(res, 'No se pudo actualizar el estado de reserva.')
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATING RESERVATION STATUS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar el estado de reserva.')
   }
 }
 
@@ -106,12 +106,12 @@ const remove = async (req, res) => {
     } else {
       console.log(pc.bgRed('RESERVATION STATUS NOT DELETED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Reservation status not deleted.')
+      handleBadRequest(res, 'No se pudo eliminar el estado de reserva.')
     }
   } catch (error) {
     console.log(pc.bgRed('DELETING RESERVATION STATUS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al eliminar el estado de reserva.')
   }
 }
 

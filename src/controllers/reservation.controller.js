@@ -14,12 +14,12 @@ const create = async (req, res) => {
       handleSuccess(res, 201, result)
     } else {
       console.log(pc.bgRed('RESERVATION NOT CREATED'))
-      handleBadRequest(res, 'Reservation not created.')
+      handleBadRequest(res, 'No se pudo crear la reserva.')
     }
   } catch (error) {
     console.log(pc.bgRed('CREATING RESERVATION FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al crear la reserva.')
   }
 }
 
@@ -33,12 +33,12 @@ const getAll = async (req, res) => {
     } else {
       console.log(pc.bgRed('RESERVATIONS NOT FOUND'))
       console.log({ Result: result })
-      handleNotFound(res, 'Reservations not found.')
+      handleNotFound(res, 'No se encontraron las reservas.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING ALL RESERVATIONS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener las reservas.')
   }
 }
 
@@ -54,12 +54,12 @@ const getById = async (req, res) => {
     } else {
       console.log(pc.bgRed('RESERVATION NOT FOUND'))
       console.log({ Reservation: reservation })
-      handleNotFound(res, 'Reservation not found.')
+      handleNotFound(res, 'No se encontro la reserva.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING RESERVATION FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener la reservas.')
   }
 }
 
@@ -75,12 +75,12 @@ const getByUserName = async (req, res) => {
     } else {
       console.log(pc.bgRed('RESERVATION NOT FOUND'))
       console.log({ Reservation: reservation })
-      handleNotFound(res, 'Reservation not found.')
+      handleNotFound(res, 'No se encontro la reserva.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING RESERVATION FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener la reserva.')
   }
 }
 
@@ -96,12 +96,12 @@ const getByToolName = async (req, res) => {
     } else {
       console.log(pc.bgRed('RESERVATION NOT FOUND'))
       console.log({ Reservation: reservation })
-      handleNotFound(res, 'Reservation not found.')
+      handleNotFound(res, 'No se encontro la reserva.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING RESERVATION FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener la reserva.')
   }
 }
 
@@ -120,12 +120,12 @@ const update = async (req, res) => {
     } else {
       console.log(pc.bgRed('RESERVATION NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Reservation not updated.')
+      handleBadRequest(res, 'No se pudo actualizar la reserva.')
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATING RESERVATION FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar la reserva.')
   }
 }
 
@@ -144,12 +144,12 @@ const updateState = async (req, res) => {
     } else {
       console.log(pc.bgRed('RESERVATION STATE NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Reservation state not updated.')
+      handleBadRequest(res, 'No se pudo actualizar el estado de la reserva.')
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATING RESERVATION STATE FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar el estado de la reserva.')
   }
 }
 
@@ -168,12 +168,12 @@ const updateEndDate = async (req, res) => {
     } else {
       console.log(pc.bgRed('RESERVATION END DATE NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Reservation end date not updated.')
+      handleBadRequest(res, 'No se pudo actualizar la fecha de entrega de la reserva.')
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATING RESERVATION END DATE FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar la fecha de entrega de la reserva.')
   }
 }
 
@@ -190,12 +190,12 @@ const remove = async (req, res) => {
     } else {
       console.log(pc.bgRed('RESERVATION NOT DELETED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Reservation not deleted.')
+      handleBadRequest(res, 'No se pudo eliminar la reserva.')
     }
   } catch (error) {
     console.log(pc.bgRed('DELETING RESERVATION FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al eliminar la reserva.')
   }
 }
 

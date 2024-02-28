@@ -16,12 +16,12 @@ const create = async (req, res) => {
     } else {
       console.log(pc.bgRed('PROVIDER HAS CATEGORY RELATION NOT CREATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Relation not created')
+      handleBadRequest(res, 'Relacion no creada')
     }
   } catch (error) {
     console.log(pc.bgRed('CREATING PROVIDER HAS CATEGORY RELATION FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error, no se pudo crear la relacion.')
   }
 }
 
@@ -36,12 +36,12 @@ const getAll = async (req, res) => {
     } else {
       console.log(pc.bgRed('PROVIDER HAS CATEGORY RELATIONS NOT FOUND'))
       console.log({ Result: result })
-      handleNotFound(res, 'Relations not found')
+      handleNotFound(res, 'No se encontraron relaciones.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING ALL PROVIDER HAS CATEGORY RELATIONS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener las relaciones.')
   }
 }
 
@@ -59,12 +59,12 @@ const remove = async (req, res) => {
     } else {
       console.log(pc.bgRed('PROVIDER HAS CATEGORY RELATION NOT REMOVED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Relation not removed')
+      handleBadRequest(res, 'No se pudo eliminar la relacion.')
     }
   } catch (error) {
     console.log(pc.bgRed('REMOVING PROVIDER HAS CATEGORY RELATION FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al eliminar la relacion.')
   }
 }
 

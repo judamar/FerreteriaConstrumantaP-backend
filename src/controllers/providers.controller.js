@@ -16,12 +16,12 @@ const create = async (req, res) => { // x-www-form-urlencoded or json raw
     } else {
       console.log(pc.bgRed('PROVIDER NOT CREATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Provider not created.')
+      handleBadRequest(res, 'No se pudo crear el proveedor.')
     }
   } catch (error) {
     console.log(pc.bgRed('CREATING PROVIDER FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al crear el proveedor.')
   }
 }
 
@@ -36,12 +36,12 @@ const getAll = async (req, res) => {
     } else {
       console.log(pc.bgRed('PROVIDERS NOT FOUND'))
       console.log({ Providers: providers })
-      handleNotFound(res, 'Providers not found.')
+      handleNotFound(res, 'No se encontraron proveedores.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING PROVIDERS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener los proveedores')
   }
 }
 
@@ -58,12 +58,12 @@ const getById = async (req, res) => {
     } else {
       console.log(pc.bgRed('PROVIDER NOT FOUND'))
       console.log({ Provider: provider })
-      handleNotFound(res, 'Provider not found.')
+      handleNotFound(res, 'Proveedor no encontrado.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING PROVIDER FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener proveedor.')
   }
 }
 
@@ -80,12 +80,12 @@ const getByName = async (req, res) => {
     } else {
       console.log(pc.bgRed('PROVIDER NOT FOUND'))
       console.log({ Provider: provider })
-      handleNotFound(res, 'Provider not found.')
+      handleNotFound(res, 'No se encontro al proveedor.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING PROVIDER FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener proveedor.')
   }
 }
 
@@ -102,12 +102,12 @@ const getByNIT = async (req, res) => {
     } else {
       console.log(pc.bgRed('PROVIDER NOT FOUND'))
       console.log({ Provider: provider })
-      handleNotFound(res, 'Provider not found.')
+      handleNotFound(res, 'No se encontro al proveedor.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING PROVIDER FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener proveedor.')
   }
 }
 
@@ -127,12 +127,12 @@ const update = async (req, res) => { // x-www-form-urlencoded or json raw
     } else {
       console.log(pc.bgRed('PROVIDER NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Provider not updated.')
+      handleBadRequest(res, 'No se pudo actualizar proveedor.')
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATING PROVIDER FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar proveedor.')
   }
 }
 
@@ -150,12 +150,12 @@ const remove = async (req, res) => {
     } else {
       console.log(pc.bgRed('PROVIDER NOT DELETED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Provider not deleted.')
+      handleBadRequest(res, 'No se pudo eliminar al proveedor.')
     }
   } catch (error) {
     console.log(pc.bgRed('DELETING PROVIDER FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al eliminar el proveedor.')
   }
 }
 
