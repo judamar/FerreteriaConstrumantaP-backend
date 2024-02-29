@@ -16,12 +16,12 @@ const create = async (req, res) => {
     } else {
       console.log(pc.bgRed('SALES STATUS CREATION FAILED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Sales status not created.')
+      handleBadRequest(res, 'No se pudo crear el estado de venta.')
     }
   } catch (error) {
     console.log(pc.bgRed('CREATING SALES STATUS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al crear el estado de venta.')
   }
 }
 
@@ -36,12 +36,12 @@ const getAll = async (req, res) => {
     } else {
       console.log(pc.red('SALES STATUSES NOT FOUND'))
       console.log({ Result: result })
-      handleNotFound(res, 'No sales statuses found.')
+      handleNotFound(res, 'No se encontraron estados de venta.')
     }
   } catch (error) {
     console.log(pc.red('GETTING ALL SALES STATUSES FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener los estados de venta.')
   }
 }
 
@@ -58,12 +58,12 @@ const getById = async (req, res) => {
     } else {
       console.log(pc.red('SALES STATUS NOT FOUND'))
       console.log({ Result: result })
-      handleNotFound(res, 'No sales status found.')
+      handleNotFound(res, 'No se encontró el estado de venta.')
     }
   } catch (error) {
     console.log(pc.red('GETTING SALES STATUS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al encontrar el estado de venta.')
   }
 }
 
@@ -83,12 +83,12 @@ const update = async (req, res) => {
     } else {
       console.log(pc.bgRed('SALES STATUS NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Sales status not updated.')
+      handleBadRequest(res, 'No se pudo actualizar el estado de venta.')
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATING SALES STATUS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar el estado de venta.')
   }
 }
 
@@ -106,12 +106,12 @@ const remove = async (req, res) => {
     } else {
       console.log(pc.bgRed('SALES STATUS NOT DELETED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Sales status not deleted.')
+      handleBadRequest(res, 'No se pudo eliminar el estado de venta.')
     }
   } catch (error) {
     console.log(pc.bgRed('DELETING SALES STATUS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al eliminar el estado de venta.')
   }
 }
 
