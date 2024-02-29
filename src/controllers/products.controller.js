@@ -45,12 +45,12 @@ const getAll = async (req, res) => {
       handleSuccess(res, 200, products)
     } else {
       console.log(pc.bgRed('PRODUCTS NOT FOUND'))
-      handleNotFound(res, 'NO HAY PRODUCTOS PARA MOSTRAR')
+      handleNotFound(res, 'No se encontraron productos.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING ALL PRODUCTS'))
     console.error({ Error: error.message })
-    handleServerError(res, 'ERROR AL OBTENER LOS PRODUCTOS')
+    handleServerError(res, 'Error al obtener los productos.')
   }
 }
 
@@ -66,12 +66,12 @@ const getById = async (req, res) => {
       handleSuccess(res, 200, product)
     } else {
       console.log(pc.bgRed('PRODUCT NOT FOUND'))
-      handleNotFound(res, 'Product not found.')
+      handleNotFound(res, 'No se encontró el producto.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING PRODUCT BY ID'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener el producto.')
   }
 }
 
@@ -87,12 +87,12 @@ const getByName = async (req, res) => {
       handleSuccess(res, 200, product)
     } else {
       console.log(pc.bgRed('PRODUCT NOT FOUND'))
-      handleNotFound(res, 'Product not found.')
+      handleNotFound(res, 'No se encontró el producto.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING PRODUCT BY NAME'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener el producto.')
   }
 }
 
@@ -108,12 +108,12 @@ const getByCategory = async (req, res) => {
       handleSuccess(res, 200, products)
     } else {
       console.log(pc.bgRed('PRODUCTS NOT FOUND'))
-      handleNotFound(res, 'Products not found.')
+      handleNotFound(res, 'No se encontraron productos en esta categoría.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING PRODUCTS BY CATEGORY'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener los productos.')
   }
 }
 
@@ -129,12 +129,12 @@ const getByKey = async (req, res) => {
       handleSuccess(res, 200, products)
     } else {
       console.log(pc.bgRed('PRODUCTS NOT FOUND'))
-      handleNotFound(res, 'Products not found.')
+      handleNotFound(res, 'No se encontró el producto.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR GETTING PRODUCTS BY KEY'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener el producto.')
   }
 }
 
@@ -161,12 +161,12 @@ const update = async (req, res) => { // x-www-form-urlencoded
     } else {
       console.log(pc.bgRed('PRODUCT NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Product not updated.')
+      handleBadRequest(res, 'No se pudo actualizar el producto.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR UPDATING PRODUCT'))
     console.error({ Error: error })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar el producto.')
   }
 }
 
@@ -187,12 +187,12 @@ const updateImage = async (req, res) => {
     } else {
       console.log(pc.bgRed('PRODUCT IMAGE NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Product image not updated.')
+      handleBadRequest(res, 'No se pudo actualizar la imagen del producto.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR UPDATING PRODUCT IMAGE'))
     console.error({ Error: error })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar la imagen del producto.')
   }
 }
 
@@ -209,12 +209,12 @@ const remove = async (req, res) => {
       handleSuccess(res, 200, result)
     } else {
       console.log(pc.bgRed('PRODUCT NOT DELETED'))
-      handleBadRequest(res, 'Product not deleted.')
+      handleBadRequest(res, 'No se pudo eliminar el producto.')
     }
   } catch (error) {
     console.log(pc.bgRed('ERROR DELETING PRODUCT'))
     console.error({ Error: error.message })
-    handleBadRequest(res, error.message)
+    handleBadRequest(res, 'Error al eliminar el producto.')
   }
 }
 
