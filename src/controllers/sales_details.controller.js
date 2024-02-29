@@ -16,12 +16,12 @@ const create = async (req, res) => {
     } else {
       console.log(pc.bgRed('SALE DETAIL NOT CREATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Sale detail not created.')
+      handleBadRequest(res, 'No se pudo crear el detalle de venta.')
     }
   } catch (error) {
     console.log(pc.bgRed('CREATING SALE DETAIL FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al crear el detalle de venta.')
   }
 }
 
@@ -36,12 +36,12 @@ const getAll = async (req, res) => {
     } else {
       console.log(pc.red('SALE DETAILS NOT FOUND'))
       console.log({ Result: result })
-      handleNotFound(res, 'No sale details found.')
+      handleNotFound(res, 'No se encontraron detalles de venta.')
     }
   } catch (error) {
     console.log(pc.red('GETTING ALL SALE DETAILS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener los detalles de venta.')
   }
 }
 
@@ -58,12 +58,12 @@ const getById = async (req, res) => {
     } else {
       console.log(pc.red('SALE DETAIL NOT FOUND'))
       console.log({ Result: result })
-      handleNotFound(res, 'No sale detail found.')
+      handleNotFound(res, 'No se encontró el detalle de venta.')
     }
   } catch (error) {
     console.log(pc.red('GETTING SALE DETAIL FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener el detalle de venta.')
   }
 }
 
@@ -80,12 +80,12 @@ const getBySaleId = async (req, res) => {
     } else {
       console.log(pc.red('SALE DETAIL NOT FOUND'))
       console.log({ Result: result })
-      handleNotFound(res, 'No sale detail found.')
+      handleNotFound(res, 'No se encontró el detalle de venta.')
     }
   } catch (error) {
     console.log(pc.red('GETTING SALE DETAIL FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener el detalle de venta.')
   }
 }
 
@@ -105,12 +105,12 @@ const update = async (req, res) => {
     } else {
       console.log(pc.bgRed('SALE DETAIL NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Sale detail not updated.')
+      handleBadRequest(res, 'No se pudo actualizar el detalle de venta.')
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATING SALE DETAIL FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar el detalle de venta.')
   }
 }
 
@@ -128,12 +128,12 @@ const remove = async (req, res) => {
     } else {
       console.log(pc.bgRed('SALE DETAIL NOT DELETED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Sale detail not deleted.')
+      handleBadRequest(res, 'No se pudo eliminar el detalle de venta.')
     }
   } catch (error) {
     console.log(pc.bgRed('DELETING SALE DETAIL FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al eliminar el detalle de venta.')
   }
 }
 
