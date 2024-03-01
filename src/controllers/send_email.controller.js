@@ -15,10 +15,10 @@ const sendEmailController = (req, res) => {
     console.log({ Body: body })
     console.log({ Filename: filename })
     sendEmail(body.toEmail, body.subject, body.body, filename)
-    handleSuccess(res, 200, 'Email sent successfully')
+    handleSuccess(res, 200)
   } catch (error) {
     console.log(pc.bgRed(error.message))
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al enviar E-Mail')
   }
 }
 

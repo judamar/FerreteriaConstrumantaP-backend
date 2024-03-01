@@ -16,12 +16,12 @@ const create = async (req, res) => {
     } else {
       console.log(pc.bgRed('CREATING TOOL MACHINE STATUS FAILED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Tool machine status not created')
+      handleBadRequest(res, 'No se pudo crear el estado de herramientas.')
     }
   } catch (error) {
     console.log(pc.bgRed('CREATING TOOL MACHINE STATUS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al crear el estado de herramientas.')
   }
 }
 
@@ -36,12 +36,12 @@ const getAll = async (req, res) => {
     } else {
       console.log(pc.bgRed('TOOL MACHINE STATUSES NOT FOUND'))
       console.log({ Result: result })
-      handleNotFound(res, 'No tool machine statuses found.')
+      handleNotFound(res, 'No se encontraron estados de herramientas.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING ALL TOOL MACHINE STATUSES FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener los estados de herramientas.')
   }
 }
 
@@ -58,12 +58,12 @@ const getById = async (req, res) => {
     } else {
       console.log(pc.bgRed('TOOL MACHINE STATUS NOT FOUND'))
       console.log({ Result: result })
-      handleNotFound(res, 'No tool machine status found.')
+      handleNotFound(res, 'No se encontró el estado de herramientas.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING TOOL MACHINE STATUS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener el estado de herramientas.')
   }
 }
 
@@ -83,12 +83,12 @@ const update = async (req, res) => {
     } else {
       console.log(pc.bgRed('TOOL MACHINE STATUS NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Tool machine status not updated')
+      handleBadRequest(res, 'No se pudo actualizar el estado de herramientas.')
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATING TOOL MACHINE STATUS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar el estado de herramientas.')
   }
 }
 
@@ -106,12 +106,12 @@ const remove = async (req, res) => {
     } else {
       console.log(pc.bgRed('TOOL MACHINE STATUS NOT DELETED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Tool machine status not deleted')
+      handleBadRequest(res, 'No se pudo eliminar el estado de herramientas.')
     }
   } catch (error) {
     console.log(pc.bgRed('DELETING TOOL MACHINE STATUS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al eliminar el estado de herramientas.')
   }
 }
 

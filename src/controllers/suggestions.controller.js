@@ -16,12 +16,12 @@ const create = async (req, res) => {
     } else {
       console.log(pc.bgRed('CREATING SUGGESTION FAILED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Suggestion not created')
+      handleBadRequest(res, 'No se pudo crear la sugerencia.')
     }
   } catch (error) {
     console.log(pc.bgRed('CREATING SUGGESTION FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al crear la sugerencia')
   }
 }
 
@@ -36,12 +36,12 @@ const getAll = async (req, res) => {
     } else {
       console.log(pc.bgRed('SUGGESTIONS NOT FOUND'))
       console.log({ Result: result })
-      handleNotFound(res, 'No suggestions found.')
+      handleNotFound(res, 'No se encontraron sugerencias.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING ALL SUGGESTIONS FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener sugerencias.')
   }
 }
 
@@ -59,12 +59,12 @@ const remove = async (req, res) => {
     } else {
       console.log(pc.bgRed('SUGGESTION NOT DELETED'))
       console.log({ Result: result })
-      handleServerError(res, 'Error deleting suggestion')
+      handleServerError(res, 'No se pudo eliminar la sugerencia.')
     }
   } catch (error) {
     console.log(pc.bgRed('DELETING SUGGESTION FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al eliminar la sugerencia.')
   }
 }
 

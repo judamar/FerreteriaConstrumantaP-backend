@@ -33,12 +33,12 @@ const signup = async (req, res) => { // x-www-form-urlencoded
     } else {
       console.log(pc.bgRed('SIGNUP USER FAILED'))
       console.log({ Result: result })
-      handleServerError(res, 'Error al crear usuario.')
+      handleServerError(res, 'No se pudo crear el usuario.')
     }
   } catch (error) {
     console.log(pc.bgRed('SIGNUP USER FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, 'Error al crear usuario.')
+    handleServerError(res, 'Error al crear el usuario.')
   }
 }
 
@@ -74,12 +74,12 @@ const getAll = async (req, res) => {
       handleSuccess(res, 200, users)
     } else {
       console.log(pc.bgRed('GET ALL USERS FAILED, NOT FOUND'))
-      handleNotFound(res, 'Users not found.')
+      handleNotFound(res, 'No se encontraron usuarios.')
     }
   } catch (error) {
     console.log(pc.bgRed('GET ALL USERS FAILED'))
     console.error({ Error: error.message })
-    handleBadRequest(res, error.message)
+    handleBadRequest(res, 'Error al obtener los usuarios.')
   }
 }
 
@@ -94,12 +94,12 @@ const getById = async (req, res) => {
       handleSuccess(res, 200, user)
     } else {
       console.log(pc.bgRed('GET USER BY ID FAILED, NOT FOUND'))
-      handleNotFound(res, 'User not found.')
+      handleNotFound(res, 'No se encontró el usuario.')
     }
   } catch (error) {
     console.log(pc.bgRed('GET USER BY ID FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener el usuario.')
   }
 }
 
@@ -114,12 +114,12 @@ const getByCedula = async (req, res) => {
       handleSuccess(res, 200, user)
     } else {
       console.log(pc.bgRed('GET USER BY CEDULA FAILED, NOT FOUND'))
-      handleNotFound(res, 'User not found.')
+      handleNotFound(res, 'No se encontró el usuario.')
     }
   } catch (error) {
     console.log(pc.bgRed('GET USER BY CEDULA FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener el usuario.')
   }
 }
 
@@ -146,12 +146,12 @@ const update = async (req, res) => {
     } else {
       console.log(pc.bgRed('UPDATE USER FAILED'))
       console.log({ Result: result })
-      handleServerError(res, 'User update failed')
+      handleServerError(res, 'No se pudo actualizar el usuario.')
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATE USER FAILED'))
     console.error({ Error: error.message })
-    error.message.includes('cannot be null') ? handleBadRequest(res, `Missing or invalid value for field: ${/Column '([^']*)'/.exec(error.message)[1] || 'Unknown'}`) : handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar el usuario.')
   }
 }
 
@@ -170,12 +170,12 @@ const updatePassword = async (req, res) => {
     } else {
       console.log(pc.bgRed('UPDATE PASSWORD FAILED'))
       console.log({ Result: result })
-      handleServerError(res, 'Password update failed')
+      handleServerError(res, 'No se pudo cambiar la contraseña.')
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATE PASSWORD FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al cambiar la contraseña.')
   }
 }
 
@@ -193,12 +193,12 @@ const remove = async (req, res) => {
     } else {
       console.log(pc.bgRed('DELETE USER FAILED'))
       console.log({ Result: result })
-      handleServerError(res, 'User delete failed')
+      handleServerError(res, 'No se pudo eliminar el usuario.')
     }
   } catch (error) {
     console.log(pc.bgRed('DELETE USER FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al eliminar el usuario.')
   }
 }
 

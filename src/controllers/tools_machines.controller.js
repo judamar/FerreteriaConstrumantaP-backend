@@ -24,12 +24,12 @@ const create = async (req, res) => {
     } else {
       console.log(pc.bgRed('TOOL - MACHINE NOT CREATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Tool - machine not created')
+      handleBadRequest(res, 'No se pudo crear la herramienta.')
     }
   } catch (error) {
     console.log(pc.bgRed('CREATING TOOL - MACHINE FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al crear la herramienta.')
   }
 }
 
@@ -45,12 +45,12 @@ const getAll = async (req, res) => {
     } else {
       console.log(pc.bgRed('TOOL - MACHINES NOT FOUND'))
       console.log({ Result: result })
-      handleNotFound(res, 'Tool - machines not found')
+      handleNotFound(res, 'No se encontraron herramientas.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING ALL TOOL - MACHINES FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener las herramientas.')
   }
 }
 
@@ -68,12 +68,12 @@ const getById = async (req, res) => {
     } else {
       console.log(pc.bgRed('TOOL - MACHINE NOT FOUND'))
       console.log({ Result: result })
-      handleNotFound(res, 'Tool - machine not found')
+      handleNotFound(res, 'No se encontró la herramienta.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING TOOL - MACHINE BY ID FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener la herramienta.')
   }
 }
 
@@ -91,12 +91,12 @@ const getByName = async (req, res) => {
     } else {
       console.log(pc.bgRed('TOOL - MACHINE NOT FOUND'))
       console.log({ Result: result })
-      handleNotFound(res, 'Tool - machine not found')
+      handleNotFound(res, 'No se encontró la herramienta.')
     }
   } catch (error) {
     console.log(pc.bgRed('GETTING TOOL - MACHINE BY NAME FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al obtener la herramienta.')
   }
 }
 
@@ -122,12 +122,12 @@ const update = async (req, res) => {
     } else {
       console.log(pc.bgRed('TOOL - MACHINE NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Tool - machine not updated')
+      handleBadRequest(res, 'No se pudo actualizar la herramienta.')
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATING TOOL - MACHINE FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar la herramienta.')
   }
 }
 
@@ -148,12 +148,12 @@ const updateImage = async (req, res) => {
     } else {
       console.log(pc.bgRed('TOOL - MACHINE IMAGE NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Tool - machine image not updated')
+      handleBadRequest(res, 'No se pudo actualizar la imagen de la herramienta.')
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATING TOOL - MACHINE IMAGE FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar la imagen de la herramienta.')
   }
 }
 
@@ -173,12 +173,12 @@ const updateState = async (req, res) => {
     } else {
       console.log(pc.bgRed('TOOL - MACHINE STATE NOT UPDATED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Tool - machine state not updated')
+      handleBadRequest(res, 'No se pudo actualizar el estado de la herramienta.')
     }
   } catch (error) {
     console.log(pc.bgRed('UPDATING TOOL - MACHINE STATE FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al actualizar el estado de la herramienta.')
   }
 }
 
@@ -194,12 +194,12 @@ const remove = async (req, res) => {
     } else {
       console.log(pc.bgRed('TOOL - MACHINE NOT REMOVED'))
       console.log({ Result: result })
-      handleBadRequest(res, 'Tool - machine not removed')
+      handleBadRequest(res, 'No se pudo elinar la herramienta.')
     }
   } catch (error) {
     console.log(pc.bgRed('REMOVING TOOL - MACHINE FAILED'))
     console.error({ Error: error.message })
-    handleServerError(res, error.message)
+    handleServerError(res, 'Error al eliminar la herramienta.')
   }
 }
 
