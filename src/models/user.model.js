@@ -46,7 +46,7 @@ class User {
   }
 
   static async update (id, user) {
-    return await pool.query('UPDATE usuarios SET cedula = ?, nombre_completo = ?, correo_electronico = ?, telefono = ?, direccion = ?, es_admin = ? WHERE id = ?', [user.cedula, user.nombre_completo, user.correo_electronico, user.telefono, user.direccion, user.es_admin, id])
+    return await pool.query('UPDATE usuarios SET cedula = ?, nombre_completo = ?, correo_electronico = ?, telefono = ?, direccion = ? WHERE id = ?', [user.cedula, user.nombre_completo, user.correo_electronico, user.telefono, user.direccion, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err

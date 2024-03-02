@@ -29,7 +29,7 @@ const signup = async (req, res) => { // x-www-form-urlencoded
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('SIGNUP USER SUCCESFULLY'))
       console.log({ Result: result })
-      handleSuccess(res, 201, { message: 'Usuario creado satisfactoriamente.' })
+      handleSuccess(res, 201, user)
     } else {
       console.log(pc.bgRed('SIGNUP USER FAILED'))
       console.log({ Result: result })
@@ -131,8 +131,7 @@ const update = async (req, res) => {
     nombre_completo: req.body.nombre_completo,
     correo_electronico: req.body.correo_electronico,
     telefono: req.body.telefono,
-    direccion: req.body.direccion,
-    es_admin: req.body.es_admin
+    direccion: req.body.direccion
   }
   try {
     console.log(pc.bgGreen('UPDATE USER'))

@@ -40,7 +40,6 @@ const getAll = async (req, res) => {
     const result = await ToolMachine.getAll()
     if (result && result.length > 0) {
       console.log(pc.bgGreen('TOOL - MACHINES FOUND'))
-      console.log({ Result: result })
       handleSuccess(res, 200, result)
     } else {
       console.log(pc.bgRed('TOOL - MACHINES NOT FOUND'))
@@ -63,7 +62,6 @@ const getById = async (req, res) => {
     const result = await ToolMachine.getById(id)
     if (result && result.length > 0) {
       console.log(pc.bgGreen('TOOL - MACHINE FOUND'))
-      console.log({ Result: result })
       handleSuccess(res, 200, result)
     } else {
       console.log(pc.bgRed('TOOL - MACHINE NOT FOUND'))
@@ -86,7 +84,6 @@ const getByName = async (req, res) => {
     const result = await ToolMachine.getByName(name)
     if (result && result.length > 0) {
       console.log(pc.bgGreen('TOOL - MACHINE FOUND'))
-      console.log({ Result: result })
       handleSuccess(res, 200, result)
     } else {
       console.log(pc.bgRed('TOOL - MACHINE NOT FOUND'))
