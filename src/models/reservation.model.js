@@ -4,6 +4,16 @@ import pool from '../database/db.js'
 updating, and deleting reservations in a database. */
 class Reservation {
   static async create (reservation) {
+    const [checkToolAvailability] = await pool.query('SELECT cantidad_disponible FROM herramientas_maquinas WHERE id = ?', [reservation.herramienta_maquina_id])
+    const cantidadDisponible = checkToolAvailability[0].cantidad_disponible
+    // Verificar si la cantidad disponible es cero o menor a la cantidad a reservar
+    if (cantidadDisponible <= 0) {
+      throw new Error('La cantidad disponible de la herramienta es cero. No se puede crear la reserva.')
+    }
+    if (reservation.cantidad > cantidadDisponible) {
+      throw new Error('La cantidad a reservar es mayor que la cantidad disponible de la herramienta.')
+    }
+    // Si las verificaciones son exitosas, proceder con la inserción y actualización
     const [insertReservationResult] = await pool.query('INSERT INTO reservas (usuarios_id, herramientas_maquinas_id, fecha_fin, cantidad, estados_reservas_id) VALUES (?, ?, ?, ?, ?)', [reservation.usuario_id, reservation.herramienta_maquina_id, reservation.fecha_fin, reservation.cantidad, reservation.estado_reserva_id])
     const [updateToolMachineResult] = await pool.query('UPDATE herramientas_maquinas SET cantidad_disponible = cantidad_disponible - ? WHERE id = ?', [reservation.cantidad, reservation.herramienta_maquina_id])
     return {
@@ -37,7 +47,7 @@ class Reservation {
   }
 
   static async getByToolName (name) {
-    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, u.telefono, hm.nombre_articulo, CONCAT(DATE_FORMAT(CONVERT_TZ(r.fecha_inicio, "UTC", "America/Bogota"), "%d/%m/%Y"), " ", DATE_FORMAT(CONVERT_TZ(r.fecha_inicio, "UTC", "America/Bogota"), "%H:%i")) AS fecha_inicio_format, DATE_FORMAT(r.fecha_fin, "%d/%m/%Y") AS fecha_fin_format, DATEDIFF(r.fecha_fin, r.fecha_inicio) AS dias_alquiler, r.cantidad, hm.precio_alquiler, ((r.cantidad * hm.precio_alquiler) * DATEDIFF(r.fecha_fin, r.fecha_inicio)) AS total, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE hm.nombre_articulo LIKE ?', [`%${name}%`])
+    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, u.telefono, hm.nombre_articulo, CONCAT(DATE_FORMAT(CONVERT_TZ(r.fecha_inicio, "UTC", "America/Bogota"), "%d/%m/%Y"), " ", DATE_FORMAT(CONVERT_TZ(r.fecha_inicio, "UTC", "America/Bogota"), "%H:%i")) AS fecha_inicio_format, DATE_FORMAT(r.fecha_fin, "%d/%m/%Y") AS fecha_fin_format, DATEDIFF(r.fecha_fin, r.fecha_inicio) AS dias_alquiler, r.cantidad, hm.precio_alquiler, ((r.cantidad * hm.precio_alquiler) * DATEDIFF(r.fecha_fin, r.fecha_inicio)) AS total, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE hm.nombre_articulo LIKE ? ORDER BY r.id DESC', [`%${name}%`])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
