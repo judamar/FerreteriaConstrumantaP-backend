@@ -16,7 +16,7 @@ class Product {
   }
 
   static async getAll () {
-    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id')
+    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria, c.id AS categoria_id FROM productos p JOIN categorias c ON p.categorias_id = c.id ORDER BY p.nombre_producto ASC')
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -24,7 +24,7 @@ class Product {
   }
 
   static async getById (id) {
-    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE p.id = ?', [id])
+    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria, c.id AS categoria_id FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE p.id = ? ORDER BY p.nombre_producto ASC', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -32,7 +32,7 @@ class Product {
   }
 
   static async getByName (name) {
-    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE nombre_producto LIKE ?', [`%${name}%`])
+    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria, c.id AS categoria_id FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE nombre_producto LIKE ? ORDER BY p.nombre_producto ASC', [`%${name}%`])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -40,7 +40,7 @@ class Product {
   }
 
   static async getByCategory (category) {
-    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE categorias_id = ?', [category])
+    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria, c.id AS categoria_id FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE categorias_id = ? ORDER BY p.nombre_producto ASC', [category])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -48,7 +48,7 @@ class Product {
   }
 
   static async getByKey (key) {
-    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE clave_producto = ?', [key])
+    return await pool.query('SELECT p.id, p.nombre_producto, p.clave_producto, p.url_imagen, p.marca, p.descripcion, p.precio, p.cantidad, c.categoria AS categoria, c.id AS categoria_id FROM productos p JOIN categorias c ON p.categorias_id = c.id WHERE clave_producto = ? ORDER BY p.nombre_producto ASC', [key])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
