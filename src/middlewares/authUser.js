@@ -27,7 +27,7 @@ const authUser = (req, res, next) => {
   console.log(pc.bgBlue('AUTHENTICATING USER'))
   const accessToken = req.headers.authorization
   if (!accessToken) {
-    handleUnauthorized(res, 'No token provided.')
+    handleUnauthorized(res, 'No has iniciado sesión.')
     console.log(pc.bgRed('USER NOT AUTHENTICATED, NO TOKEN PROVIDED'))
     return
   }
@@ -41,7 +41,7 @@ const authUser = (req, res, next) => {
         req.esAdmin = decoded.esAdmin
         const user = await User.getById(req.id)
         if (!user) {
-          handleNotFound(res, 'User not found.')
+          handleNotFound(res, 'No existe el usuario.')
           console.log(pc.bgRed('USER NOT AUTHENTICATED, USER NOT FOUND'))
         }
         console.log(pc.bgBlue('USER AUTHENTICATED SUCCESFULLY'))
@@ -72,7 +72,7 @@ const authAdmin = async (req, res, next) => {
   try {
     const user = await User.getById(req.id)
     if (!user) {
-      handleNotFound(res, 'User not found.')
+      handleNotFound(res, 'No existe el usuario.')
       console.log(pc.bgRed('USER NOT AUTHENTICATED, USER NOT FOUND'))
     }
     if (req.esAdmin === 1) {
@@ -80,7 +80,7 @@ const authAdmin = async (req, res, next) => {
       console.log(pc.bgBlue('USER AUTHENTICATED SUCCESFULLY'))
       next()
     } else {
-      handleUnauthorized(res, 'You are not authorized to perform this action.')
+      handleUnauthorized(res, 'No tienes permiso para realizar esta acción.')
       console.log(pc.bgRed('USER NOT AUTHENTICATED, NOT AN ADMIN'))
     }
   } catch (error) {
