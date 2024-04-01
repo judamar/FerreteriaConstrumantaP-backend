@@ -34,7 +34,7 @@ const authUser = (req, res, next) => {
   try {
     jwt.verify(accessToken, secretKey, async (err, user) => {
       if (err) {
-        handleExpiredToken(res, err.message)
+        handleExpiredToken(res, 'Sesión expirada, vuelve a iniciar sesión.')
       } else {
         const decoded = jwt.decode(accessToken)
         req.id = decoded.id
