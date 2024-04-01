@@ -14,7 +14,7 @@ class ToolMachine {
   }
 
   static async getAll () {
-    return await pool.query('SELECT hm.id, hm.nombre_articulo, hm.url_imagen, hm.descripcion, hm.precio_alquiler, hm.cantidad_disponible, ehm.estado as estado FROM herramientas_maquinas hm JOIN estados_herramientas_maquinas ehm ON hm.estados_herramientas_maquinas_id = ehm.id')
+    return await pool.query('SELECT hm.id, hm.nombre_articulo, hm.url_imagen, hm.descripcion, hm.precio_alquiler, hm.cantidad_disponible, ehm.estado as estado, ehm.id as estado_id FROM herramientas_maquinas hm JOIN estados_herramientas_maquinas ehm ON hm.estados_herramientas_maquinas_id = ehm.id')
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -22,7 +22,7 @@ class ToolMachine {
   }
 
   static async getById (id) {
-    return await pool.query('SELECT hm.id, hm.nombre_articulo, hm.url_imagen, hm.descripcion, hm.precio_alquiler, hm.cantidad_disponible, ehm.estado as estado FROM herramientas_maquinas hm JOIN estados_herramientas_maquinas ehm ON hm.estados_herramientas_maquinas_id = ehm.id WHERE hm.id = ?', [id])
+    return await pool.query('SELECT hm.id, hm.nombre_articulo, hm.url_imagen, hm.descripcion, hm.precio_alquiler, hm.cantidad_disponible, ehm.estado as estado, ehm.id as estado_id FROM herramientas_maquinas hm JOIN estados_herramientas_maquinas ehm ON hm.estados_herramientas_maquinas_id = ehm.id WHERE hm.id = ?', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -30,7 +30,7 @@ class ToolMachine {
   }
 
   static async getByName (name) {
-    return await pool.query('SELECT hm.id, hm.nombre_articulo, hm.url_imagen, hm.descripcion, hm.precio_alquiler, hm.cantidad_disponible, ehm.estado as estado FROM herramientas_maquinas hm JOIN estados_herramientas_maquinas ehm ON hm.estados_herramientas_maquinas_id = ehm.id WHERE nombre_articulo LIKE ?', [`%${name}%`])
+    return await pool.query('SELECT hm.id, hm.nombre_articulo, hm.url_imagen, hm.descripcion, hm.precio_alquiler, hm.cantidad_disponible, ehm.estado as estado, ehm.id as estado_id FROM herramientas_maquinas hm JOIN estados_herramientas_maquinas ehm ON hm.estados_herramientas_maquinas_id = ehm.id WHERE nombre_articulo LIKE ?', [`%${name}%`])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
