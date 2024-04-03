@@ -18,8 +18,7 @@ const signup = async (req, res) => { // x-www-form-urlencoded
     correo_electronico: req.body.correo_electronico,
     telefono: req.body.telefono,
     direccion: req.body.direccion,
-    password: await password.hashPassword(req.body.password), // hashea la contraseña
-    es_admin: req.body.es_admin
+    password: await password.hashPassword(req.body.password) // hashea la contraseña
   }
   try {
     console.log(pc.bgGreen('SIGNUP USER'))

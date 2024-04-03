@@ -5,7 +5,7 @@ import password from '../utils/password.js'
 updating, and deleting user data from a database. */
 class User {
   static async create (user) {
-    return await pool.query('INSERT INTO usuarios (cedula, nombre_completo, correo_electronico, telefono, direccion, password, es_admin) VALUES (?, ?, ?, ?, ?, ?, ?)', [user.cedula, user.nombre_completo, user.correo_electronico, user.telefono, user.direccion, user.password, user.es_admin])
+    return await pool.query('INSERT INTO usuarios (cedula, nombre_completo, correo_electronico, telefono, direccion, password) VALUES (?, ?, ?, ?, ?, ?, ?)', [user.cedula, user.nombre_completo, user.correo_electronico, user.telefono, user.direccion, user.password])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
