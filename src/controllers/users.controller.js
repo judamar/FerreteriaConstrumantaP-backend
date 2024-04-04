@@ -164,7 +164,7 @@ const updatePassword = async (req, res) => {
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('UPDATE PASSWORD SUCCESFULLY'))
       console.log({ Result: result })
-      handleSuccess(res, 200, { message: 'Password updated successfully' })
+      handleSuccess(res, 200, { message: 'Contraseña actualizada satisfactoriamente.' })
     } else {
       console.log(pc.bgRed('UPDATE PASSWORD FAILED'))
       console.log({ Result: result })
@@ -187,7 +187,7 @@ const remove = async (req, res) => {
     if (result && result.affectedRows > 0) {
       console.log(pc.bgGreen('DELETE USER SUCCESFULLY'))
       console.log({ Result: result })
-      handleSuccess(res, 200, { message: 'User deleted successfully' })
+      handleSuccess(res, 200, { message: 'Usuario eliminado satisfactoriamente.' })
     } else {
       console.log(pc.bgRed('DELETE USER FAILED'))
       console.log({ Result: result })
