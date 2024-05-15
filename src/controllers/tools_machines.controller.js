@@ -4,15 +4,15 @@ import pc from 'picocolors'
 
 // create tool machine
 const create = async (req, res) => {
-  const toolMachine = {
-    nombre_articulo: req.body.nombre_articulo,
-    descripcion: req.body.descripcion,
-    precio_alquiler: req.body.precio_alquiler,
-    cantidad_disponible: req.body.cantidad_disponible,
-    estados_herramientas_maquinas_id: req.body.estados_herramientas_maquinas_id,
-    image: req.file.filename
-  }
   try {
+    const toolMachine = {
+      nombre_articulo: req.body.nombre_articulo,
+      descripcion: req.body.descripcion,
+      precio_alquiler: req.body.precio_alquiler,
+      cantidad_disponible: req.body.cantidad_disponible,
+      estados_herramientas_maquinas_id: req.body.estados_herramientas_maquinas_id,
+      image: req.file.filename
+    }
     console.log(pc.bgGreen('CREATING TOOL - MACHINE'))
     console.log({ Body: toolMachine })
     const image = `src/images/public/${toolMachine.image}`
@@ -130,9 +130,9 @@ const update = async (req, res) => {
 
 // update image of tool machine
 const updateImage = async (req, res) => {
-  const id = req.params.id
-  const image = req.file.filename
   try {
+    const id = req.params.id
+    const image = req.file.filename
     const img = `src/images/public/${image}`
     console.log(pc.bgGreen('UPDATING TOOL - MACHINE IMAGE'))
     console.log({ ID: id })

@@ -4,16 +4,16 @@ import pc from 'picocolors'
 
 // create a product
 const create = async (req, res) => {
-  const product = {
-    nombre_producto: req.body.nombre_producto,
-    marca: req.body.marca,
-    descripcion: req.body.descripcion,
-    precio: req.body.precio,
-    cantidad: req.body.cantidad,
-    categorias_id: req.body.categorias_id,
-    image: req.file.filename
-  }
   try {
+    const product = {
+      nombre_producto: req.body.nombre_producto,
+      marca: req.body.marca,
+      descripcion: req.body.descripcion,
+      precio: req.body.precio,
+      cantidad: req.body.cantidad,
+      categorias_id: req.body.categorias_id,
+      image: req.file.filename
+    }
     const image = `src/images/public/${product.image}`
     console.log(pc.bgGreen('CREATING PRODUCT'))
     console.log({ Product: product })
@@ -172,9 +172,9 @@ const update = async (req, res) => { // x-www-form-urlencoded
 
 // update a product image
 const updateImage = async (req, res) => {
-  const id = req.params.id
-  const image = req.file.filename
   try {
+    const id = req.params.id
+    const image = req.file.filename
     const img = `src/images/public/${image}`
     console.log(pc.bgGreen('UPDATING PRODUCT IMAGE'))
     console.log({ ID: id })
