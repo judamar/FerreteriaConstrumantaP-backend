@@ -22,6 +22,7 @@ const signup = async (req, res) => { // x-www-form-urlencoded
   }
   try {
     console.log(pc.bgGreen('SIGNUP USER'))
+    console.log({ User: user })
     const result = await User.create(user)
     const { password, ...loggableUser } = user
     console.log({ User: loggableUser })
