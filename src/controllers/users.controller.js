@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken'
 
 // signup user
 const signup = async (req, res) => { // x-www-form-urlencoded
-  if (req.body.password.length < 8) {
+  if (!req.body.password || req.body.password.length < 8) {
     handleBadRequest(res, 'La contraseña debe ser minimo de 8 caracteres.')
     console.log(pc.bgRed('SIGNUP USER FAILED, INVALID PASSWORD'))
     return
