@@ -23,7 +23,7 @@ class Reservation {
   }
 
   static async getAll () {
-    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, u.telefono, hm.nombre_articulo, CONCAT(DATE_FORMAT(CONVERT_TZ(r.fecha_inicio, "UTC", "America/Bogota"), "%d/%m/%Y"), " ", DATE_FORMAT(CONVERT_TZ(r.fecha_inicio, "UTC", "America/Bogota"), "%H:%i")) AS fecha_inicio_format, DATE_FORMAT(r.fecha_fin, "%d/%m/%Y") AS fecha_fin_format, DATEDIFF(r.fecha_fin, r.fecha_inicio) AS dias_alquiler, r.cantidad, hm.precio_alquiler, ((r.cantidad * hm.precio_alquiler) * DATEDIFF(r.fecha_fin, r.fecha_inicio)) AS total, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id ORDER BY r.id DESC')
+    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, u.telefono, hm.nombre_articulo, CONCAT(DATE_FORMAT(r.fecha_inicio, "%d/%m/%Y"), " ", DATE_FORMAT(r.fecha_inicio, "%H:%i")) AS fecha_inicio_format, DATE_FORMAT(r.fecha_fin, "%d/%m/%Y") AS fecha_fin_format, DATEDIFF(r.fecha_fin, r.fecha_inicio) AS dias_alquiler, r.cantidad, hm.precio_alquiler, ((r.cantidad * hm.precio_alquiler) * DATEDIFF(r.fecha_fin, r.fecha_inicio)) AS total, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id ORDER BY r.id DESC')
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -31,7 +31,7 @@ class Reservation {
   }
 
   static async getById (id) {
-    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, u.telefono, hm.nombre_articulo, CONCAT(DATE_FORMAT(CONVERT_TZ(r.fecha_inicio, "UTC", "America/Bogota"), "%d/%m/%Y"), " ", DATE_FORMAT(CONVERT_TZ(r.fecha_inicio, "UTC", "America/Bogota"), "%H:%i")) AS fecha_inicio_format, DATE_FORMAT(r.fecha_fin, "%d/%m/%Y") AS fecha_fin_format, DATEDIFF(r.fecha_fin, r.fecha_inicio) AS dias_alquiler, r.cantidad, hm.precio_alquiler, ((r.cantidad * hm.precio_alquiler) * DATEDIFF(r.fecha_fin, r.fecha_inicio)) AS total, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE r.id = ?', [id])
+    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, u.telefono, hm.nombre_articulo, CONCAT(DATE_FORMAT(r.fecha_inicio, "%d/%m/%Y"), " ", DATE_FORMAT(r.fecha_inicio, "%H:%i")) AS fecha_inicio_format, DATE_FORMAT(r.fecha_fin, "%d/%m/%Y") AS fecha_fin_format, DATEDIFF(r.fecha_fin, r.fecha_inicio) AS dias_alquiler, r.cantidad, hm.precio_alquiler, ((r.cantidad * hm.precio_alquiler) * DATEDIFF(r.fecha_fin, r.fecha_inicio)) AS total, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE r.id = ?', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -39,7 +39,7 @@ class Reservation {
   }
 
   static async getByUserName (name) {
-    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, u.telefono, hm.nombre_articulo, CONCAT(DATE_FORMAT(CONVERT_TZ(r.fecha_inicio, "UTC", "America/Bogota"), "%d/%m/%Y"), " ", DATE_FORMAT(CONVERT_TZ(r.fecha_inicio, "UTC", "America/Bogota"), "%H:%i")) AS fecha_inicio_format, DATE_FORMAT(r.fecha_fin, "%d/%m/%Y") AS fecha_fin_format, DATEDIFF(r.fecha_fin, r.fecha_inicio) AS dias_alquiler, r.cantidad, hm.precio_alquiler, ((r.cantidad * hm.precio_alquiler) * DATEDIFF(r.fecha_fin, r.fecha_inicio)) AS total, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE u.nombre_completo LIKE ?', [`%${name}%`])
+    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, u.telefono, hm.nombre_articulo, CONCAT(DATE_FORMAT(r.fecha_inicio, "%d/%m/%Y"), " ", DATE_FORMAT(r.fecha_inicio, "%H:%i")) AS fecha_inicio_format, DATE_FORMAT(r.fecha_fin, "%d/%m/%Y") AS fecha_fin_format, DATEDIFF(r.fecha_fin, r.fecha_inicio) AS dias_alquiler, r.cantidad, hm.precio_alquiler, ((r.cantidad * hm.precio_alquiler) * DATEDIFF(r.fecha_fin, r.fecha_inicio)) AS total, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE u.nombre_completo LIKE ?', [`%${name}%`])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -47,7 +47,7 @@ class Reservation {
   }
 
   static async getByToolName (name) {
-    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, u.telefono, hm.nombre_articulo, CONCAT(DATE_FORMAT(CONVERT_TZ(r.fecha_inicio, "UTC", "America/Bogota"), "%d/%m/%Y"), " ", DATE_FORMAT(CONVERT_TZ(r.fecha_inicio, "UTC", "America/Bogota"), "%H:%i")) AS fecha_inicio_format, DATE_FORMAT(r.fecha_fin, "%d/%m/%Y") AS fecha_fin_format, DATEDIFF(r.fecha_fin, r.fecha_inicio) AS dias_alquiler, r.cantidad, hm.precio_alquiler, ((r.cantidad * hm.precio_alquiler) * DATEDIFF(r.fecha_fin, r.fecha_inicio)) AS total, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE hm.nombre_articulo LIKE ? ORDER BY r.id DESC', [`%${name}%`])
+    return await pool.query('SELECT r.id, u.nombre_completo, u.cedula, u.telefono, hm.nombre_articulo, CONCAT(DATE_FORMAT(r.fecha_inicio, "%d/%m/%Y"), " ", DATE_FORMAT(r.fecha_inicio, "%H:%i")) AS fecha_inicio_format, DATE_FORMAT(r.fecha_fin, "%d/%m/%Y") AS fecha_fin_format, DATEDIFF(r.fecha_fin, r.fecha_inicio) AS dias_alquiler, r.cantidad, hm.precio_alquiler, ((r.cantidad * hm.precio_alquiler) * DATEDIFF(r.fecha_fin, r.fecha_inicio)) AS total, er.estado FROM reservas r JOIN usuarios u ON r.usuarios_id = u.id JOIN herramientas_maquinas hm ON r.herramientas_maquinas_id = hm.id JOIN estados_reservas er ON r.estados_reservas_id = er.id WHERE hm.nombre_articulo LIKE ? ORDER BY r.id DESC', [`%${name}%`])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
