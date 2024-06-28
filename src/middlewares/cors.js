@@ -1,7 +1,8 @@
 import cors from 'cors'
 
 const ACCEPTED_ORIGINS = [
-  process.env.CLIENT_URL
+  process.env.CLIENT_URL,
+  'http://localhost:5173'
 ]
 
 /**
