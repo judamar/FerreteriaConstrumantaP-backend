@@ -23,46 +23,65 @@ import SalesDetailRouter from './routes/sales_details.routes.js'
 import ProviderHasCategoryRouter from './routes/providers_has_categories.routes.js'
 import SendEmailRouter from './routes/sendEmail.routes.js'
 
-const PORT = process.env.PORT ?? 3000 // get server port or use 3000 by default
-const app = express()
+class ExpressApp {
+  constructor () {
+    this.app = express()
+    this.port = process.env.PORT ?? 3000
+    this.pc = pc
+    this.pool = pool
 
-app.disable('x-powered-by') // dissable header X-Powered-By
-app.use(json()) // enable json
-app.use(express.urlencoded({ extended: true })) // enable forms
+    this.initializeMiddlewares()
+    this.initializeRoutes()
+    this.initializeDatabase()
+  }
 
-app.use(morgan('dev'))
-app.use(corsMiddleware()) // enables cors in all routes
+  initializeMiddlewares () { // middlewares
+    this.app.disable('x-powered-by')
+    this.app.use(json())
+    this.app.use(express.urlencoded({ extended: true }))
+    this.app.use(morgan('dev'))
+    this.app.use(corsMiddleware())
+  }
 
-pool.getConnection() // connect to db
-  .then(conection => {
-    console.log(pc.green('[+] '), pc.white('Database connected to host: '), pc.yellow(process.env.DB_HOST))
-    conection.release()
-  })
-  .catch(err => {
-    console.log(pc.red('[-] '), pc.white('Database connection error: '), err)
-  })
+  initializeRoutes () { // routes
+    this.app.get('/', (req, res) => {
+      res.send('<h1>Ferreteria Construmanta P</h1>')
+    })
 
-app.get('/', (req, res) => {
-  res.send('<h1>Ferreteria Construmanta P</h1>')
-})
+    this.app.use('/api/productos', ProductRouter)
+    this.app.use('/api/categorias', CategoryRouter)
+    this.app.use('/api/proveedores', ProviderRouter)
+    this.app.use('/api/proveedores_tienen_categorias', ProviderHasCategoryRouter)
+    this.app.use('/api/sugerencias', SuggestionRouter)
+    this.app.use('/api/usuarios', UserRouter)
+    this.app.use('/api/estados_reserva', ReservationStatusRouter)
+    this.app.use('/api/reservas', ReservationRouter)
+    this.app.use('/api/estados_herramienta_maquina', TMStatusRouter)
+    this.app.use('/api/herramientas_maquinas', ToolsMachinesRouter)
+    this.app.use('/api/estados_venta', SalesStatusRouter)
+    this.app.use('/api/ventas', SalesRouter)
+    this.app.use('/api/detalles_ventas', SalesDetailRouter)
+    this.app.use('/api/send_email', SendEmailRouter)
+  }
 
-// ROUTES
-app.use('/api/productos', ProductRouter)
-app.use('/api/categorias', CategoryRouter)
-app.use('/api/proveedores', ProviderRouter)
-app.use('/api/proveedores_tienen_categorias', ProviderHasCategoryRouter)
-app.use('/api/sugerencias', SuggestionRouter)
-app.use('/api/usuarios', UserRouter)
-app.use('/api/estados_reserva', ReservationStatusRouter)
-app.use('/api/reservas', ReservationRouter)
-app.use('/api/estados_herramienta_maquina', TMStatusRouter)
-app.use('/api/herramientas_maquinas', ToolsMachinesRouter)
-app.use('/api/estados_venta', SalesStatusRouter)
-app.use('/api/ventas', SalesRouter)
-app.use('/api/detalles_ventas', SalesDetailRouter)
-app.use('/api/send_email', SendEmailRouter)
+  initializeDatabase () { // connect database
+    this.pool.getConnection()
+      .then(connection => {
+        console.log(this.pc.green('[+] '), this.pc.white('Database connected to host: '), this.pc.yellow(process.env.DB_HOST))
+        connection.release()
+      })
+      .catch(err => {
+        console.log(this.pc.red('[-] '), this.pc.white('Database connection error: '), err)
+      })
+  }
 
-// Initialize the server
-app.listen(PORT, () => {
-  console.log(pc.green('[+] '), pc.white('Server running on port: '), pc.yellow(PORT))
-})
+  startServer () { // starts server
+    this.app.listen(this.port, () => {
+      console.log(this.pc.green('[+] '), this.pc.white('Server running on port: '), this.pc.yellow(this.port))
+    })
+  }
+}
+
+// Initialize and start the server
+const server = new ExpressApp()
+server.startServer()
