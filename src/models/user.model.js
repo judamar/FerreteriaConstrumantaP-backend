@@ -5,7 +5,7 @@ import password from '../utils/password.js'
 updating, and deleting user data from a database. */
 class User {
   static async create (user) {
-    return await pool.query('INSERT INTO usuarios (cedula, nombre_completo, correo_electronico, telefono, direccion, password) VALUES (?, ?, ?, ?, ?, ?)', [user.cedula, user.nombre_completo, user.correo_electronico, user.telefono, user.direccion, user.password])
+    return await pool.query('INSERT INTO ferre_c_usuarios (cedula, nombre_completo, correo_electronico, telefono, direccion, password) VALUES (?, ?, ?, ?, ?, ?)', [user.cedula, user.nombre_completo, user.correo_electronico, user.telefono, user.direccion, user.password])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -13,7 +13,7 @@ class User {
   }
 
   static async authenticate (cedula, providedPassword) {
-    const [rows] = await pool.query('SELECT * FROM usuarios WHERE cedula = ?', [cedula])
+    const [rows] = await pool.query('SELECT * FROM ferre_c_usuarios WHERE cedula = ?', [cedula])
     if (rows.length > 0 && await password.comparePassword(providedPassword, rows[0].password)) {
       return rows[0]
     } else {
@@ -22,7 +22,7 @@ class User {
   }
 
   static async getAll () {
-    return await pool.query('SELECT id, cedula, nombre_completo, correo_electronico, telefono, direccion, es_admin FROM usuarios')
+    return await pool.query('SELECT id, cedula, nombre_completo, correo_electronico, telefono, direccion, es_admin FROM ferre_c_usuarios')
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -30,7 +30,7 @@ class User {
   }
 
   static async getById (id) {
-    return await pool.query('SELECT id, cedula, nombre_completo, correo_electronico, telefono, direccion, es_admin FROM usuarios WHERE id = ?', [id])
+    return await pool.query('SELECT id, cedula, nombre_completo, correo_electronico, telefono, direccion, es_admin FROM ferre_c_usuarios WHERE id = ?', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -38,7 +38,7 @@ class User {
   }
 
   static async getByCedula (cedula) {
-    return await pool.query('SELECT id, cedula, nombre_completo, correo_electronico, telefono, direccion, es_admin FROM usuarios WHERE cedula = ?', [cedula])
+    return await pool.query('SELECT id, cedula, nombre_completo, correo_electronico, telefono, direccion, es_admin FROM ferre_c_usuarios WHERE cedula = ?', [cedula])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -46,7 +46,7 @@ class User {
   }
 
   static async update (id, user) {
-    return await pool.query('UPDATE usuarios SET cedula = ?, nombre_completo = ?, correo_electronico = ?, telefono = ?, direccion = ? WHERE id = ?', [user.cedula, user.nombre_completo, user.correo_electronico, user.telefono, user.direccion, id])
+    return await pool.query('UPDATE ferre_c_usuarios SET cedula = ?, nombre_completo = ?, correo_electronico = ?, telefono = ?, direccion = ? WHERE id = ?', [user.cedula, user.nombre_completo, user.correo_electronico, user.telefono, user.direccion, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -54,7 +54,7 @@ class User {
   }
 
   static async updatePassword (id, password) {
-    return await pool.query('UPDATE usuarios SET password = ? WHERE id = ?', [password, id])
+    return await pool.query('UPDATE ferre_c_usuarios SET password = ? WHERE id = ?', [password, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -62,7 +62,7 @@ class User {
   }
 
   static async remove (id) {
-    return await pool.query('DELETE FROM usuarios WHERE id = ?', [id])
+    return await pool.query('DELETE FROM ferre_c_usuarios WHERE id = ?', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err

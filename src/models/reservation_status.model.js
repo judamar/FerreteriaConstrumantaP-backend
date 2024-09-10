@@ -4,7 +4,7 @@ import pool from '../database/db.js'
 updating, and deleting reservation statuses in a database. */
 class ReservationStatus {
   static async create (status) {
-    return await pool.query('INSERT INTO estados_reservas (estado) VALUES (?)', [status.estado])
+    return await pool.query('INSERT INTO ferre_c_estados_reservas (estado) VALUES (?)', [status.estado])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -12,7 +12,7 @@ class ReservationStatus {
   }
 
   static async getAll () {
-    return await pool.query('SELECT * FROM estados_reservas')
+    return await pool.query('SELECT * FROM ferre_c_estados_reservas')
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -20,7 +20,7 @@ class ReservationStatus {
   }
 
   static async getById (id) {
-    return await pool.query('SELECT * FROM estados_reservas WHERE id = ?', [id])
+    return await pool.query('SELECT * FROM ferre_c_estados_reservas WHERE id = ?', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -28,7 +28,7 @@ class ReservationStatus {
   }
 
   static async update (id, status) {
-    return await pool.query('UPDATE estados_reservas SET estado = ? WHERE id = ?', [status.estado, id])
+    return await pool.query('UPDATE ferre_c_estados_reservas SET estado = ? WHERE id = ?', [status.estado, id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
@@ -36,7 +36,7 @@ class ReservationStatus {
   }
 
   static async remove (id) {
-    return await pool.query('DELETE FROM estados_reservas WHERE id = ?', [id])
+    return await pool.query('DELETE FROM ferre_c_estados_reservas WHERE id = ?', [id])
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err

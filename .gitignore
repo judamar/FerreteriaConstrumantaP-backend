@@ -132,5 +132,5 @@ dist
 
 # x
 arkit.svg
-.pdf
-files
+src/files/*.pdf
+src/images/public/*.png
