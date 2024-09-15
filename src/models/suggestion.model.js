@@ -12,7 +12,7 @@ class Suggestion {
   }
 
   static async getAll () {
-    return await pool.query('SELECT s.id, u.nombre_completo, s.mensaje FROM ferre_c_sugerencias s JOIN usuarios u ON s.usuarios_id = u.id')
+    return await pool.query('SELECT s.id, u.nombre_completo, s.mensaje FROM ferre_c_sugerencias s JOIN ferre_c_usuarios u ON s.usuarios_id = u.id')
       .then(([rows, fields]) => rows)
       .catch(err => {
         throw err
