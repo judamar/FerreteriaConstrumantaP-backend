@@ -1,7 +1,11 @@
 import cors from 'cors'
 
+const clientsUrls = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(',').map(url => url.trim())
+  : []
+
 const ACCEPTED_ORIGINS = [
-  process.env.CLIENT_URL,
+  ...clientsUrls,
   'http://localhost:5173'
 ]
 

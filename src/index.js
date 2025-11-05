@@ -76,7 +76,7 @@ class ExpressApp {
   }
 
   startServer () { // starts server
-    this.app.listen(this.port, () => {
+    this.app.listen(this.port, '0.0.0.0', () => {
       console.log(this.pc.green('[+] '), this.pc.white('Server running on port: '), this.pc.yellow(this.port))
     })
   }
