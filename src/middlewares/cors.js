@@ -6,7 +6,8 @@ const clientsUrls = process.env.CLIENT_URL
 
 const ACCEPTED_ORIGINS = [
   ...clientsUrls,
-  'http://localhost:5173'
+  'http://localhost:5173',
+  'http://192.168.1.65:5173'
 ]
 
 /**
